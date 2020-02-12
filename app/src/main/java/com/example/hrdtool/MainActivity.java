@@ -18,7 +18,6 @@ import org.json.JSONObject;
 public class MainActivity extends AppCompatActivity {
 
     EditText sampleTextField;
-    Button submitButton;
 
 
     private static final String TAG = "MainActivity";
@@ -30,23 +29,21 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         sampleTextField = findViewById(R.id.editText3);
-        submitButton = findViewById(R.id.submitButton);
 
-        
-        JSONObject formJson = new JSONObject();           //example json creation for testing
-        try {
-            formJson.put("username", "Ben");
-            formJson.put("password", "12345");
-        } catch (JSONException e) {
+    }
+
+    public void scheduleJob(View v) {
+        ComponentName componentName = new ComponentName(this, DataSendingService.class);
+
+        JSONObject formJson = new JSONObject();
+        try{
+            formJson.put("enteredText", sampleTextField.getText());
+        } catch (JSONException e){
             e.printStackTrace();
         }
 
         String jsonString = formJson.toString();
         bundle.putString("json", jsonString);
-    }
-
-    public void scheduleJob(View v) {
-        ComponentName componentName = new ComponentName(this, DataSendingService.class);
 
         JobInfo info = new JobInfo.Builder(9, componentName)
                 .setRequiresCharging(false)

@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,6 +17,10 @@ import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
 
+    EditText sampleTextField;
+    Button submitButton;
+
+
     private static final String TAG = "MainActivity";
     PersistableBundle bundle = new PersistableBundle();
 
@@ -22,6 +28,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        sampleTextField = findViewById(R.id.editText3);
+        submitButton = findViewById(R.id.submitButton);
+
         
         JSONObject formJson = new JSONObject();           //example json creation for testing
         try {
@@ -54,13 +64,5 @@ public class MainActivity extends AppCompatActivity {
             Log.d(TAG, "Job scheduling failed");
         }
     }
-
-    public void cancelJob(View v) {
-        JobScheduler scheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
-        scheduler.cancel(9);
-        Log.d(TAG, "Job cancelled");
-    }
-
-
 
 }

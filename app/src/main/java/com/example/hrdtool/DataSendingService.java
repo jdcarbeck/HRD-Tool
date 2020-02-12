@@ -21,8 +21,10 @@ public class DataSendingService extends JobService {
             @Override
             public void run() {
 
+                String json = parameters.getExtras().getString("json");
+
                 // *Code for sending messages goes here*
-                new OkHttp().execute();
+                new OkHttp().execute(json);
 
                 if (jobCancelled) {
                     return;

@@ -15,20 +15,15 @@ public class OkHttp extends AsyncTask<String, Void, String> {
 
     @Override
     protected String doInBackground(String... parameters) {
-
-        String json = new StringBuilder()
-                .append("{")
-                .append("\"username\":\"Ben\",")
-                .append("\"password\":\"123\"")
-                .append("}").toString();
+        
 
         RequestBody body = RequestBody.create(
                 MediaType.parse("application/json; charset=utf-8"),
-                json
+                parameters[0]
         );
 
         Request request = new Request.Builder()
-                .url("https://webhook.site/e5f447ab-3bc6-4bfe-aefb-c068eca4b101")
+                .url("URL of management site goes here, use webhook.site to test easily")
                 .addHeader("User-Agent", "OkHttp Bot")
                 .post(body)
                 .build();

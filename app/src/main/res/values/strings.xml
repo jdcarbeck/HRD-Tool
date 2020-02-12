@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">HRDTool</string>
+    <string name="help">This is help information</string>
+    <string name="back">back</string>
+    <string name="tab_form_label">Form</string>
+    <string name="tab_contact_label">Help Info</string>
 </resources>

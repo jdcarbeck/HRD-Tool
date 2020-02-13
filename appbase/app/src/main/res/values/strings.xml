@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">app-base</string>
+    <string name="button_message">Click me!</string>
+    <string name="support_name_1">John Doe</string>
+    <string name="support_address_1">100 Parnell Street</string>
+    <string name="support_telephone_1">( 01) 437 0969</string>
+    <string name="support_type_1">Legal help</string>
+    <string name="support_email_1">johndoe@example.com</string>
 </resources>

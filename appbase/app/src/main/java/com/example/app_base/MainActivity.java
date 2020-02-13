@@ -131,8 +131,19 @@ public class MainActivity extends AppCompatActivity {
         Spinner dropdown_type = findViewById(R.id.spinner_type);
         Spinner dropdown_area = findViewById(R.id.spinner_area);
 
+
+        /*
+        If the user forgets to choose an option on the drop down,
+        the hint message will be selected and sent to the next activity
+        default behavior should be "any".
+         */
         String type = dropdown_type.getSelectedItem().toString();
+        if(type.equalsIgnoreCase(TYPES[0]))
+            type=TYPES[1];
         String area = dropdown_area.getSelectedItem().toString();
+        if(area.equalsIgnoreCase(AREA[0]))
+            area=AREA[1];
+
         Intent intent = new Intent(this, Support_Information_Activity.class);
         intent.putExtra("type", type);
         intent.putExtra("area", area);

@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.opencsv.CSVReader;
@@ -20,10 +22,14 @@ import java.util.Iterator;
 
 public class Support_Information_Activity extends AppCompatActivity {
 
+
+    private int index = 1;
+    private ArrayList<CSVRow> users = new ArrayList<CSVRow>(0);
+    private int length = 0;
+
     private static final String[] HEADERS = {"ID","NAME","TYPE","ADDRESS","TELEPHONE","EMAIL","AREA"};
     private static final int TYPE_COLUMN = 2;
     private static final int AREA_COLUMN = 6;
-
 
     /*
     Find the correct support in the csv based on type of help needed and which area the victim is
@@ -170,6 +176,19 @@ public class Support_Information_Activity extends AppCompatActivity {
         }
     }
 
+    private void display_CSVRow(CSVRow user) {
+        TextView support_name = (TextView) findViewById(R.id.support_name);
+        support_name.setText(user.getName());
+        TextView support_type = (TextView) findViewById(R.id.support_type);
+        support_type.setText(user.getType());
+        TextView support_address = (TextView) findViewById(R.id.support_address);
+        support_address.setText(user.getAddress());
+        TextView support_telephone = (TextView) findViewById(R.id.support_telephone);
+        support_telephone.setText(user.getTelephone());
+        TextView support_email = (TextView) findViewById(R.id.support_email);
+        support_email.setText(user.getEmail());
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -189,21 +208,34 @@ public class Support_Information_Activity extends AppCompatActivity {
             CSVReader reader = new CSVReader(new InputStreamReader(getResources().openRawResource(R.raw.test)));
             String area = intent.getStringExtra("area");
             String type = intent.getStringExtra("type");
+
             Log.d("DEBUG", "The passed area and type of support area: " + area + ", " + type);
-            ArrayList<CSVRow> users = find_user_zone_type(reader, area, type);
+            this.users = find_user_zone_type(reader, area, type);
             Log.d("DEBUG", "Finished collecting users");
 
-            StringBuilder sb = new StringBuilder();
+            // FOR DEBUGGING.
+            /*StringBuilder sb = new StringBuilder();
             for (CSVRow r : users) {
                 sb.append(r.toString());
                 sb.append("\n");
             }
             Log.d("DEBUG", "Users found: " + sb.toString());
+            */
+
+            this.length = this.users.size();
+
+            Button next = findViewById(R.id.button_next);
+            Button prev = findViewById(R.id.button_previous);
+            TextView page_ratio = (TextView) findViewById(R.id.page_ratio);
+
+            prev.setEnabled(false);
+            if(users.size() <= 1)
+                next.setEnabled(false);
 
             // If no support is available, set text view to null
             if(users.isEmpty()) {
                 TextView support_name = (TextView) findViewById(R.id.support_name);
-                support_name.setText("Sorry, there is no support available for you");
+                support_name.setText(R.string.No_available_help);
                 TextView support_address = (TextView) findViewById(R.id.support_address);
                 support_address.setText(null);
                 TextView support_telephone = (TextView) findViewById(R.id.support_telephone);
@@ -215,24 +247,60 @@ public class Support_Information_Activity extends AppCompatActivity {
             }
             // Else use the first row and display its information
             else {
-                CSVRow user = users.get(0);
-                TextView support_name = (TextView) findViewById(R.id.support_name);
-                support_name.setText(user.getName());
-                TextView support_type = (TextView) findViewById(R.id.support_type);
-                support_type.setText(user.getType());
-                TextView support_address = (TextView) findViewById(R.id.support_address);
-                support_address.setText(user.getAddress());
-                TextView support_telephone = (TextView) findViewById(R.id.support_telephone);
-                support_telephone.setText(user.getTelephone());
-                TextView support_email = (TextView) findViewById(R.id.support_email);
-                support_email.setText(user.getEmail());
+                CSVRow user = users.get(this.index-1);
+                display_CSVRow(user);
+                String ratio = this.index+"/"+this.length;
+                page_ratio.setText(ratio);
             }
 
+
             // TODO: Add buttons on the left and right side of the screen to go through pages of support information if there are multiple.
+
+
+
         }
         catch (Exception e) {
             e.printStackTrace();
             Toast.makeText(this, "The specified file was not found", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+    public void nextUser(View view) {
+        if(this.index >= this.length) {
+            this.index = this.length;
+            return;
+        }
+        else {
+            Button next = findViewById(R.id.button_next);
+            Button prev = findViewById(R.id.button_previous);
+            this.index++;
+            display_CSVRow(this.users.get(this.index-1));
+            if(this.index == this.length)
+                next.setEnabled(false);
+            prev.setEnabled(true);
+            TextView page_ratio = (TextView) findViewById(R.id.page_ratio);
+            String ratio = this.index + "/" + this.length;
+            page_ratio.setText(ratio);
+
+        }
+        return;
+    }
+
+    public void previousUser(View view) {
+        if(this.index <= 1) {
+            this.index = 1;
+            return;
+        } else {
+            Button next = findViewById(R.id.button_next);
+            Button prev = findViewById(R.id.button_previous);
+            this.index--;
+            display_CSVRow(this.users.get(index-1));
+            if(this.index == 1)
+                prev.setEnabled(false);
+            next.setEnabled(true);
+            TextView page_ratio = (TextView) findViewById(R.id.page_ratio);
+            String ratio = this.index + "/" + this.length;
+            page_ratio.setText(ratio);
         }
     }
 }

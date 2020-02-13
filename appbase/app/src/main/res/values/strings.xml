@@ -6,4 +6,7 @@
     <string name="support_telephone_1">( 01) 437 0969</string>
     <string name="support_type_1">Legal help</string>
     <string name="support_email_1">johndoe@example.com</string>
+    <string name="button_next">Next</string>
+    <string name="button_previous">Previous</string>
+    <string name="No_available_help">Sorry, there is no support available for you</string>
 </resources>

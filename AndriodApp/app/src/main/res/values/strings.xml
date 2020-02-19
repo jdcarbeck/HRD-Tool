@@ -21,4 +21,5 @@
     </string-array>
 
     <string name="details">Enter Any Additional Info</string>
+    <string name="default_support">Sorry, no support is available for you.</string>
 </resources>

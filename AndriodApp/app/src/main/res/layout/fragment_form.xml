@@ -6,20 +6,20 @@
     android:layout_height="match_parent">
 
     <Spinner
-        android:id="@+id/type"
+        android:id="@+id/spinner_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="28dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/age" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner_age" />
 
     <EditText
         android:id="@+id/i_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginStart="96dp"
+        android:layout_marginTop="24dp"
         android:ems="10"
         android:hint="@string/i_date"
         android:inputType="date"
@@ -31,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="28dp"
         android:ems="10"
         android:hint="@string/a_date"
         android:inputType="date"
@@ -39,35 +39,35 @@
         app:layout_constraintTop_toBottomOf="@+id/i_date" />
 
     <Spinner
-        android:id="@+id/gender"
+        android:id="@+id/spinner_gender"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="28dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/a_date" />
 
     <Spinner
-        android:id="@+id/age"
+        android:id="@+id/spinner_age"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="28dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gender" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner_gender" />
 
     <EditText
         android:id="@+id/details"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="28dp"
         android:ems="10"
         android:gravity="start|top"
         android:hint="@string/details"
         android:inputType="textMultiLine"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/type" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner_type" />
 
     <Button
         android:id="@+id/submit_form"
@@ -78,4 +78,12 @@
         android:text="Submit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinner_area"
+        android:layout_width="101dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="36dp"
+        app:layout_constraintStart_toStartOf="@+id/details"
+        app:layout_constraintTop_toBottomOf="@+id/details" />
 </androidx.constraintlayout.widget.ConstraintLayout>

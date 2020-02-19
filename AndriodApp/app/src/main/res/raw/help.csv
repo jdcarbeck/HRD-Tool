@@ -1,0 +1,5 @@
+id,name,type,address,telephone,email,area
+1,John doe,Legal advice,100 Parnell Street,( 01) 437 0969,johndoe@example.com,d1
+2,Alice,Medical,88 Capel Street,( 01) 123 2244,alice@example.com,d1
+3,Bob,Psychological,23 Dame Street,( 01) 872 4413,bob@example.com,d2
+4,Charlie,Legal,45 George Street,12345678,charlie@example.com,d2

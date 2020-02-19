@@ -11,6 +11,10 @@ import com.opencsv.CSVReader;
 import java.util.ArrayList;
 
 public class FormActivity extends AppCompatActivity {
+    private static final String[] TYPES = {"Choose type of support needed", "Any", "Legal", "Medical", "Psychological"};
+
+    private static final String[] AREA = {"What area are you located in?", "Any", "D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "D9", "D10",
+            "D11", "D12", "D13", "D14", "D15", "D16", "D17", "D18", "D19", "D20"};
 
     private static final String[] HEADERS = {"DATA_TYPE","INCIDENT_DATE","ATTENTION_DATE","GENDER"
             ,"ATTENTION_TYPE","DETAILS"};
@@ -157,9 +161,9 @@ public class FormActivity extends AppCompatActivity {
         setContentView(R.layout.fragment_form);
         Intent intent = getIntent();
         super.onCreate(savedInstanceState);
-        Spinner dropdown_gender = findViewById(R.id.gender);
-        Spinner dropdown_age = findViewById(R.id.age);
-        Spinner dropdown_area = findViewById(R.id.type);
+        Spinner dropdown_gender = findViewById(R.id.spinner_gender);
+        Spinner dropdown_age = findViewById(R.id.spinner_age);
+        Spinner dropdown_area = findViewById(R.id.spinner_type);
 
     }
 }

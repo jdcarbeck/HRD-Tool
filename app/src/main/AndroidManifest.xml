@@ -24,6 +24,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".FormActivity" />
+
         <service
             android:name=".DataSendingService"
             android:permission="android.permission.BIND_JOB_SERVICE"/>

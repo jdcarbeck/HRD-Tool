@@ -10,7 +10,7 @@ import com.opencsv.CSVReader;
 
 import java.util.ArrayList;
 
-public class Form_Activity extends AppCompatActivity {
+public class FormActivity extends AppCompatActivity {
 
     private static final String[] HEADERS = {"DATA_TYPE","INCIDENT_DATE","ATTENTION_DATE","GENDER"
             ,"ATTENTION_TYPE","DETAILS"};

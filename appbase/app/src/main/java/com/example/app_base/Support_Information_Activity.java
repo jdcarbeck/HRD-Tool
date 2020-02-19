@@ -5,7 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
+import android.text.util.Linkify;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -19,6 +23,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.regex.Pattern;
 
 public class Support_Information_Activity extends AppCompatActivity {
 
@@ -27,6 +32,8 @@ public class Support_Information_Activity extends AppCompatActivity {
     private ArrayList<CSVRow> users = new ArrayList<CSVRow>(0);
     private int length = 0;
 
+    private static final String CITY = "DUBLIN";
+    private static final String COUNTRY = "IRELAND";
     private static final String[] HEADERS = {"ID","NAME","TYPE","ADDRESS","TELEPHONE","EMAIL","AREA"};
     private static final int TYPE_COLUMN = 2;
     private static final int AREA_COLUMN = 6;
@@ -136,12 +143,34 @@ public class Support_Information_Activity extends AppCompatActivity {
             return address;
         }
 
+        /*
+        Returns a more complete address with details of the city and country so that google maps
+        can find the appropiate place. The assumption for this example is that, all the support is
+        in Dublin, Ireland and therefore that information may not be present in the CSV. Maps can
+        find the wrong place. For the actual app, the city might not be fixed, but area will be known
+        through the form and we can use that. The country, Nicaragua, is known and static, so the same
+        assumption applies.
+         */
+        public String getCompleteAddress() {
+            String fullAddress = this.address;
+            if(!fullAddress.toLowerCase().contains(CITY.toLowerCase()))
+                fullAddress+= ", " + CITY.substring(0,1).toUpperCase() + CITY.substring(1).toLowerCase();
+            if(!fullAddress.toLowerCase().contains(COUNTRY.toLowerCase()))
+                fullAddress += ", " + COUNTRY.substring(0,1).toUpperCase() + COUNTRY.substring(1).toLowerCase();
+            return fullAddress;
+        }
+
         public void setAddress(String address) {
             this.address = address;
         }
 
         public String getTelephone() {
             return telephone;
+        }
+
+        // Remove all non numeric character inside the telephone number to make it a phone link.
+        public String getCleanTelephone() {
+            return telephone.replaceAll("[^0-9]","");
         }
 
         public void setTelephone(String telephone) {
@@ -176,15 +205,31 @@ public class Support_Information_Activity extends AppCompatActivity {
         }
     }
 
+    // TODO: Change how the phone number is displayed so that the phone link works ( Remove the parathenses )
+
     private void display_CSVRow(CSVRow user) {
         TextView support_name = (TextView) findViewById(R.id.support_name);
         support_name.setText(user.getName());
         TextView support_type = (TextView) findViewById(R.id.support_type);
         support_type.setText(user.getType());
         TextView support_address = (TextView) findViewById(R.id.support_address);
-        support_address.setText(user.getAddress());
+        support_address.setText(user.getCompleteAddress());
+
+        if(support_address != null){
+            Pattern pattern = Pattern.compile(".*", Pattern.DOTALL);
+            Linkify.addLinks(support_address, pattern, "geo:0,0?q=");
+            support_address.setMovementMethod(LinkMovementMethod.getInstance());
+        }
+
         TextView support_telephone = (TextView) findViewById(R.id.support_telephone);
-        support_telephone.setText(user.getTelephone());
+        support_telephone.setText(user.getCleanTelephone());
+
+        // Make the telephone number a phone link
+        if(support_telephone != null){
+            Linkify.addLinks(support_telephone, Patterns.PHONE,"tel:",Linkify.sPhoneNumberMatchFilter,Linkify.sPhoneNumberTransformFilter);
+            support_telephone.setMovementMethod(LinkMovementMethod.getInstance());
+        }
+
         TextView support_email = (TextView) findViewById(R.id.support_email);
         support_email.setText(user.getEmail());
     }
@@ -204,6 +249,11 @@ public class Support_Information_Activity extends AppCompatActivity {
              Right now the csv is inside the app folder and comes packaged with the app.
              */
 
+
+            /*
+            String uri = intent.getStringExtra("uri");
+            CSVReader reader = new CSVReader(new InputStreamReader(getContentResolver().openInputStream(Uri.parse(uri))));
+            */
 
             CSVReader reader = new CSVReader(new InputStreamReader(getResources().openRawResource(R.raw.test)));
             String area = intent.getStringExtra("area");
@@ -252,11 +302,6 @@ public class Support_Information_Activity extends AppCompatActivity {
                 String ratio = this.index+"/"+this.length;
                 page_ratio.setText(ratio);
             }
-
-
-            // TODO: Add buttons on the left and right side of the screen to go through pages of support information if there are multiple.
-
-
 
         }
         catch (Exception e) {

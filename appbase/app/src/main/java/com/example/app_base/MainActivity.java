@@ -1,9 +1,13 @@
 package com.example.app_base;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -19,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String[] AREA = {"What area are you located in?", "Any", "D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "D9", "D10",
                                             "D11", "D12", "D13", "D14", "D15", "D16", "D17", "D18", "D19", "D20"};
+
+    private static Uri file_URI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,6 +132,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+
     /* When button is click, send type and area info to new activity and will display the relevant help.*/
     public void changeScreen(View view) {
         Spinner dropdown_type = findViewById(R.id.spinner_type);
@@ -147,7 +155,37 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, Support_Information_Activity.class);
         intent.putExtra("type", type);
         intent.putExtra("area", area);
+        intent.putExtra("uri", file_URI);
         startActivity(intent);
-
     }
+
+
+    // Button select path open a file explore menu and lets user provide file for the application
+    public void openFile(View view) {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+
+        // Set MIME type of file to be opened, can only open files of that type, set to */* to open any file.
+        intent.setType("text/*");
+
+        startActivityForResult(intent, 2);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode,
+                                 Intent resultData) {
+        if (requestCode == 2
+                && resultCode == Activity.RESULT_OK) {
+            // The result data contains a URI for the document or directory that
+            // the user selected.
+            Uri uri = null;
+            if (resultData != null) {
+                file_URI = resultData.getData();
+                Log.d("DEBUG", "The URI for the test.csv file is: " + file_URI.toString());
+                // Perform operations on the document using its URI.
+            }
+        }
+    }
+
+
 }

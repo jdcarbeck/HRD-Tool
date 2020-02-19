@@ -9,4 +9,5 @@
     <string name="button_next">Next</string>
     <string name="button_previous">Previous</string>
     <string name="No_available_help">Sorry, there is no support available for you</string>
+    <string name="path_selector">Select path</string>
 </resources>

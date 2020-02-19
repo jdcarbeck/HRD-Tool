@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">HRDTool</string>
+    <string name="help">This is help information</string>
+    <string name="back">back</string>
+    <string name="tab_form_label">Form</string>
+    <string name="tab_contact_label">Help Info</string>
+    <string name="i_date">Enter Incident Date</string>
+    <string name="a_date">Enter Attention Date</string>
+    <string-array name="gender">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+    <string-array name="age">
+        <item>11-20</item>
+        <item>21-30</item>
+    </string-array>
+    <string-array name="attention">
+        <item>Legal Attention</item>
+        <item>Psychological Attention</item>
+        <item>Other</item>
+    </string-array>
+
+    <string name="details">Enter Any Additional Info</string>
+</resources>

@@ -2,33 +2,19 @@ package com.example.hrdtool;
 
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
-
 import android.content.ComponentName;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.PersistableBundle;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.ImageSpan;
 import android.util.Log;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.FrameLayout;
-
-
-import com.google.android.material.tabs.TabLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.material.tabs.TabLayout;
 
-
-import org.json.JSONException;
 import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
@@ -51,16 +37,16 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void scheduleJob(View v) {
+    public void scheduleJob(JSONObject rcvJSON) {
         ComponentName componentName = new ComponentName(this, DataSendingService.class);
 
-        JSONObject formJson = new JSONObject();
+        /*JSONObject formJson = new JSONObject();
         try{
             formJson.put("enteredText", "sample");
         } catch (JSONException e){
             e.printStackTrace();
-        }
-
+        }*/
+        JSONObject formJson = rcvJSON;
         String jsonString = formJson.toString();
         bundle.putString("json", jsonString);
 

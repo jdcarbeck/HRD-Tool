@@ -4,7 +4,7 @@ Here an explanation is given for the directories for the management portal devel
 
 ## server
 
-Here are all the code that belongs to the sever including the database and server code
+Here are all the code that belongs to the sever including the database and server code. This file links both the routing which is done in `./routes/HRform-router.js` which defines the methods uses for different http requests, such as: `POST, PUT, DELTE, and GET`. This allso links the db which is specified in `./db/index.js`
 
 ### /server/index.js
 

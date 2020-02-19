@@ -6,16 +6,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import org.json.JSONObject;
+
 public class FormFragment extends Fragment {
 
     private String title;
     private int page;
-
+    private  Button submit_form;
+    private EditText i_date;
+    private EditText a_date;
+    private EditText details;
+    private Spinner dropdown_gender;
+    private Spinner dropdown_type;
+    private Spinner dropdown_age;
     public static FormFragment newInstance(int page, String title){
         FormFragment formFragment = new FormFragment();
         Bundle args = new Bundle();
@@ -24,6 +34,8 @@ public class FormFragment extends Fragment {
         formFragment.setArguments(args);
         return formFragment;
     }
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,12 +50,34 @@ public class FormFragment extends Fragment {
                                 Bundle savedInstanceState) {
         String[] SUPPORT = {"Choose type of support needed",
                 "Any", "Legal", "Medical", "Psychological"};
-        String[] GENDER = {"What area are you located in?", "Male", "Female", "Other"};
+        String[] GENDER = {"Select Gender", "Male", "Female", "Other"};
         String[] AGE = {"Select Age Range", "0-9", "10-19", "20-29", "30-39", "40-49", "50+"};
         View v = inflater.inflate(R.layout.fragment_form, container, false);
-        Spinner dropdown_gender = (Spinner) v.findViewById(R.id.gender);
-        Spinner dropdown_type = (Spinner) v.findViewById(R.id.type);
-        Spinner dropdown_age = (Spinner) v.findViewById(R.id.age);
+        dropdown_gender = (Spinner) v.findViewById(R.id.gender);
+        dropdown_type = (Spinner) v.findViewById(R.id.type);
+        dropdown_age = (Spinner) v.findViewById(R.id.age);
+        submit_form = v.findViewById(R.id.submit_form);
+        i_date = v.findViewById(R.id.i_date);
+        a_date = v.findViewById(R.id.a_date);
+        details = v.findViewById(R.id.details);
+        submit_form.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                JSONObject jObj = new JSONObject();
+                try {
+
+                    jObj.put("incident date", i_date.getText().toString());
+                    jObj.put("attention date",  a_date.getText().toString());
+                    jObj.put("gender",  dropdown_gender.getSelectedItem().toString());
+                    jObj.put("age range",  dropdown_age.getSelectedItem().toString());
+                    jObj.put("details",  details.getText().toString());
+                } catch (Exception e) {
+                    System.out.println("Error:" + e);
+                }
+                ((MainActivity)getActivity()).scheduleJob(jObj);
+            }
+        });
+
         ArrayAdapter<String> gender_adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, GENDER) {
             @Override
             public boolean isEnabled(int position) {
@@ -70,7 +104,7 @@ public class FormFragment extends Fragment {
                 return view;
             }
         };
-        ArrayAdapter<String> type_adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, GENDER) {
+        ArrayAdapter<String> type_adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, SUPPORT) {
             @Override
             public boolean isEnabled(int position) {
                 if (position == 0) {

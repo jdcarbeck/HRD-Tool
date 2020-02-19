@@ -45,7 +45,4 @@ dependencies {
 
     // Testing Navigation
     androidTestImplementation "androidx.navigation:navigation-testing:$nav_version"
-
-    //csv reader
-    implementation 'com.opencsv:opencsv:4.6'
 }

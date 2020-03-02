@@ -5,7 +5,6 @@ import {
     useGlobalFilter,
     usePagination,
   } from 'react-table'
-import api from '../api'
 
 import styled from 'styled-components'
 
@@ -178,6 +177,7 @@ function SelectColumnFilter({
 
 //This is the table component
 function Table({ columns, data }) {
+    console.log('data on FormList', data)
     const filterTypes = React.useMemo(
         () => ({
             text: (rows, id, filterValue) => {
@@ -288,28 +288,9 @@ function filterGreaterThan(rows, id, filterValue) {
 filterGreaterThan.autoRemove = val => typeof val !== 'number'
 
 class FormList extends Component {
-    constructor(props){
-        super(props)
-        this.state= {
-            forms: [],
-            columns: [],
-            isLoading: false,
-        }
-    }
-
-    componentDidMount = async () => {
-        this.setState({ isLoading: true })
-
-        await api.getAllForms().then(forms =>{
-            this.setState({
-                forms: forms.data.data,
-                isLoading: false,
-            })
-        })
-    }
 
     render() {
-        const { forms, isLoading } = this.state
+        const { forms, isLoading } = this.props
         console.log('TCL: FormsList -> render -> forms', forms)
 
         const columns = [

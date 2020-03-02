@@ -1,3 +1,3 @@
-import FormList from './FormList'
+import Dashboard from './Dashboard'
 
-export { FormList }
+export { Dashboard }

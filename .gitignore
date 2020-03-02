@@ -143,3 +143,5 @@ dist
 
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
+
+mongodb-macos-x86_64-4.2.3

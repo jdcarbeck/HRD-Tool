@@ -1,4 +1,4 @@
-const HRform = require('../models/HRform')
+const Form = require('../models/HRform')
 
 createForm = (req, res) => {
     const body = req.body
@@ -9,7 +9,7 @@ createForm = (req, res) => {
         })
     }
 
-    const form = new HRform(body)
+    const form = new Form(body)
 
     if(!form){
         return res.status(400).json({
@@ -45,7 +45,7 @@ updateForm = async (req, res) => {
         })
     }
 
-    HRform.findOne({ _id: req.params.id }, (err, form) => {
+    Form.findOne({ _id: req.params.id }, (err, form) => {
         if(err){
             return res.status(404).json({
                 err,
@@ -74,7 +74,7 @@ updateForm = async (req, res) => {
 }
 
 deleteForm = async (req, res) => {
-    await HRForm.findOneAndDelete({ _id: req.params.id }, (err, form) => {
+    await Form.findOneAndDelete({ _id: req.params.id }, (err, form) => {
         if (err) {
             return res.status(400).json({ success: false, error: err })
         }
@@ -90,7 +90,7 @@ deleteForm = async (req, res) => {
 }
 
 getFormById = async(req, res) => {
-    await HRForm.findOne({ _id: req.params.id }, (err, form) => {
+    await Form.findOne({ _id: req.params.id }, (err, form) => {
         if (err) {
             return res.status(400).json({ success: false, error: err })
         }
@@ -105,7 +105,7 @@ getFormById = async(req, res) => {
 }
 
 getForm = async (req, res) => {
-    await HRForm.find({}, (err, form) => {
+    await Form.find({}, (err, form) => {
         if (err) {
             return res.status(400).json({ success: false, error: err })
         }

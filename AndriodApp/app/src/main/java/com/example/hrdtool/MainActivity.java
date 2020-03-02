@@ -14,7 +14,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import android.provider.Settings.Secure;
 import com.google.android.material.tabs.TabLayout;
 import com.opencsv.CSVReader;
 
@@ -347,13 +347,15 @@ public class MainActivity extends AppCompatActivity {
     public void scheduleJob(JSONObject rcvJSON) {
         ComponentName componentName = new ComponentName(this, DataSendingService.class);
 
-        /*JSONObject formJson = new JSONObject();
-        try{
-            formJson.put("enteredText", "sample");
-        } catch (JSONException e){
-            e.printStackTrace();
-        }*/
         JSONObject formJson = rcvJSON;
+        String android_id = Secure.getString(MainActivity.this.getContentResolver(),
+                Secure.ANDROID_ID);
+        try {
+            formJson.put("id", android_id);
+        }
+        catch (JSONException e){
+            e.printStackTrace();
+        }
         String jsonString = formJson.toString();
         bundle.putString("json", jsonString);
 

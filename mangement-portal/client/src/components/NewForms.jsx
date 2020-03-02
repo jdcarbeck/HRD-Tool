@@ -4,7 +4,36 @@ import {
     useSortBy,
 } from 'react-table'
 
-import api from '../api'
+import styled from 'styled-components'
+
+const Styles = styled.div`
+    padding: 1rem;
+
+    table {
+        border-spacing: 0;
+        border: 1px solid black;
+
+        tr{
+            :last-child {
+                td {
+                    border-bottom: 0;
+                }
+            }
+        }
+
+        th,
+        td {
+            margin: 0;
+            padding: 0.5rem;
+            border-bottom: 1px solid black;
+            border-right: 1px solid black;
+
+            :last-child {
+                border-right: 0;
+            }
+        }
+    }
+`
 
 function Table({ columns, data }) {
     console.log('data on NewForms', data)
@@ -59,8 +88,7 @@ function Table({ columns, data }) {
 
 class NewForms extends Component {
     render() {
-        const { forms, isLoading } = this.props
-        console.log('BBBBCL: FormsList -> render -> forms', forms)
+        const { forms } = this.props
         
         const columns = [
             {
@@ -68,23 +96,25 @@ class NewForms extends Component {
                 accessor: '_id',
             },
             {
-                Header: 'Time',
+                Header: 'Date',
                 accessor: 'time',
-                sortType: 'basic'
+                sortType: 'basic',
+                Cell: function(cellProps){
+                    console.log(cellProps)
+                    return(
+                        <span>{cellProps.cell.value.join('/')}</span>
+                    )
+                },
             }      
         ]
 
-        let showTable = true
-        if(!forms.length){
-            showTable=false
-        }
-
         return (
-            <Table
-                data={forms}
-                columns={columns}
-                loading={isLoading}
-            />
+            <Styles>
+                <Table
+                    data={forms}
+                    columns={columns}
+                />
+            </Styles>
         )
     }
 }

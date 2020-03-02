@@ -306,8 +306,14 @@ class FormList extends Component {
                 filter: 'includes'
             },
             {   
-                Header: 'Time',
+                Header: 'Date',
                 accessor: 'time',
+                Cell: function(cellProps){
+                  console.log(cellProps)
+                  return(
+                    <span>{cellProps.cell.value.join('/')}</span>
+                  )
+                },
             }
         ]
 

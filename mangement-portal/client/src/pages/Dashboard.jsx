@@ -27,7 +27,7 @@ class Dashboard extends Component {
         super(props)
         this.state = {
             data: {},
-            isLoading: false,
+            isLoading: true,
         }
     }
     
@@ -35,13 +35,15 @@ class Dashboard extends Component {
         await api.getAllForms().then(forms =>{
             this.setState({
                 data: forms.data.data,
+                isLoading: false,
             })
         })
     }
 
     
     render() {
-        const { data, isLoading } = this.state
+
+        const { data } = this.state
 
         let showDashboard = true
         if(!data.length){

@@ -28,6 +28,11 @@ class Links extends Component {
                                 Device Mangement
                             </Link>
                         </Item>
+                        <Item>
+                            <Link to="/resources" className="nav-link">
+                                Help Resources Mangement
+                            </Link>
+                        </Item>
                     </List>
                 </Collapse>
             </React.Fragment>

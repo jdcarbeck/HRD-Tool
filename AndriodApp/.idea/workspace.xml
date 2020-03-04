@@ -16,8 +16,10 @@
     <list default="true" id="cd4aaaf7-4ed6-4b5a-92ef-1986409743e2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/FormFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/FormFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_help.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_help.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,7 +30,7 @@
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_3_API_28" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="Nexus_5X_API_29_x86" />
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
@@ -38,20 +40,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1635">
-              <caret line="166" column="50" selection-start-line="166" selection-start-column="50" selection-end-line="166" selection-end-column="50" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/OkHttp.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
-              <caret line="42" column="1" lean-forward="true" selection-start-line="42" selection-start-column="1" selection-end-line="42" selection-end-column="1" />
+            <state relative-caret-position="613">
+              <caret line="503" lean-forward="true" selection-start-line="503" selection-end-line="503" />
+              <folding>
+                <element signature="class#CSVHelpRow#0;class#MainActivity#0" />
+                <element signature="method#find_user_zone_type#0;class#MainActivity#0" />
+                <element signature="method#check_headers#0;class#MainActivity#0" />
+                <element signature="method#display_CSVRow#0;class#MainActivity#0" />
+                <element signature="class#CSVFormRow#0;class#MainActivity#0" />
+                <element signature="method#scheduleJob#0;class#MainActivity#0" />
+                <element signature="class#MyPagerAdapter#0;class#MainActivity#0" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -59,11 +61,25 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/FormFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="765">
-              <caret line="63" column="8" selection-start-line="63" selection-start-column="8" selection-end-line="63" selection-end-column="8" />
+            <state relative-caret-position="493">
+              <caret line="196" column="81" lean-forward="true" selection-start-line="196" selection-start-column="81" selection-end-line="196" selection-end-column="81" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#2740#3160#0" />
+                <element signature="e#3181#3254#0" />
+                <element signature="class#3397:4412" />
+                <element signature="class#4462:5478" />
+                <element signature="class#5528:6540" />
+                <element signature="class#6590:7603" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/OkHttp.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="612">
+              <caret line="42" column="1" selection-start-line="42" selection-start-column="1" selection-end-line="42" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -71,7 +87,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/HelpFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
+            <state relative-caret-position="578">
               <caret line="46" column="1" selection-start-line="46" selection-start-column="1" selection-end-line="46" selection-end-column="1" />
             </state>
           </provider>
@@ -92,7 +108,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/FormActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1590">
+            <state relative-caret-position="1802">
               <caret line="132" column="9" selection-start-line="132" selection-start-column="9" selection-end-line="132" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -121,10 +137,12 @@
         <option value="$PROJECT_DIR$/local.properties" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_form.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/FormFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_help.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/MainActivity.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="y" value="413" />
     <option name="width" value="1680" />
     <option name="height" value="1027" />
@@ -135,10 +153,31 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
-      <pane id="ProjectPane" />
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane" />
+      <pane id="AndroidView">
+        <subPane>
+          <expand>
+            <path>
+              <item name="HRDTool" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+            </path>
+            <path>
+              <item name="HRDTool" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+            </path>
+            <path>
+              <item name="HRDTool" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+              <item name="layout" type="ddeffd01:AndroidResFolderTypeNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -236,11 +275,12 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="413" width="1680" height="1027" extended-state="0" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" sideWeight="0.50110865" side_tool="true" weight="0.32972974" />
       <window_info id="Capture Tool" order="1" />
-      <window_info content_ui="combo" id="Project" order="2" sideWeight="0.49889135" visible="true" weight="0.18315019" />
+      <window_info active="true" content_ui="combo" id="Project" order="2" sideWeight="0.49889135" visible="true" weight="0.18496802" />
       <window_info id="Structure" order="3" side_tool="true" />
       <window_info id="Build Variants" order="4" side_tool="true" />
       <window_info id="Image Layers" order="5" />
@@ -249,12 +289,12 @@
       <window_info id="Favorites" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Logcat" order="0" sideWeight="0.49946696" weight="0.32936078" />
       <window_info anchor="bottom" id="TODO" order="1" />
-      <window_info anchor="bottom" id="Android Profiler" order="2" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Android Profiler" order="2" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.32936078" />
       <window_info anchor="bottom" id="Run" order="4" weight="0.32939914" />
       <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.50053304" side_tool="true" weight="0.32936078" />
       <window_info anchor="bottom" id="Version Control" order="6" />
-      <window_info anchor="bottom" id="Build" order="7" visible="true" weight="0.2116228" />
+      <window_info anchor="bottom" id="Build" order="7" visible="true" weight="0.2112676" />
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
       <window_info anchor="right" id="Capture Analysis" order="1" />
@@ -301,8 +341,8 @@
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor" />
       <provider editor-type-id="android-manifest" />
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/assets/form.csv" />
     <entry file="file://$PROJECT_DIR$/app/src/main/res/raw/form.csv" />
@@ -331,26 +371,41 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/raw/help.csv" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/MainActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/FormActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1635">
-          <caret line="166" column="50" selection-start-line="166" selection-start-column="50" selection-end-line="166" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/FormFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="765">
-          <caret line="63" column="8" selection-start-line="63" selection-start-column="8" selection-end-line="63" selection-end-column="8" />
+        <state relative-caret-position="1802">
+          <caret line="132" column="9" selection-start-line="132" selection-start-column="9" selection-end-line="132" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/OkHttp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="42" column="1" selection-start-line="42" selection-start-column="1" selection-end-line="42" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/FormFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="196" column="81" lean-forward="true" selection-start-line="196" selection-start-column="81" selection-end-line="196" selection-end-column="81" />
+          <folding>
+            <element signature="e#2740#3160#0" />
+            <element signature="e#3181#3254#0" />
+            <element signature="class#3397:4412" />
+            <element signature="class#4462:5478" />
+            <element signature="class#5528:6540" />
+            <element signature="class#6590:7603" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/HelpFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
+        <state relative-caret-position="578">
           <caret line="46" column="1" selection-start-line="46" selection-start-column="1" selection-end-line="46" selection-end-column="1" />
         </state>
       </provider>
@@ -363,20 +418,19 @@
       <provider selected="true" editor-type-id="android-designer2" />
       <provider editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/FormActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1590">
-          <caret line="132" column="9" selection-start-line="132" selection-start-column="9" selection-end-line="132" selection-end-column="9" />
+        <state relative-caret-position="613">
+          <caret line="503" lean-forward="true" selection-start-line="503" selection-end-line="503" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="class#CSVHelpRow#0;class#MainActivity#0" />
+            <element signature="method#find_user_zone_type#0;class#MainActivity#0" />
+            <element signature="method#check_headers#0;class#MainActivity#0" />
+            <element signature="method#display_CSVRow#0;class#MainActivity#0" />
+            <element signature="class#CSVFormRow#0;class#MainActivity#0" />
+            <element signature="method#scheduleJob#0;class#MainActivity#0" />
+            <element signature="class#MyPagerAdapter#0;class#MainActivity#0" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/OkHttp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="42" column="1" lean-forward="true" selection-start-line="42" selection-start-column="1" selection-end-line="42" selection-end-column="1" />
         </state>
       </provider>
     </entry>

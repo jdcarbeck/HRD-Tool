@@ -8,17 +8,6 @@
     android:baselineAligned="false">
 
     <Button
-        android:id="@+id/button_get_help"
-        android:layout_width="218dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="96dp"
-        android:layout_marginTop="24dp"
-        android:onClick="getHelp"
-        android:text="Get Help!"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
         android:id="@+id/button_prev"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -45,11 +34,10 @@
         android:id="@+id/support_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
         android:text="@string/default_support"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_get_help"
+        tools:layout_editor_absoluteY="120dp"
         tools:text="@string/default_support" />
 
     <TextView

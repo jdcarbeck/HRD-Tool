@@ -413,14 +413,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void getHelp(View view) {
+    public void getHelp(View view, String type) {
         try {
             CSVReader reader = new CSVReader(new InputStreamReader(getResources().openRawResource(R.raw.help)));
 
-            Spinner dropdown_type = findViewById(R.id.spinner_type);
             Spinner dropdown_area = findViewById(R.id.spinner_area);
-
-            String type = dropdown_type.getSelectedItem().toString();
             String area = dropdown_area.getSelectedItem().toString();
 
             if(type.equalsIgnoreCase(TYPES[0]))
@@ -438,6 +435,8 @@ public class MainActivity extends AppCompatActivity {
             prev.setEnabled(false);
             if(users.size() <= 1)
                 next.setEnabled(false);
+            else
+                next.setEnabled(true);
 
             if(users.isEmpty()) {
                 TextView support_name = (TextView) findViewById(R.id.support_name);

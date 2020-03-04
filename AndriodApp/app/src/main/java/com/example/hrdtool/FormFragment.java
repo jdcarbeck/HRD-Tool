@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -190,6 +191,18 @@ public class FormFragment extends Fragment {
 
         dropdown_age.setAdapter(age_adapter);
         dropdown_type.setAdapter(type_adapter);
+        dropdown_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+                String type = adapterView.getItemAtPosition(position).toString();
+                ((MainActivity)getActivity()).getHelp(view, type);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         dropdown_gender.setAdapter(gender_adapter);
         dropdown_area.setAdapter(area_adapter);
 

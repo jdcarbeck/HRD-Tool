@@ -42,6 +42,4 @@ public class HelpFragment extends Fragment {
 
         return v;
     }
-
-
 }

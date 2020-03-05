@@ -3,6 +3,7 @@ package com.example.hrdtool;
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
 import android.content.ComponentName;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.text.method.LinkMovementMethod;
@@ -237,6 +238,12 @@ public class MainActivity extends AppCompatActivity {
             String ratio = index + "/" + length;
             page_ratio.setText(ratio);
         }
+    }
+
+    public void toCalculator(View view){
+        Intent intent = new Intent(this, Calculator.class);
+        startActivity(intent);
+
     }
 }
 

@@ -4,7 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -16,228 +21,177 @@ Inside the calculator app, the pin code to switch screen is 1201 and the button 
  */
 public class Calculator extends AppCompatActivity {
 
-    static final String PINCODE = "1201";
-    double input1 = 0, input2 = 0;
-    TextView edt1;
-    boolean Addition, Subtract, Multiplication, Division, mRemainder, decimal;
-    Button button0, button1, button2, button3, button4, button5, button6, button7, button8, button9, buttonAdd, buttonSub,
-            buttonMul, buttonDivision, buttonEqual, buttonDel, buttonDot, Remainder;
+    /**
+     * resultShown is true when a result is shown
+     * after calculation and false otherwise.
+     * Uses: To differentiate between the status of the calculator
+     * whether it is a new calculation or not.
+     */
+    private static boolean resultShown = false;
+    private static final String PINCODE = "1201";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculator);
 
-        button0 = (Button) findViewById(R.id.button0);
-        button1 = (Button) findViewById(R.id.button1);
-        button2 = (Button) findViewById(R.id.button2);
-        button3 = (Button) findViewById(R.id.button3);
-        button4 = (Button) findViewById(R.id.button4);
-        button5 = (Button) findViewById(R.id.button5);
-        button6 = (Button) findViewById(R.id.button6);
-        button7 = (Button) findViewById(R.id.button7);
-        button8 = (Button) findViewById(R.id.button8);
-        button9 = (Button) findViewById(R.id.button9);
-        buttonDot = (Button) findViewById(R.id.buttonDot);
-        buttonAdd = (Button) findViewById(R.id.buttonadd);
-        buttonSub = (Button) findViewById(R.id.buttonsub);
-        buttonMul = (Button) findViewById(R.id.buttonmul);
-        buttonDivision = (Button) findViewById(R.id.buttondiv);
-        Remainder = (Button) findViewById(R.id.Remainder);
-        buttonDel = (Button) findViewById(R.id.buttonDel);
-        buttonEqual = (Button) findViewById(R.id.buttoneql);
+        final TextView display = findViewById(R.id.display);
+        final TextView history = findViewById(R.id.prev);
+        Button clear = findViewById(R.id.clear);
 
-        edt1 = (TextView) findViewById(R.id.display);
-
-        button1.setOnClickListener(new View.OnClickListener() {
+        // Setting functionality for clear button to clear
+        // both TextViews on holding this button.
+        clear.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public void onClick(View v) {
-                edt1.setText(edt1.getText() + "1");
+            public boolean onLongClick(View v) {
+                display.setText("0");
+                history.setText("");
+                return true;
             }
         });
+    }
 
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                edt1.setText(edt1.getText() + "2");
+    /**
+     * Generating ActionBar option menu.
+     * @param menu: default
+     * @return: default
+     */
+
+
+    /**
+     * Method to handle operand buttons like 1, 2, 3... clicks.
+     * @param view: default
+     */
+    public void operandClick(View view) {
+        Button btn = findViewById(view.getId());
+        TextView display = findViewById(R.id.display);
+
+        String dataOnDisplay = display.getText().toString();
+        String btnData = btn.getText().toString();
+
+        // If display data is 0 or a result is shown
+        // we set the display value to the value of the
+        // operand clicked otherwise we append operand with
+        // existing data
+        if (dataOnDisplay.equals("0") || resultShown) {
+            display.setText(btnData);
+            resultShown = false;
+        }
+        else {
+            String res = dataOnDisplay + btn.getText().toString();
+            display.setText(res);
+        }
+    }
+
+    /**
+     * Handles operators like +, -, *, / clicks.
+     * @param view: default
+     */
+    public void operatorClick(View view) {
+        TextView display = findViewById(R.id.display);
+        Button btn = findViewById(view.getId());
+        String displayText = display.getText().toString();
+
+        if (resultShown)
+            resultShown = false;
+
+        if (displayText.equals("Syntax Error") || displayText.equals("Infinity"))
+            display.setText("0" + btn.getText());
+        else
+            display.setText(displayText + btn.getText());
+    }
+
+    /**
+     * Method is invoked when C button is pressed. We delete the last
+     * character inputted on a single press.
+     * For some special cases we set it back to 0.
+     * @param view: default
+     */
+    public void clear(View view) {
+        TextView display = findViewById(R.id.display);
+        String displayData = display.getText().toString();
+
+        if (displayData.equals("0") || displayData.equals("Syntax Error") || displayData.equals("Infinity"))
+            display.setText("0");
+        else {
+            String backSpacedData = displayData.substring(0, displayData.length() - 1);
+
+            if (backSpacedData.equals(""))
+                backSpacedData = "0";
+
+            display.setText(backSpacedData);
+        }
+    }
+
+    /**
+     * Method is called upon equal button is clicked.
+     * We calculate the value of the equation by calling ExpressionEvaluation class.
+     * if it returns NaN then an error has occured. Otherwise we show the result
+     * of calculation.
+     * @param view: default
+     */
+    public void calculate(View view) {
+        TextView display = findViewById(R.id.display);
+
+        if(display.getText().equals(PINCODE)) {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
+
+        Animation textTransition = AnimationUtils.loadAnimation(this, R.anim.text_transition);
+
+        TextView history = findViewById(R.id.prev);
+
+        history.startAnimation(textTransition);
+
+        String equation = display.getText().toString().trim();
+        Double result = ExpressionEvaluation.expressionEvaluation(equation);
+
+        if (Double.isNaN(result)) {
+            display.setText("Syntax Error");
+        } else {
+            history.setText(equation);
+
+            if (String.valueOf(result).contains("E")) {
+                display.setText(result.toString());
             }
-        });
+            else if (result == Math.round(result))
+            {
+                String res = result.toString();
+                display.setText(res.substring(0, res.length() - 2));;
+            } else
+                display.setText(result.toString());
 
-        button3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                edt1.setText(edt1.getText() + "3");
-            }
-        });
+        }
 
-        button4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                edt1.setText(edt1.getText() + "4");
-            }
-        });
+        resultShown = true;
 
-        button5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                edt1.setText(edt1.getText() + "5");
-            }
-        });
+    }
 
-        button6.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                edt1.setText(edt1.getText() + "6");
-            }
-        });
+    /**
+     * Handles decimal point button click.
+     * @param view: default
+     */
+    public void dotClick(View view) {
+        TextView display = findViewById(R.id.display);
+        String dataOnDisplay = display.getText().toString();
+        int len = dataOnDisplay.length();
+        char lastChar = dataOnDisplay.charAt(len - 1);
 
-        button7.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                edt1.setText(edt1.getText() + "7");
-            }
-        });
+        if (resultShown) {
+            resultShown = false;
+            display.setText("0.");
+        } else {
+            if ((lastChar >= '1'
+                    && lastChar <= '9')
+                    || lastChar == '0')
+                display.setText(dataOnDisplay + ".");
+            else if (lastChar == '+'
+                    || lastChar == '-'
+                    || lastChar == '\u00d7' // \u00d7 = multiplication character in unicode
+                    || lastChar == '\u00f7') // // \u00f7 = multiplication character in unicode
+                display.setText(dataOnDisplay + "0.");
 
-        button8.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                edt1.setText(edt1.getText() + "8");
-            }
-        });
-
-        button9.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                edt1.setText(edt1.getText() + "9");
-            }
-        });
-
-        button0.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                edt1.setText(edt1.getText() + "0");
-            }
-        });
-
-        buttonAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (edt1.getText().length() != 0) {
-                    input1 = Float.parseFloat(edt1.getText() + "");
-                    Addition = true;
-                    decimal = false;
-                    edt1.setText(null);
-                }
-            }
-        });
-
-        buttonSub.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (edt1.getText().length() != 0) {
-                    input1 = Float.parseFloat(edt1.getText() + "");
-                    Subtract = true;
-                    decimal = false;
-                    edt1.setText(null);
-                }
-            }
-        });
-
-        buttonMul.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (edt1.getText().length() != 0) {
-                    input1 = Float.parseFloat(edt1.getText() + "");
-                    Multiplication = true;
-                    decimal = false;
-                    edt1.setText(null);
-                }
-            }
-        });
-
-        buttonDivision.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (edt1.getText().length() != 0) {
-                    input1 = Float.parseFloat(edt1.getText() + "");
-                    Division = true;
-                    decimal = false;
-                    edt1.setText(null);
-                }
-            }
-        });
-
-        Remainder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (edt1.getText().length() != 0) {
-                    input1 = Float.parseFloat(edt1.getText() + "");
-                    mRemainder = true;
-                    decimal = false;
-                    edt1.setText(null);
-                }
-            }
-        });
-
-        buttonEqual.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (Addition || Subtract || Multiplication || Division || mRemainder) {
-                    input2 = Float.parseFloat(edt1.getText() + "");
-                }
-
-                if (Addition) {
-
-                    edt1.setText(input1 + input2 + "");
-                    Addition = false;
-                }
-
-                if (Subtract) {
-
-                    edt1.setText(input1 - input2 + "");
-                    Subtract = false;
-                }
-
-                if (Multiplication) {
-                    edt1.setText(input1 * input2 + "");
-                    Multiplication = false;
-                }
-
-                if (Division) {
-                    edt1.setText(input1 / input2 + "");
-                    Division = false;
-                }
-                if (mRemainder) {
-                    edt1.setText(input1 % input2 + "");
-                    mRemainder = false;
-                }
-            }
-        });
-
-        buttonDel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(edt1.getText().equals(PINCODE)) {
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(intent);
-                }
-                edt1.setText("");
-                input1 = 0.0;
-                input2 = 0.0;
-            }
-        });
-
-        buttonDot.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (decimal) {
-                    //do nothing or you can show the error
-                } else {
-                    edt1.setText(edt1.getText() + ".");
-                    decimal = true;
-                }
-
-            }
-        });
+        }
     }
 }

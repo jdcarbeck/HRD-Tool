@@ -240,11 +240,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void toCalculator(View view){
-        Intent intent = new Intent(this, Calculator.class);
-        startActivity(intent);
-
-    }
 }
 
 

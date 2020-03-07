@@ -7,4 +7,5 @@
     <color name="green">#00FF00</color>
     <color name="operator_btn_clr">#FFFFFF</color>
     <color name="selected">#3498DB</color>
+    <color name="white">#fff</color>
 </resources>

@@ -36,8 +36,6 @@ public class OkHttp {
                 .build();
 
 
-        // Get response
-        //Response response =
         httpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -54,7 +52,7 @@ public class OkHttp {
                    System.out.println((responseBody));
                 }
             }
-            //publicKeyReceived = response.body().string();
+            
         });
 
     }

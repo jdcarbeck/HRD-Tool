@@ -30,7 +30,7 @@ public class OkHttp {
         );
 
         Request request = new Request.Builder()
-                .url("https://webhook.site/d4e2ccf6-0b30-45bc-b567-a6bd82047ff6")
+                .url(http://(LocalIpAddress:3000/HRform-router/" + parameters[0])
                 .addHeader("User-Agent", "OkHttp Bot")
                 .post(body)
                 .build();

@@ -52,6 +52,112 @@ public class MainActivity extends AppCompatActivity {
     PersistableBundle bundle = new PersistableBundle();
     int jobId = 1;
 
+    public static String receivedPublicKey;
+    protected static SecretKey mySecretKey;
+    protected PublicKey myPublicKey;
+    protected PrivateKey myPrivateKey;
+
+    public static void generateSymmetricKey()
+    {
+        KeyGenerator generator;
+        try {
+            generator = KeyGenerator.getInstance("AES");
+            generator.init(256);
+            mySecretKey = generator.generateKey();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+    }
+    public byte[] encryptSecretKey()
+    {
+        byte[] encryptedKey = null;
+        try {
+            KeyPairGenerator generator = KeyPairGenerator.getInstance("RSA");
+            generator.initialize(2048);
+            KeyPair keyPair = generator.generateKeyPair();
+            myPublicKey = keyPair.getPublic();
+            myPrivateKey = keyPair.getPrivate();
+            Cipher cipher = Cipher.getInstance("RSA/ECB/OAEPWITHSHA-256ANDMGF1PADDING");
+            cipher.init(Cipher.PUBLIC_KEY, myPublicKey);         //received public key will replace Cipher.PUBLIC_KEY
+            encryptedKey = cipher.doFinal(mySecretKey.getEncoded());
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (NoSuchPaddingException e) {
+            e.printStackTrace();
+        } catch (InvalidKeyException e) {
+            e.printStackTrace();
+        } catch (IllegalBlockSizeException e) {
+            e.printStackTrace();
+        } catch (BadPaddingException e) {
+            e.printStackTrace();
+        }
+        return encryptedKey;
+    }
+    public byte[] encryptText(String textToEncrypt)
+    {
+        byte[] byteCipherText = null;
+        try {
+            Cipher encCipher = Cipher.getInstance("AES");
+            encCipher.init(Cipher.ENCRYPT_MODE, mySecretKey);
+            byteCipherText = encCipher.doFinal(textToEncrypt.getBytes());
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (NoSuchPaddingException e) {
+            e.printStackTrace();
+        } catch (InvalidKeyException e) {
+            e.printStackTrace();
+        } catch (IllegalBlockSizeException e) {
+            e.printStackTrace();
+        } catch (BadPaddingException e) {
+            e.printStackTrace();
+        }
+        return byteCipherText;
+    }
+//    public byte[] decryptSecretKey(byte[] encryptedSecretKey)         //for testing decryption
+//    {
+//        byte[] decryptedKey = null;
+//        try {
+//            Cipher cipher = Cipher.getInstance("RSA/ECB/OAEPWITHSHA-256ANDMGF1PADDING");
+//            cipher.init(Cipher.PRIVATE_KEY, myPrivateKey);
+//            decryptedKey = cipher.doFinal(encryptedSecretKey);
+//        } catch (NoSuchAlgorithmException e) {
+//            e.printStackTrace();
+//        } catch (NoSuchPaddingException e) {
+//            e.printStackTrace();
+//        } catch (InvalidKeyException e) {
+//            e.printStackTrace();
+//        } catch (IllegalBlockSizeException e) {
+//            e.printStackTrace();
+//        } catch (BadPaddingException e) {
+//            e.printStackTrace();
+//        }
+//        return decryptedKey;
+//    }
+//    public String decryptText(byte[] decryptedKey, byte[] encryptedText)      //for testing decryption
+//    {
+//        String decryptedPlainText = null;
+//        try {
+//            SecretKey originalKey = new SecretKeySpec(decryptedKey , 0, decryptedKey.length, "AES");
+//            Cipher aesCipher2 = Cipher.getInstance("AES");
+//            aesCipher2.init(Cipher.DECRYPT_MODE, originalKey);
+//            byte[] bytePlainText = aesCipher2.doFinal(encryptedText);
+//            decryptedPlainText = new String(bytePlainText);
+//        } catch (NoSuchAlgorithmException e) {
+//            e.printStackTrace();
+//        } catch (NoSuchPaddingException e) {
+//            e.printStackTrace();
+//        } catch (InvalidKeyException e) {
+//            e.printStackTrace();
+//        } catch (IllegalBlockSizeException e) {
+//            e.printStackTrace();
+//        } catch (BadPaddingException e) {
+//            e.printStackTrace();
+//        }
+//        return decryptedPlainText;
+//    }
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,11 +167,20 @@ public class MainActivity extends AppCompatActivity {
         adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(adapterViewPager);
         mTabLayout.setupWithViewPager(mViewPager);
+        OkHttp.sendPostReq("getKey", "", "");
+    }
 
+    public static void setPublicKey(String publicKeyResponse) {
+        receivedPublicKey = publicKeyResponse;
+        System.out.println("public key received");
     }
 
     public void scheduleJob(JSONObject rcvJSON) {
+
+
         ComponentName componentName = new ComponentName(this, DataSendingService.class);
+
+
 
         JSONObject formJson = rcvJSON;
         String android_id = Secure.getString(MainActivity.this.getContentResolver(),
@@ -77,7 +192,28 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         String jsonString = formJson.toString();
-        bundle.putString("json", jsonString);
+
+        generateSymmetricKey();
+        String strEncodedSecretKey  = Base64.encodeToString(mySecretKey.getEncoded(), Base64.DEFAULT);
+        System.out.println(strEncodedSecretKey);
+        byte[] encryptedSecretKey = encryptSecretKey();
+        System.out.println(encryptedSecretKey);
+        byte[] encryptedText = encryptText(jsonString);
+        System.out.println(encryptedText);
+//        byte[] decryptedSecretKey = decryptSecretKey(encryptedSecretKey);
+//        System.out.println(decryptedSecretKey);
+//        String decryptedText = decryptText(decryptedSecretKey, encryptedText);
+//        System.out.println(decryptedText);
+        try {
+            String encryptedSecretKeyString = new String(encryptedSecretKey, "UTF-8");
+            String encryptedFormDataString = new String(encryptedText, "UTF-8");
+            bundle.putString("encryptedSecretKey", encryptedSecretKeyString);
+            bundle.putString("encryptedFormData", encryptedFormDataString);
+        }
+        catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
 
         JobInfo info = new JobInfo.Builder(jobId, componentName)
                 .setRequiresCharging(false)

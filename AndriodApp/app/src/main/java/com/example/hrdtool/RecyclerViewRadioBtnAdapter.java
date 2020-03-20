@@ -1,6 +1,7 @@
 package com.example.hrdtool;
 
 import android.content.Context;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,7 +61,9 @@ public class RecyclerViewRadioBtnAdapter extends RecyclerView.Adapter<RecyclerVi
         return mItems.size();
     }
 
-
+    public int getSelectedIds() {
+        return mSelectedItem;
+    }
 }
 
 

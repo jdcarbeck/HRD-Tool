@@ -50,7 +50,7 @@ public class FormFragment extends Fragment {
     private Context context;
     private Context context1;
     private RecyclerViewAdapter adapter;
-    private RecyclerViewAdapter adapter2;
+    private RecyclerViewAdapter1 adapter2;
     private RecyclerViewRadioBtnAdapter adapter1;
     private CheckBox chb;
     private CheckBox chb1;
@@ -365,7 +365,7 @@ public class FormFragment extends Fragment {
 
 //        for(int i=1;i<arrayList.size();i++) {
 //            arrayList = Arrays.asList(CLASSIFICATION_PHY[i]);
-        adapter2 = new RecyclerViewAdapter(context, arrayList);
+        adapter2 = new RecyclerViewAdapter1(context, arrayList);
 //        };
 
         recyclerView8.setAdapter(adapter2);
@@ -404,7 +404,7 @@ public class FormFragment extends Fragment {
         arrayList1 = Arrays.asList(CLASSIFICATION_EMO);
 
 //        for(int i=0;i<arrayList1.size();i++) {
-        adapter2 = new RecyclerViewAdapter(context1, arrayList1);
+        adapter2 = new RecyclerViewAdapter1(context1, arrayList1);
 
 //        };
 
@@ -441,7 +441,7 @@ public class FormFragment extends Fragment {
         arrayList1 = Arrays.asList(CLASSIFICATION_SEX);
 
 //        for(int i=0;i<arrayList1.size();i++) {
-        adapter2 = new RecyclerViewAdapter(context1, arrayList1);
+        adapter2 = new RecyclerViewAdapter1(context1, arrayList1);
 
 //        };
 

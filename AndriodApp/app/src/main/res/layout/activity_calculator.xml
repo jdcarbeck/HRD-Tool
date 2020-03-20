@@ -10,7 +10,7 @@
     tools:context=".Calculator">
 
     <LinearLayout
-        android:background="@color/colorPrimary"
+        android:background="@color/white"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -21,9 +21,9 @@
             android:ellipsize="start"
             android:padding="5sp"
             android:singleLine="true"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="30sp"
-            android:background="@color/colorPrimary"/>
+            android:background="@color/white"/>
 
         <TextView
             android:text="0"
@@ -33,8 +33,8 @@
             app:autoSizeMinTextSize="30sp"
             app:autoSizeMaxTextSize="80sp"
             app:autoSizeTextType="uniform"
-            android:background="@color/colorPrimary"
-            android:textColor="#fff"
+            android:background="@color/white"
+            android:textColor="@color/black"
             android:textAlignment="textEnd"
             android:layout_gravity="center|end"
             android:layout_width="match_parent"
@@ -51,7 +51,8 @@
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -206,18 +207,19 @@
             android:layout_width="match_parent"
             android:layout_weight="3"
             android:orientation="vertical"
-            android:background="@color/colorPrimary"
-            android:layout_height="match_parent">
+            android:background="@color/black"
+            android:layout_height="match_parent"
+            >
 
             <Button
                 android:id="@+id/plus"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/operator_button_style"
+                android:background="@color/grey"
                 android:text="+"
                 android:onClick="operatorClick"
-                android:textColor="@color/white"
+                android:textColor="@color/colorPrimary"
                 android:textSize="40sp" />
 
             <Button

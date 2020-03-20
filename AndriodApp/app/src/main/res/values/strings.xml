@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">HRDTool</string>
+    <string name="help">This is help information</string>
+    <string name="back">back</string>
+    <string name="tab_form_label">Form</string>
+    <string name="tab_contact_label">Help Info</string>
+    <string name="i_date">Incident Date</string>
+    <string name="a_date">Attention Date</string>
+    <string name="type_attention"><u><font size='17' color='#000000'>Type of attention the survivor is seeking from us <font color='#6200EE'>*</font></font></u></string>
+    <string-array name="attention">
+        <item>Information</item>
+        <item>Legal Attention</item>
+        <item>Psychosocial Attention</item>
+        <item>Medical Attention</item>
+        <item>Refuge</item>
+        <item>Other Attention</item>
+    </string-array>
+    <string name="type_attention1"><u><font size='17' color='#000000'>Type of attention I offered the survivor <font color='#6200EE'>*</font></font></u></string>
+    <string name="type_attention2"><u><font size='17' color='#000000'>Type of attention I referred the survivor to <font color='#6200EE'>*</font></font></u></string>
+    <string name="prep_gender"><u><font size='17' color='#000000'>Sex of the perpetrator <font color='#6200EE'>*</font></font></u></string>
+    <string name="prep_known"><u><font size='17' color='#000000'>Was the perpetrator known/unknown? <font color='#6200EE'>*</font></font></u></string>
+    <string name="prep_ifknown"><u><font size='17' color='#000000'>If known, was the perpetrator</font></u></string>
+    <string name="classif"><u><font size='17' color='#000000'>Classification of case <font color='#6200EE'>*</font></font></u></string>
+    <string name="class_phy"><u><font size='17' color='#000000'>Physical (an act of physical violence that is not sexual in nature eg. Hitting) </font></u></string>
+    <string name="class_emotional"><u><font size='17' color='#000000'>Emotional/psychological (infliction of mental or emotional pain or injury eg. threats of physical or sexual violence, intimidation, humiliation) </font></u></string>
+    <string name="class_sexual"><u><font size='17' color='#000000'>Sexual (any form of non-consensual sexual contact) </font></u></string>
+    <string name="class_forcedm"><u><font size='17' color='#000000'>Forced Marriage (the marriage of an individual against her or his will) </font></u></string>
+    <string name="denial"><u><font size='17' color='#000000'>Denial of Resources, Opportunities or Services <font color='#6200EE'>*</font></font></u></string>
+
+    <string-array name="gender">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+    <string-array name="age">
+        <item>11-20</item>
+        <item>21-30</item>
+    </string-array>
+
+
+    <string name="details">Enter Any Additional Info</string>
+    <string name="default_support">Sorry, no support is available for you.</string>
+</resources>

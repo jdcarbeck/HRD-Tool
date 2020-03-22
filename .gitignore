@@ -145,3 +145,9 @@ dist
 .vscode-test
 
 mongodb-macos-x86_64-4.2.3
+
+# exclude everything
+keys/*
+
+# exception to the rule
+!keys/.gitkeep 

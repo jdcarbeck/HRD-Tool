@@ -32,7 +32,7 @@ public class OkHttp {
         );
 
         Request request = new Request.Builder()
-                .url("http://192.168.0.11:3000/HRform-router/" + parameters[0])
+                .url(URL + parameters[0])
                 .addHeader("User-Agent", "OkHttp Bot")
                 .post(body)
                 .build();

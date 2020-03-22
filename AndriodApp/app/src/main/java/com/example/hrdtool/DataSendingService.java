@@ -22,9 +22,9 @@ public class DataSendingService extends JobService {
             public void run() {
 
                 String json = parameters.getExtras().getString("json");
-
-                // *Code for sending messages goes here*
-                new OkHttp().execute(json);
+                String encryptedSecretKey = parameters.getExtras().getString("encryptedSecretKey");
+                
+                OkHttp.sendPostReq("post", json, encryptedSecretKey);
 
                 if (jobCancelled) {
                     return;

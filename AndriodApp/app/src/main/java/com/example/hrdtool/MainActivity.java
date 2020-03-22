@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     PersistableBundle bundle = new PersistableBundle();
     int jobId = 1;
 
-    public static String receivedPublicKey;
+    protected static PublicKey receivedPublicKey;
     protected static SecretKey mySecretKey;
     protected PublicKey myPublicKey;
     protected PrivateKey myPrivateKey;
@@ -76,9 +76,10 @@ public class MainActivity extends AppCompatActivity {
             generator.initialize(2048);
             KeyPair keyPair = generator.generateKeyPair();
             myPublicKey = keyPair.getPublic();
-            myPrivateKey = keyPair.getPrivate();
+            myPrivateKey = keyPair.getPrivate();            
             Cipher cipher = Cipher.getInstance("RSA/ECB/OAEPWITHSHA-256ANDMGF1PADDING");
-            cipher.init(Cipher.PUBLIC_KEY, myPublicKey);         //received public key will replace Cipher.PUBLIC_KEY
+            cipher.init(Cipher.PUBLIC_KEY, receivedPublicKey);         //received public key will replace Cipher.PUBLIC_KEY
+            System.out.println(Cipher.PUBLIC_KEY);
             encryptedKey = cipher.doFinal(mySecretKey.getEncoded());
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
@@ -167,20 +168,53 @@ public class MainActivity extends AppCompatActivity {
         adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(adapterViewPager);
         mTabLayout.setupWithViewPager(mViewPager);
-        OkHttp.sendPostReq("getKey", "", "");
+        scheduleJobGetPublicKey();
     }
 
+    //This method is called by OkHttp when a a public key is recevied as a response
     public static void setPublicKey(String publicKeyResponse) {
-        receivedPublicKey = publicKeyResponse;
-        System.out.println("public key received");
-    }
+        try {
+            byte[] publicBytes = Base64.decode(publicKeyResponse, Base64.DEFAULT);
+            X509EncodedKeySpec keySpec = new X509EncodedKeySpec(publicBytes);
+            KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+            PublicKey pubKey = keyFactory.generatePublic(keySpec);
+            System.out.println(pubKey);
+            receivedPublicKey = pubKey;
+            System.out.println("public key received");
+        }
+        catch(NoSuchAlgorithmException e){
+            e.printStackTrace();
+        }
+        catch(InvalidKeySpecException e){
+            e.printStackTrace();
+        }
 
+    }
+    public void scheduleJobGetPublicKey() {
+        ComponentName componentName = new ComponentName(this, DataSendingService.class);
+        bundle.putString("route", "getPublicKey");
+        bundle.putString("encryptedSecretKey", "");
+        bundle.putString("encryptedFormData", "");
+        JobInfo info = new JobInfo.Builder(jobId, componentName)
+                .setRequiresCharging(false)
+                .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
+                .setPersisted(true)
+                .setExtras(bundle)
+                .build();
+        jobId += 1;
+        JobScheduler scheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
+        int resultCode = scheduler.schedule(info);
+        if (resultCode == JobScheduler.RESULT_SUCCESS) {
+            Log.d(TAG, "Job scheduled");
+        } else {
+            Log.d(TAG, "Job scheduling failed");
+        }
+
+
+    }
     public void scheduleJob(JSONObject rcvJSON) {
 
-
         ComponentName componentName = new ComponentName(this, DataSendingService.class);
-
-
 
         JSONObject formJson = rcvJSON;
         String android_id = Secure.getString(MainActivity.this.getContentResolver(),
@@ -207,6 +241,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             String encryptedSecretKeyString = new String(encryptedSecretKey, "UTF-8");
             String encryptedFormDataString = new String(encryptedText, "UTF-8");
+            bundle.putString("route", "sendForm");
             bundle.putString("encryptedSecretKey", encryptedSecretKeyString);
             bundle.putString("encryptedFormData", encryptedFormDataString);
         }
@@ -214,14 +249,12 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-
         JobInfo info = new JobInfo.Builder(jobId, componentName)
                 .setRequiresCharging(false)
                 .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
                 .setPersisted(true)
                 .setExtras(bundle)
                 .build();
-
         jobId += 1;
         JobScheduler scheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
         int resultCode = scheduler.schedule(info);

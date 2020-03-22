@@ -3,6 +3,7 @@ package com.example.hrdtool;
 import android.app.DatePickerDialog;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,9 +38,9 @@ public class FormFragment extends Fragment {
     private String title;
     private int page;
     private  Button submit_form;
-    private TextInputEditText i_date;
+    private EditText i_date;
     private EditText a_date;
-    private EditText details;
+    private EditText community;
     private AutoCompleteTextView dropdown_gender;
     private AutoCompleteTextView dropdown_type;
     private AutoCompleteTextView dropdown_age;
@@ -50,11 +51,11 @@ public class FormFragment extends Fragment {
     private Context context;
     private Context context1;
     private RecyclerViewAdapter adapter;
-    private RecyclerViewAdapter adapter2;
+    private RecyclerViewAdapter1 adapter2;
     private RecyclerViewRadioBtnAdapter adapter1;
     private CheckBox chb;
     private CheckBox chb1;
-
+    private SparseBooleanArray support_sought;
     DatePickerDialog.OnDateSetListener setListener;
 
     public static FormFragment newInstance(int page, String title){
@@ -92,7 +93,7 @@ public class FormFragment extends Fragment {
         final String[] IFKNOWN = {"Current partner","Former partner" ,"Relative" ,"Neighbor" ,"Friend" ,"Association" ,"Other"};
 
         final String[] AGE = {"0-9", "10-19", "20-29", "30-39", "40-49", "50+"};
-        final String[] AREA = {"Any", "D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "D9", "D10",
+        final String[] AREA = {"D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "D9", "D10",
                 "D11", "D12", "D13", "D14", "D15", "D16", "D17", "D18", "D19", "D20"};
 
         String[] CLASSIFICATION_PHY = {"Physical (an act of physical violence that is not sexual in nature eg. Hitting)"
@@ -124,9 +125,9 @@ public class FormFragment extends Fragment {
         submit_form = v.findViewById(R.id.submit_form);
         i_date =  v.findViewById(R.id.i_date);
         a_date = v.findViewById(R.id.a_date);
-//        details = v.findViewById(R.id.details);
+        community = v.findViewById(R.id.community);
         chb = v.findViewById(R.id.rowCheckBox);
-        chb1 = v.findViewById(R.id.rowCheckBox);
+        chb1 = v.findViewById(R.id.rowCheckBox1);
 
 
         Calendar cal = Calendar.getInstance();
@@ -147,9 +148,18 @@ public class FormFragment extends Fragment {
 
                     jObj.put("incident date", i_date.getText().toString());
                     jObj.put("attention date",  a_date.getText().toString());
-                    jObj.put("gender",  dropdown_gender.getOnItemSelectedListener().toString());
-                    jObj.put("age range",  dropdown_age.getOnItemSelectedListener().toString());
-                    jObj.put("details",  details.getText().toString());
+                    jObj.put("gender",  dropdown_gender.getText().toString());
+                    jObj.put("age range",  dropdown_age.getText().toString());
+                    jObj.put("municipality",  dropdown_area.getText().toString());
+                    jObj.put("community",  community.getText().toString());
+                    for (int i = 0; i<support_sought.size(); i++)
+                    {
+                        if(support_sought.valueAt(i)==true)
+                        {
+                            jObj.put("support sought"+i,  SUPPORT[i]);
+                        }
+                    }
+                    //jObj.put("attention sought",  recyclerView.getSelectedIds());
                 } catch (Exception e) {
                     System.out.println("Error:" + e);
                 }
@@ -162,16 +172,7 @@ public class FormFragment extends Fragment {
         //------------------------------gender of survivor------------------------------//
         ArrayAdapter<String> gender_adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.select_dialog_singlechoice, GENDER) {
 
-            @Override
-            public boolean isEnabled(int position) {
-                if (position == 0) {
-                    // Disable the first item from Spinner
-                    // First item will be use for hint
-                    return false;
-                } else {
-                    return true;
-                }
-            }
+
 
             @Override
             public View getDropDownView(int position, View convertView,
@@ -190,16 +191,7 @@ public class FormFragment extends Fragment {
         };
         //------------------------------age range of survivor------------------------------//
         ArrayAdapter<String>  age_adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.select_dialog_singlechoice, AGE) {
-            @Override
-            public boolean isEnabled(int position) {
-                if (position == 0) {
-                    // Disable the first item from Spinner
-                    // First item will be use for hint
-                    return false;
-                } else {
-                    return true;
-                }
-            }
+
 
             @Override
             public View getDropDownView(int position, View convertView,
@@ -217,16 +209,8 @@ public class FormFragment extends Fragment {
         };
         //------------------------------municipailty------------------------------//
         ArrayAdapter<String> area_adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.select_dialog_singlechoice, AREA) {
-            @Override
-            public boolean isEnabled(int position) {
-                if (position == 0) {
-                    // Disable the first item from Spinner
-                    // First item will be use for hint
-                    return false;
-                } else {
-                    return true;
-                }
-            }
+
+
 
             @Override
             public View getDropDownView(int position, View convertView,
@@ -254,7 +238,7 @@ public class FormFragment extends Fragment {
 
         adapter = new RecyclerViewAdapter(context, arrayList);
         recyclerView.setAdapter(adapter);
-
+        support_sought = adapter.getSelectedIds();
         //------------------------------Attention HRD provided survivor------------------------------//
         RecyclerView recyclerView1 = (RecyclerView) v.findViewById(R.id.recycler_view1);
         recyclerView1.setHasFixedSize(true);
@@ -365,7 +349,7 @@ public class FormFragment extends Fragment {
 
 //        for(int i=1;i<arrayList.size();i++) {
 //            arrayList = Arrays.asList(CLASSIFICATION_PHY[i]);
-        adapter2 = new RecyclerViewAdapter(context, arrayList);
+        adapter2 = new RecyclerViewAdapter1(context, arrayList);
 //        };
 
         recyclerView8.setAdapter(adapter2);
@@ -404,7 +388,7 @@ public class FormFragment extends Fragment {
         arrayList1 = Arrays.asList(CLASSIFICATION_EMO);
 
 //        for(int i=0;i<arrayList1.size();i++) {
-        adapter2 = new RecyclerViewAdapter(context1, arrayList1);
+        adapter2 = new RecyclerViewAdapter1(context1, arrayList1);
 
 //        };
 
@@ -441,7 +425,7 @@ public class FormFragment extends Fragment {
         arrayList1 = Arrays.asList(CLASSIFICATION_SEX);
 
 //        for(int i=0;i<arrayList1.size();i++) {
-        adapter2 = new RecyclerViewAdapter(context1, arrayList1);
+        adapter2 = new RecyclerViewAdapter1(context1, arrayList1);
 
 //        };
 

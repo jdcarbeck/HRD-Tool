@@ -47,26 +47,27 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/a_date"
                 android:layout_width="344dp"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="date" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
 
         <!-- Gender Spinner -->
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/gender"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Gender"
             android:layout_marginStart="36dp"
-            android:layout_marginTop="16dp">
+            android:layout_marginTop="16dp"
+            android:hint="@string/gender">
 
             <AutoCompleteTextView
                 android:id="@+id/spinner_gender"
                 android:layout_width="343dp"
                 android:layout_height="wrap_content"
-                android:dropDownWidth="wrap_content"
-                />
+                android:dropDownWidth="wrap_content" />
 
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -125,7 +126,7 @@
             >
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/Community"
+                android:id="@+id/community"
                 android:layout_width="343dp"
                 android:layout_height="wrap_content" />
 

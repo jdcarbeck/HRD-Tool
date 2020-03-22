@@ -23,7 +23,7 @@ public class OkHttp extends AsyncTask<String, Void, String> {
         );
 
         Request request = new Request.Builder()
-                .url("https://webhook.site/64eb19f1-ade7-4c8e-aa27-5b4e633cc901")
+                .url("https://webhook.site/a8f1b056-8035-4836-9046-c35ddab4fcf6")
                 .addHeader("User-Agent", "OkHttp Bot")
                 .post(body)
                 .build();

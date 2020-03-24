@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.accessibility.AccessibilityEvent;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -30,6 +31,22 @@ public class Calculator extends AppCompatActivity {
     private static boolean resultShown = false;
     private static final String PINCODE = "1201";
 
+        public void onAccessibilityEvent(AccessibilityEvent event) {
+        if (event.getEventType() != AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED || event.getClassName() == null)
+            return;
+
+        String Calculator = String.valueOf(event.getClassName());
+
+        if (Calculator.equals("com.android.internal.policy.impl.RecentApplicationsDialog")
+                || Calculator.equals("com.android.systemui.recent.RecentsActivity")
+                || Calculator.equals("com.android.systemui.recents.RecentsActivity")){
+            //Recent button was pressed. Do something.
+            Intent intent = new Intent(this, Calculator.class);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +54,7 @@ public class Calculator extends AppCompatActivity {
 
         final TextView display = findViewById(R.id.display);
         final TextView history = findViewById(R.id.prev);
+
         Button clear = findViewById(R.id.clear);
 
         // Setting functionality for clear button to clear
@@ -194,4 +212,5 @@ public class Calculator extends AppCompatActivity {
 
         }
     }
+
 }

@@ -1,11 +1,13 @@
 package com.example.hrdtool;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.accessibility.AccessibilityEvent;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -23,6 +25,8 @@ import androidx.fragment.app.Fragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import android.widget.Toast;
 
@@ -467,7 +471,9 @@ public class FormFragment extends Fragment {
         dropdown_gender.setAdapter(gender_adapter);
         dropdown_area.setAdapter(area_adapter);
 
+
         return v;
     }
+
 }
 

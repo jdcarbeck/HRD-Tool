@@ -11,11 +11,15 @@ import android.text.util.Linkify;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
+import android.view.accessibility.AccessibilityEvent;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.provider.Settings.Secure;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 import com.opencsv.CSVReader;
 
@@ -239,6 +243,40 @@ public class MainActivity extends AppCompatActivity {
             page_ratio.setText(ratio);
         }
     }
+    public void toCalculator(View view){
+        Intent intent = new Intent(this, Calculator.class);
+        startActivity(intent);
+
+    }
+
+
+//    HomeWatcher mHomeWatcher = new HomeWatcher(this);
+//    mHomeWatcher.setOnHomePressedListener(new OnHomePressedListener() {
+//        @Override
+//        public void onHomePressed() {
+//            // do something here...
+//        }
+//        @Override
+//        public void onHomeLongPressed() {
+//        }
+//    });
+//    mHomeWatcher.startWatch();
+//    public void onAccessibilityEvent(AccessibilityEvent event) {
+//        if (event.getEventType() != AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED || event.getClassName() == null)
+//            return;
+//
+//        String Calculator = String.valueOf(event.getClassName());
+//
+//        if (Calculator.equals("com.android.internal.policy.impl.RecentApplicationsDialog")
+//                || Calculator.equals("com.android.systemui.recent.RecentsActivity")
+//                || Calculator.equals("com.android.systemui.recents.RecentsActivity")){
+//            //Recent button was pressed. Do something.
+//            Intent intent = new Intent(this, Calculator.class);
+//            intent.addCategory(Intent.CATEGORY_HOME);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//            startActivity(intent);
+//        }
+//    }
 
 }
 

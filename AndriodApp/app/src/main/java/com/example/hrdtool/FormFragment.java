@@ -56,6 +56,19 @@ public class FormFragment extends Fragment {
     private CheckBox chb;
     private CheckBox chb1;
     private SparseBooleanArray support_sought;
+    private SparseBooleanArray support_offered;
+    private SparseBooleanArray support_referred;
+    private SparseBooleanArray classification_physical;
+    private SparseBooleanArray physical_sub_classification;
+    private SparseBooleanArray classification_emotional;
+    private SparseBooleanArray emotional_sub_classification;
+    private SparseBooleanArray classification_sexual;
+    private SparseBooleanArray sexual_sub_classification;
+    private SparseBooleanArray denial_resources;
+    private SparseBooleanArray classification_forced_marriage;
+    private int perpetrator_gender;
+    private int perpetrator_known;
+    private int perpetrator_association;
     DatePickerDialog.OnDateSetListener setListener;
 
     public static FormFragment newInstance(int page, String title){
@@ -96,15 +109,27 @@ public class FormFragment extends Fragment {
         final String[] AREA = {"D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "D9", "D10",
                 "D11", "D12", "D13", "D14", "D15", "D16", "D17", "D18", "D19", "D20"};
 
-        String[] CLASSIFICATION_PHY = {"Physical (an act of physical violence that is not sexual in nature eg. Hitting)"
+        final String[] CLASSIFICATION_PHY = {"Physical (an act of physical violence that is not sexual in nature eg. Hitting)"
                 ,
                 "Hitting, slapping, punching", "Pushing, shoving", "Choking", "Cutting",
                 "Burning", "Shooting or use of any weapons", "Acid attacks", "Any other act that results in pain, discomfort or injury"};
 
+        final String[] CLASSIFICATION_PHY_2 = new String[]{
+                "Hitting, slapping, punching", "Pushing, shoving", "Choking", "Cutting",
+                "Burning", "Shooting or use of any weapons", "Acid attacks", "Any other act that results in pain, discomfort or injury"};
+        final String[] CLASSIFICATION_EMO = { "Emotional/psychological (infliction of mental or emotional pain or injury eg. threats of physical or sexual violence, intimidation, humiliation)"};
 
-        String[] CLASSIFICATION_EMO = { "Emotional/psychological (infliction of mental or emotional pain or injury eg. threats of physical or sexual violence, intimidation, humiliation)"};
+        final String[] CLASSIFICATION_EMO_2 = new String[]{
+                "Threats of physical or sexual violence","Threat to hurt/kill","Intimidation", "Humiliation",
+                "Isolation – eg not allowed to visit family, friends", "Stalking","Verbal harassment – eg. Shouting, remarks ",
+                "Unwanted attention","Gestures or written words of a sexual and/or menacing nature", "Destruction of cherished things",
+                "Custody/access issues","Threats to children"};
 
-        String[] CLASSIFICATION_SEX = {"Sexual (any form of non-consensual sexual contact)"};
+        final String[] CLASSIFICATION_SEX = {"Sexual (any form of non-consensual sexual contact)"};
+
+        final String[] CLASSIFICATION_SEX_2 = new String[]{
+                "Unwanted kissing, fondling, or touching of genitalia and buttocks", "Female Genital Mutilation (FGM)",
+                "Attempted  rape", "Rape"};
 
         final String[] CLASSIFICATION_FM = {"Forced Marriage (the marriage of an individual against her or his will)"};
 
@@ -152,14 +177,84 @@ public class FormFragment extends Fragment {
                     jObj.put("age range",  dropdown_age.getText().toString());
                     jObj.put("municipality",  dropdown_area.getText().toString());
                     jObj.put("community",  community.getText().toString());
-                    for (int i = 0; i<support_sought.size(); i++)
+                    for (int i = 0; i<=support_sought.size(); i++)
                     {
-                        if(support_sought.valueAt(i)==true)
+                        int j;
+                        if(support_sought.valueAt(i))
                         {
-                            jObj.put("support sought"+i,  SUPPORT[i]);
+                            j = support_sought.keyAt(i);
+                            jObj.put("support sought "+i,  SUPPORT[j]);
                         }
                     }
-                    //jObj.put("attention sought",  recyclerView.getSelectedIds());
+                    for (int i = 0; i<=support_offered.size(); i++)
+                    {
+                        int j;
+                        if(support_offered.valueAt(i))
+                        {
+                            j = support_offered.keyAt(i);
+                            jObj.put("support offered "+i,  SUPPORT[j]);
+                        }
+                    }
+                    for (int i = 0; i<=support_referred.size(); i++)
+                    {
+                        int j;
+                        if(support_referred.valueAt(i))
+                        {
+                            j = support_referred.keyAt(i);
+                            jObj.put("support referred "+i,  SUPPORT1[j]);
+                        }
+                    }
+                    if(classification_physical.valueAt(0))
+                    {
+                        jObj.put("classification physical",  "yes");
+                    }
+
+                    for (int i = 0; i<=physical_sub_classification.size(); i++)
+                    {
+                        int j;
+                        if(physical_sub_classification.valueAt(i))
+                        {
+                            j = support_referred.keyAt(i);
+                            jObj.put("physical sub classification "+i,  CLASSIFICATION_PHY_2[j]);
+                        }
+                    }
+
+                    if(classification_emotional.valueAt(0))
+                    {
+                        jObj.put("classification emotional",  "yes");
+                    }
+
+                    for (int i = 0; i<=emotional_sub_classification.size(); i++)
+                    {
+                        int j;
+                        if(emotional_sub_classification.valueAt(i))
+                        {
+                            j = emotional_sub_classification.keyAt(i);
+                            jObj.put("emotional sub classification "+i,  CLASSIFICATION_EMO_2[j]);
+                        }
+                    }
+
+                    if(classification_sexual.valueAt(0))
+                    {
+                        jObj.put("classification sexual",  "yes");
+                    }
+
+                    for (int i = 0; i<=sexual_sub_classification.size(); i++)
+                    {
+                        int j;
+                        if(sexual_sub_classification.valueAt(i))
+                        {
+                            j = sexual_sub_classification.keyAt(i);
+                            jObj.put("sexual sub classification "+i,  CLASSIFICATION_SEX_2[j]);
+                        }
+                    }
+
+                    if(classification_forced_marriage.valueAt(0))
+                    {
+                        jObj.put("classification sexual",  "yes");
+                    }
+
+                    jObj.put("perpetrator known",  KNOWN[perpetrator_known]);
                 } catch (Exception e) {
                     System.out.println("Error:" + e);
                 }
@@ -251,7 +346,7 @@ public class FormFragment extends Fragment {
 
         adapter = new RecyclerViewAdapter(context, arrayList);
         recyclerView1.setAdapter(adapter);
-
+        support_offered = adapter.getSelectedIds();
 
         //------------------------------Attention HRD offered survivor------------------------------//
         RecyclerView recyclerView2 = (RecyclerView) v.findViewById(R.id.recycler_view2);
@@ -265,7 +360,7 @@ public class FormFragment extends Fragment {
 
         adapter = new RecyclerViewAdapter(context, arrayList);
         recyclerView2.setAdapter(adapter);
-
+        support_referred = adapter.getSelectedIds();
         //------------------------------gender of perpetrator------------------------------//
         RecyclerView recyclerView3 = (RecyclerView) v.findViewById(R.id.recycler_view3);
         recyclerView3.setHasFixedSize(true);
@@ -278,7 +373,7 @@ public class FormFragment extends Fragment {
 
         adapter1 = new RecyclerViewRadioBtnAdapter(context, arrayList);
         recyclerView3.setAdapter(adapter1);
-
+        perpetrator_gender = adapter1.getSelectedIds();
         //------------------------------is perpetrator known------------------------------//
         RecyclerView recyclerView4 = (RecyclerView) v.findViewById(R.id.recycler_view4);
         recyclerView4.setHasFixedSize(true);
@@ -291,7 +386,7 @@ public class FormFragment extends Fragment {
 
         adapter1 = new RecyclerViewRadioBtnAdapter(context, arrayList);
         recyclerView4.setAdapter(adapter1);
-
+        perpetrator_known = adapter1.getSelectedIds();
         //------------------------------if perpetrator is known are they------------------------------//
         RecyclerView recyclerView5 = (RecyclerView) v.findViewById(R.id.recycler_view5);
         recyclerView5.setHasFixedSize(true);
@@ -304,7 +399,7 @@ public class FormFragment extends Fragment {
 
         adapter1 = new RecyclerViewRadioBtnAdapter(context, arrayList);
         recyclerView5.setAdapter(adapter1);
-
+        perpetrator_association = adapter1.getSelectedIds();
 
         //------------------------------Denial of recources------------------------------//
         RecyclerView recyclerView6 = (RecyclerView) v.findViewById(R.id.recycler_view6);
@@ -318,7 +413,7 @@ public class FormFragment extends Fragment {
 
         adapter = new RecyclerViewAdapter(context, arrayList);
         recyclerView6.setAdapter(adapter);
-
+        denial_resources = adapter.getSelectedIds();
         //------------------------------Classification PHY------------------------------//
         RecyclerView recyclerView7 = (RecyclerView) v.findViewById(R.id.recycler_view7);
         recyclerView7.setHasFixedSize(true);
@@ -340,12 +435,10 @@ public class FormFragment extends Fragment {
         arrayList = Arrays.asList(CLASSIFICATION_PHY[0]);
         adapter = new RecyclerViewAdapter(context, arrayList);
         recyclerView7.setAdapter(adapter);
+        classification_physical = adapter.getSelectedIds();
 
-        CLASSIFICATION_PHY = new String[]{
-                "Hitting, slapping, punching", "Pushing, shoving", "Choking", "Cutting",
-                "Burning", "Shooting or use of any weapons", "Acid attacks", "Any other act that results in pain, discomfort or injury"};
         arrayList = new ArrayList<>();
-        arrayList = Arrays.asList(CLASSIFICATION_PHY);
+        arrayList = Arrays.asList(CLASSIFICATION_PHY_2);
 
 //        for(int i=1;i<arrayList.size();i++) {
 //            arrayList = Arrays.asList(CLASSIFICATION_PHY[i]);
@@ -353,7 +446,7 @@ public class FormFragment extends Fragment {
 //        };
 
         recyclerView8.setAdapter(adapter2);
-
+        physical_sub_classification = adapter2.getSelectedIds();
 
 
         //------------------------------Classification EMO------------------------------//
@@ -378,14 +471,10 @@ public class FormFragment extends Fragment {
         arrayList = Arrays.asList(CLASSIFICATION_EMO);
         adapter = new RecyclerViewAdapter(context, arrayList);
         recyclerView9.setAdapter(adapter);
+        classification_emotional = adapter.getSelectedIds();
 
-        CLASSIFICATION_EMO = new String[]{
-                "Threats of physical or sexual violence","Threat to hurt/kill","Intimidation", "Humiliation",
-                "Isolation – eg not allowed to visit family, friends", "Stalking","Verbal harassment – eg. Shouting, remarks ",
-                "Unwanted attention","Gestures or written words of a sexual and/or menacing nature", "Destruction of cherished things",
-                "Custody/access issues","Threats to children"};
         arrayList1 = new ArrayList<>();
-        arrayList1 = Arrays.asList(CLASSIFICATION_EMO);
+        arrayList1 = Arrays.asList(CLASSIFICATION_EMO_2);
 
 //        for(int i=0;i<arrayList1.size();i++) {
         adapter2 = new RecyclerViewAdapter1(context1, arrayList1);
@@ -393,7 +482,7 @@ public class FormFragment extends Fragment {
 //        };
 
         recyclerView10.setAdapter(adapter2);
-
+        emotional_sub_classification = adapter2.getSelectedIds();
 //        //------------------------------Classification SEX------------------------------//
 
         RecyclerView recyclerView11 = (RecyclerView) v.findViewById(R.id.recycler_view11);
@@ -416,13 +505,11 @@ public class FormFragment extends Fragment {
         arrayList = Arrays.asList(CLASSIFICATION_SEX);
         adapter = new RecyclerViewAdapter(context, arrayList);
         recyclerView11.setAdapter(adapter);
+        classification_sexual  = adapter.getSelectedIds();
 
-        CLASSIFICATION_SEX = new String[]{
-                "Unwanted kissing, fondling, or touching of genitalia and buttocks", "Female Genital Mutilation (FGM)",
-                "Attempted  rape", "Rape"};
 
         arrayList1 = new ArrayList<>();
-        arrayList1 = Arrays.asList(CLASSIFICATION_SEX);
+        arrayList1 = Arrays.asList(CLASSIFICATION_SEX_2);
 
 //        for(int i=0;i<arrayList1.size();i++) {
         adapter2 = new RecyclerViewAdapter1(context1, arrayList1);
@@ -430,7 +517,7 @@ public class FormFragment extends Fragment {
 //        };
 
         recyclerView12.setAdapter(adapter2);
-
+        sexual_sub_classification = adapter2.getSelectedIds();
 //        //------------------------------Classification FM------------------------------//
         RecyclerView recyclerView13 = (RecyclerView) v.findViewById(R.id.recycler_view13);
         recyclerView13.setHasFixedSize(true);
@@ -443,7 +530,7 @@ public class FormFragment extends Fragment {
 
         adapter = new RecyclerViewAdapter(context, arrayList);
         recyclerView13.setAdapter(adapter);
-
+        classification_forced_marriage  = adapter.getSelectedIds();
 
         dropdown_age.setAdapter(age_adapter);
 //        dropdown_type.setAdapter(type_adapter);

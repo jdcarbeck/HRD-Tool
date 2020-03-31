@@ -4,25 +4,22 @@ import styled from 'styled-components'
 import Logo from './Logo'
 import Links from './Links'
 
-const Container = styled.div.attrs({
-    className: 'container',
-})``
 
 const Nav = styled.nav.attrs({
-    className: 'navbar navbar-expand-lg navbar-dark bg-dark',
+    className: 'navbar navbar-expand-sm navbar-dark',
 })`
     margin-bottom: 20px;
+    background-color: #131515;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 `
 
 class NavBar extends Component {
     render() {
         return (
-            <Container>
                 <Nav>
                     <Logo/>
                     <Links/>
                 </Nav>
-            </Container>
         )
     }
 }

@@ -1,7 +1,20 @@
 const HRform = require('../models/HRform')
+const rsa = require('../crypto/rsa')
+const aes = require('../crypto/aes')
+
+rsa.initLoadServerKeys(__dirname + "/../" )
 
 createForm = (req, res) => {
-    const body = req.body
+    let body = req.body
+    console.log(body)
+    let buff = Buffer.from(body.data, 'base64')
+    let text = rsa.decrypt(rsa.serverPrivate, buff)
+    let paylod = JSON.parse(text)
+    console.log(paylod)
+    let bodyStr = aes.decrypt(paylod.key, paylod.iv, paylod.data)
+    body = JSON.parse(bodyStr)
+    console.log(body)
+
     if(!body) {
         return res.status(400).json({
             sucesss: false,

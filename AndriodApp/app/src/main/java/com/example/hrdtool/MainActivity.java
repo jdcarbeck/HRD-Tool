@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
+import android.util.Base64;
+import android.util.Base64.*;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
@@ -31,8 +33,29 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.security.AlgorithmParameters;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.KeyFactory;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.NoSuchAlgorithmException;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.InvalidParameterSpecException;
+import java.security.spec.X509EncodedKeySpec;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.KeyGenerator;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.IvParameterSpec;
 
 import static com.example.hrdtool.CSVForm.AREA;
 import static com.example.hrdtool.CSVForm.CITY;
@@ -44,6 +67,7 @@ import static com.example.hrdtool.CSVHelp.index;
 import static com.example.hrdtool.CSVHelp.length;
 import static com.example.hrdtool.CSVHelp.users;
 
+
 public class MainActivity extends AppCompatActivity {
 
     FragmentPagerAdapter adapterViewPager;
@@ -54,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
     protected static PublicKey receivedPublicKey;
     protected static SecretKey mySecretKey;
+    protected static byte[] iv;
     protected PublicKey myPublicKey;
     protected PrivateKey myPrivateKey;
 
@@ -73,13 +98,13 @@ public class MainActivity extends AppCompatActivity {
         byte[] encryptedKey = null;
         try {
             KeyPairGenerator generator = KeyPairGenerator.getInstance("RSA");
-            generator.initialize(2048);
+            generator.initialize(3072);
             KeyPair keyPair = generator.generateKeyPair();
             myPublicKey = keyPair.getPublic();
             myPrivateKey = keyPair.getPrivate();            
-            Cipher cipher = Cipher.getInstance("RSA/ECB/OAEPWITHSHA-256ANDMGF1PADDING");
-            cipher.init(Cipher.PUBLIC_KEY, receivedPublicKey);         //received public key will replace Cipher.PUBLIC_KEY
-            System.out.println(Cipher.PUBLIC_KEY);
+            Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+            cipher.init(Cipher.PUBLIC_KEY, receivedPublicKey);
+            System.out.println("cipher public key" + Cipher.PUBLIC_KEY);
             encryptedKey = cipher.doFinal(mySecretKey.getEncoded());
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
@@ -94,22 +119,45 @@ public class MainActivity extends AppCompatActivity {
         }
         return encryptedKey;
     }
+    public byte[] encryptPayload(String secretKey, String iv, String encryptedText)
+    {
+        byte[] encryptedPayload = null;
+        try {
+            KeyPairGenerator generator = KeyPairGenerator.getInstance("RSA");
+            generator.initialize(3072);
+            KeyPair keyPair = generator.generateKeyPair();
+            myPublicKey = keyPair.getPublic();
+            myPrivateKey = keyPair.getPrivate();
+            Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding ");
+            cipher.init(Cipher.PUBLIC_KEY, receivedPublicKey);
+            JSONObject payload = new JSONObject();
+            payload.put("key", secretKey);
+            payload.put("iv", iv);
+            payload.put("data", encryptedText);
+            String payloadStr = payload.toString();
+            byte[] payloadBytes = payloadStr.getBytes();
+            encryptedPayload = cipher.doFinal(payloadBytes);
+
+        } catch (NoSuchAlgorithmException | InvalidKeyException |
+                 NoSuchPaddingException | IllegalBlockSizeException |
+                BadPaddingException | JSONException e){
+            e.printStackTrace();
+        }
+        return encryptedPayload;
+    }
+
     public byte[] encryptText(String textToEncrypt)
     {
         byte[] byteCipherText = null;
         try {
-            Cipher encCipher = Cipher.getInstance("AES");
+            Cipher encCipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
             encCipher.init(Cipher.ENCRYPT_MODE, mySecretKey);
+            AlgorithmParameters params = encCipher.getParameters();
+            iv = params.getParameterSpec(IvParameterSpec.class).getIV();
             byteCipherText = encCipher.doFinal(textToEncrypt.getBytes());
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (NoSuchPaddingException e) {
-            e.printStackTrace();
-        } catch (InvalidKeyException e) {
-            e.printStackTrace();
-        } catch (IllegalBlockSizeException e) {
-            e.printStackTrace();
-        } catch (BadPaddingException e) {
+        } catch (NoSuchAlgorithmException | InvalidParameterSpecException
+                | NoSuchPaddingException | InvalidKeyException | IllegalBlockSizeException
+                | BadPaddingException e) {
             e.printStackTrace();
         }
         return byteCipherText;
@@ -192,8 +240,8 @@ public class MainActivity extends AppCompatActivity {
     }
     public void scheduleJobGetPublicKey() {
         ComponentName componentName = new ComponentName(this, DataSendingService.class);
-        bundle.putString("route", "getPublicKey");
-        bundle.putString("encryptedSecretKey", "");
+        bundle.putString("route", "key");
+        bundle.putString("encryptedPayload", "");
         bundle.putString("encryptedFormData", "");
         JobInfo info = new JobInfo.Builder(jobId, componentName)
                 .setRequiresCharging(false)
@@ -228,24 +276,27 @@ public class MainActivity extends AppCompatActivity {
         String jsonString = formJson.toString();
 
         generateSymmetricKey();
-        String strEncodedSecretKey  = Base64.encodeToString(mySecretKey.getEncoded(), Base64.DEFAULT);
-        System.out.println(strEncodedSecretKey);
-        byte[] encryptedSecretKey = encryptSecretKey();
-        System.out.println(encryptedSecretKey);
+
         byte[] encryptedText = encryptText(jsonString);
-        System.out.println(encryptedText);
+        String strEncodedSecretKey  = Base64.encodeToString(mySecretKey.getEncoded(), Base64.NO_WRAP);
+        String strEncodedIv = Base64.encodeToString(iv, Base64.NO_WRAP);
+        String strEncodedJson = Base64.encodeToString(encryptedText, Base64.NO_WRAP);
+
+        byte[] encryptedPayload = encryptPayload(strEncodedSecretKey, strEncodedIv, strEncodedJson);
+
+
 //        byte[] decryptedSecretKey = decryptSecretKey(encryptedSecretKey);
 //        System.out.println(decryptedSecretKey);
 //        String decryptedText = decryptText(decryptedSecretKey, encryptedText);
 //        System.out.println(decryptedText);
         try {
-            String encryptedSecretKeyString = new String(encryptedSecretKey, "UTF-8");
-            String encryptedFormDataString = new String(encryptedText, "UTF-8");
-            bundle.putString("route", "sendForm");
-            bundle.putString("encryptedSecretKey", encryptedSecretKeyString);
-            bundle.putString("encryptedFormData", encryptedFormDataString);
-        }
-        catch (UnsupportedEncodingException e) {
+            String encryptedPayloadStr = Base64.encodeToString(encryptedPayload, Base64.NO_WRAP);
+
+            System.out.println(encryptedPayloadStr);
+
+            bundle.putString("route", "api/form/");
+            bundle.putString("encryptedPayload", encryptedPayloadStr);
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

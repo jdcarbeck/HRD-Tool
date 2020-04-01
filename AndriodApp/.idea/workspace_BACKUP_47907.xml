@@ -13,6 +13,9 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< Updated upstream
+    <list default="true" id="cd4aaaf7-4ed6-4b5a-92ef-1986409743e2" name="Default Changelist" comment="" />
+=======
     <list default="true" id="cd4aaaf7-4ed6-4b5a-92ef-1986409743e2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/DataSendingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/DataSendingService.java" afterDir="false" />
@@ -25,6 +28,7 @@
       <change beforePath="$PROJECT_DIR$/../mangement-portal/server/keys/server.public.pem" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../mangement-portal/server/routes/HRform-router.js" beforeDir="false" afterPath="$PROJECT_DIR$/../mangement-portal/server/routes/HRform-router.js" afterDir="false" />
     </list>
+>>>>>>> Stashed changes
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,8 +51,13 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
+            <state relative-caret-position="1078">
+              <caret line="248" column="32" lean-forward="true" selection-start-line="248" selection-start-column="32" selection-end-line="248" selection-end-column="32" />
+=======
             <state relative-caret-position="194">
               <caret line="153" column="61" lean-forward="true" selection-start-line="153" selection-start-column="61" selection-end-line="153" selection-end-column="61" />
+>>>>>>> Stashed changes
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -59,8 +68,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/DataSendingService.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
+            <state relative-caret-position="300">
+              <caret line="24" column="40" selection-start-line="24" selection-start-column="40" selection-end-line="24" selection-end-column="40" />
+=======
             <state relative-caret-position="102">
               <caret line="22" selection-start-line="22" selection-end-line="22" />
+>>>>>>> Stashed changes
             </state>
           </provider>
         </entry>
@@ -68,6 +82,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/OkHttp.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
+            <state relative-caret-position="196">
+              <caret line="32" column="29" selection-start-line="32" selection-start-column="21" selection-end-line="32" selection-end-column="29" />
+=======
             <state relative-caret-position="179">
               <caret line="36" column="39" selection-start-line="36" selection-start-column="29" selection-end-line="36" selection-end-column="39" />
               <folding>
@@ -75,6 +93,7 @@
                 <element signature="e#1192#1193#0" expanded="true" />
                 <element signature="e#1243#1244#0" expanded="true" />
               </folding>
+>>>>>>> Stashed changes
             </state>
           </provider>
         </entry>
@@ -432,10 +451,17 @@
       <window_info anchor="bottom" id="TODO" order="2" />
       <window_info anchor="bottom" id="Android Profiler" order="3" show_stripe_button="false" />
       <window_info anchor="bottom" id="Debug" order="4" weight="0.33152762" />
+<<<<<<< Updated upstream
+      <window_info anchor="bottom" id="Run" order="5" weight="0.32894737" />
+      <window_info anchor="bottom" id="Event Log" order="6" sideWeight="0.50053304" side_tool="true" weight="0.32936078" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32936078" />
+      <window_info anchor="bottom" id="Build" order="8" visible="true" weight="0.20394737" />
+=======
       <window_info active="true" anchor="bottom" id="Run" order="5" visible="true" weight="0.32894737" />
       <window_info anchor="bottom" id="Event Log" order="6" sideWeight="0.50053304" side_tool="true" weight="0.32936078" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32936078" />
       <window_info anchor="bottom" id="Build" order="8" weight="0.20394737" />
+>>>>>>> Stashed changes
       <window_info anchor="bottom" id="Terminal" order="9" weight="0.32936078" />
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
       <window_info anchor="right" id="Capture Analysis" order="1" />

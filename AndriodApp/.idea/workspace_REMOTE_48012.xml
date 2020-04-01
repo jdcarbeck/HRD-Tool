@@ -152,8 +152,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/OkHttp.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/DataSendingService.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/MainActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/DataSendingService.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/OkHttp.java" />
       </list>
     </option>
   </component>
@@ -201,7 +199,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../Noobculator/app" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
@@ -430,7 +428,7 @@
       <window_info anchor="bottom" id="Find" order="0" weight="0.32936078" />
       <window_info anchor="bottom" id="Logcat" order="1" sideWeight="0.49946696" weight="0.32936078" />
       <window_info anchor="bottom" id="TODO" order="2" />
-      <window_info anchor="bottom" id="Android Profiler" order="3" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Android Profiler" order="3" />
       <window_info anchor="bottom" id="Debug" order="4" weight="0.33152762" />
       <window_info active="true" anchor="bottom" id="Run" order="5" visible="true" weight="0.32894737" />
       <window_info anchor="bottom" id="Event Log" order="6" sideWeight="0.50053304" side_tool="true" weight="0.32936078" />
@@ -518,8 +516,8 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_help.xml">
-      <provider selected="true" editor-type-id="android-designer2" />
       <provider editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/FormFragment.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -641,12 +639,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_calculator.xml">
-      <provider selected="true" editor-type-id="android-designer2" />
       <provider editor-type-id="text-editor">
         <state relative-caret-position="810">
           <caret line="54" selection-start-line="54" selection-end-line="54" />
         </state>
       </provider>
+      <provider selected="true" editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/button_style.xml">
       <provider selected="true" editor-type-id="text-editor">
@@ -663,36 +661,8 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_form.xml">
-      <provider selected="true" editor-type-id="android-designer2" />
       <provider editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
       <provider selected="true" editor-type-id="android-designer2" />
-      <provider editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/OkHttp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="32" column="29" selection-start-line="32" selection-start-column="21" selection-end-line="32" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/DataSendingService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="24" column="40" selection-start-line="24" selection-start-column="40" selection-end-line="24" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1078">
-          <caret line="248" column="32" lean-forward="true" selection-start-line="248" selection-start-column="32" selection-end-line="248" selection-end-column="32" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
       <provider editor-type-id="text-editor" />

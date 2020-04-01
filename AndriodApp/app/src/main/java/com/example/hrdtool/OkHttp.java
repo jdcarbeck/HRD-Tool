@@ -11,6 +11,7 @@ import java.util.concurrent.CountDownLatch;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.FormBody;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -28,20 +29,23 @@ public class OkHttp {
 
     public static void sendPostReq(String... parameters)  {
 
-        final String paramZero = parameters[0];
+//        System.out.println("Body should contain: " + parameters[1] + parameters[2]);
         final String paramOne = parameters[1];
-        final String paramTwo = parameters[2];
-
-        RequestBody body = RequestBody.create(
-                MediaType.parse("charset=utf-8"),
-                parameters[1] + parameters[2]
-        );
+//        RequestBody body = RequestBody.create(
+//                MediaType.parse("charset=utf-8"),
+//                parameters[1] + parameters[2]
+//        );
+        RequestBody body = new FormBody.Builder()
+                .add("data", parameters[1])
+                .build();
 
         Request request = new Request.Builder()
                 .url(URL + parameters[0])
                 .addHeader("User-Agent", "OkHttp Bot")
                 .post(body)
                 .build();
+
+        System.out.println(request);
 
         httpClient.newCall(request).enqueue(new Callback() {
             @Override

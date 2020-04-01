@@ -17,15 +17,21 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+
+
 public class OkHttp {
 
+    public static final String URL = "http://10.0.2.2:3000/";
     private static final OkHttpClient httpClient = new OkHttpClient();
     public static String publicKeyReceived;
 
 
     public static void sendPostReq(String... parameters)  {
 
+        final String paramZero = parameters[0];
         final String paramOne = parameters[1];
+        final String paramTwo = parameters[2];
+
         RequestBody body = RequestBody.create(
                 MediaType.parse("charset=utf-8"),
                 parameters[1] + parameters[2]
@@ -48,16 +54,16 @@ public class OkHttp {
                 if (!response.isSuccessful()) {
                     throw new IOException("Unexpected code " + response);
                 } else {
-                   String responseBody = response.body().string();
-                    if (paramOne.equals("")){
+                    String responseBody = response.body().string();
+                    System.out.println((responseBody));
+                    if (paramZero.equals("getPublicKey")){
                         MainActivity.setPublicKey(responseBody);
-                        System.out.println((responseBody));
+                        MainActivity.sendForm(paramTwo);
+                        System.out.println("started MainActivity");
                     }
-
                 }
             }
 
         });
-
     }
 }

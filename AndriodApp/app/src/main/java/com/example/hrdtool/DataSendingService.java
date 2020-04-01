@@ -21,11 +21,8 @@ public class DataSendingService extends JobService {
             @Override
             public void run() {
 
-                String route = parameters.getExtras().getString("route");
-                String json = parameters.getExtras().getString("encryptedFormData");
-                String encryptedSecretKey = parameters.getExtras().getString("encryptedSecretKey");
 
-                OkHttp.sendPostReq(route, json, encryptedSecretKey);
+                OkHttp.sendPostReq("/key", "", "");
 
                 if (jobCancelled) {
                     return;

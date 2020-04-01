@@ -52,7 +52,9 @@ public class FormFragment extends Fragment {
     private Context context1;
     private RecyclerViewAdapter adapter;
     private RecyclerViewAdapter1 adapter2;
-    private RecyclerViewRadioBtnAdapter adapter1;
+    private RecyclerViewRadioBtnAdapter adapter1radio1;
+    private RecyclerViewRadioBtnAdapter adapter1radio2;
+    private RecyclerViewRadioBtnAdapter adapter1radio3;
     private CheckBox chb;
     private CheckBox chb1;
     private SparseBooleanArray support_sought;
@@ -253,8 +255,14 @@ public class FormFragment extends Fragment {
                     {
                         jObj.put("classification sexual",  "yes");
                     }
+                    perpetrator_gender = adapter1radio1.getSelectedIds();
+                    jObj.put("perpetrator gender",  GENDER[perpetrator_gender]);
 
+                    perpetrator_known = adapter1radio2.getSelectedIds();
                     jObj.put("perpetrator known",  KNOWN[perpetrator_known]);
+
+                    perpetrator_association = adapter1radio3.getSelectedIds();
+                    jObj.put("perpetrator association if known",  IFKNOWN[perpetrator_association]);
                 } catch (Exception e) {
                     System.out.println("Error:" + e);
                 }
@@ -371,9 +379,9 @@ public class FormFragment extends Fragment {
         arrayList = new ArrayList<>();
         arrayList = Arrays.asList(GENDER1);
 
-        adapter1 = new RecyclerViewRadioBtnAdapter(context, arrayList);
-        recyclerView3.setAdapter(adapter1);
-        perpetrator_gender = adapter1.getSelectedIds();
+        adapter1radio1 = new RecyclerViewRadioBtnAdapter(context, arrayList);
+        recyclerView3.setAdapter(adapter1radio1);
+        perpetrator_gender = adapter1radio1.getSelectedIds();
         //------------------------------is perpetrator known------------------------------//
         RecyclerView recyclerView4 = (RecyclerView) v.findViewById(R.id.recycler_view4);
         recyclerView4.setHasFixedSize(true);
@@ -384,9 +392,9 @@ public class FormFragment extends Fragment {
         arrayList = new ArrayList<>();
         arrayList = Arrays.asList(KNOWN);
 
-        adapter1 = new RecyclerViewRadioBtnAdapter(context, arrayList);
-        recyclerView4.setAdapter(adapter1);
-        perpetrator_known = adapter1.getSelectedIds();
+        adapter1radio2 = new RecyclerViewRadioBtnAdapter(context, arrayList);
+        recyclerView4.setAdapter(adapter1radio2);
+        perpetrator_known = adapter1radio2.getSelectedIds();
         //------------------------------if perpetrator is known are they------------------------------//
         RecyclerView recyclerView5 = (RecyclerView) v.findViewById(R.id.recycler_view5);
         recyclerView5.setHasFixedSize(true);
@@ -397,9 +405,9 @@ public class FormFragment extends Fragment {
         arrayList = new ArrayList<>();
         arrayList = Arrays.asList(IFKNOWN);
 
-        adapter1 = new RecyclerViewRadioBtnAdapter(context, arrayList);
-        recyclerView5.setAdapter(adapter1);
-        perpetrator_association = adapter1.getSelectedIds();
+        adapter1radio3 = new RecyclerViewRadioBtnAdapter(context, arrayList);
+        recyclerView5.setAdapter(adapter1radio3);
+        perpetrator_association = adapter1radio3.getSelectedIds();
 
         //------------------------------Denial of recources------------------------------//
         RecyclerView recyclerView6 = (RecyclerView) v.findViewById(R.id.recycler_view6);

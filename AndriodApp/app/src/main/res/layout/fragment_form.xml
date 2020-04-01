@@ -1,6 +1,7 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -22,9 +23,7 @@
         app:backgroundTint="#6200EE"/>
         <!--app:srcCompat="@drawable/ic_calculator4" />
         -->
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <ScrollView
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -49,7 +48,7 @@
                     android:id="@+id/i_date"
                     android:layout_width="343dp"
                     android:layout_height="wrap_content"
-                    />
+                    android:inputType="date" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -69,7 +68,8 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/a_date"
                     android:layout_width="344dp"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:inputType="date" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

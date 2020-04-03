@@ -1,89 +1,367 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frameLayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+ <androidx.coordinatorlayout.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+    >
 
-    <Spinner
-        android:id="@+id/spinner_type"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="28dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_age" />
+     <com.google.android.material.floatingactionbutton.FloatingActionButton
+         android:id="@+id/button0"
+         android:layout_width="83dp"
+         android:layout_height="wrap_content"
+         android:layout_gravity="bottom|right"
+         android:layout_margin="30dp"
+         android:layout_marginTop="36dp"
+         android:layout_marginEnd="36dp"
+         android:layout_marginBottom="36dp"
+         android:backgroundTint="@color/white"
+         android:onClick="toCalculator"
+         android:tint="#9C27B0"
+         app:backgroundTint="#6200EE"
+         app:srcCompat="@drawable/ic_calculator4" />
 
-    <EditText
-        android:id="@+id/i_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="96dp"
-        android:layout_marginTop="24dp"
-        android:ems="10"
-        android:hint="@string/i_date"
-        android:inputType="date"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/frameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_vertical">
+            <!-- Incident Date -->
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="@string/i_date"
+            android:inputType="date"
+            >
 
-    <EditText
-        android:id="@+id/a_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="28dp"
-        android:ems="10"
-        android:hint="@string/a_date"
-        android:inputType="date"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/i_date" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/i_date"
+                android:layout_width="343dp"
+                android:layout_height="wrap_content"
+                        />
 
-    <Spinner
-        android:id="@+id/spinner_gender"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="28dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/a_date" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <Spinner
-        android:id="@+id/spinner_age"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="28dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_gender" />
 
-    <EditText
-        android:id="@+id/details"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="28dp"
-        android:ems="10"
-        android:gravity="start|top"
-        android:hint="@string/details"
-        android:inputType="textMultiLine"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_type" />
+        <!-- Attention Date -->
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="@string/a_date"
+            android:inputType="date"
+            >
 
-    <Button
-        android:id="@+id/submit_form"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="44dp"
-        android:layout_marginBottom="32dp"
-        android:text="Submit"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/a_date"
+                android:layout_width="344dp"
+                android:layout_height="wrap_content" />
 
-    <Spinner
-        android:id="@+id/spinner_area"
-        android:layout_width="101dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="36dp"
-        app:layout_constraintStart_toStartOf="@+id/details"
-        app:layout_constraintTop_toBottomOf="@+id/details" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <!-- Gender Spinner -->
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Gender"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="16dp">
+
+            <AutoCompleteTextView
+                android:id="@+id/spinner_gender"
+                android:layout_width="343dp"
+                android:layout_height="wrap_content"
+                android:dropDownWidth="wrap_content"
+                />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <!-- Age Range Spinner -->
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Age Range"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="16dp"
+            android:textAppearance="?attr/textAppearanceSubtitle1"
+
+            >
+
+            <AutoCompleteTextView
+                android:id="@+id/spinner_age"
+                android:layout_width="343dp"
+                android:layout_height="54dp"
+                android:dropDownWidth="wrap_content"
+                android:padding="16dp" />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Municipality -->
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Municipality"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="16dp">
+
+            <AutoCompleteTextView
+                android:id="@+id/municipality"
+                android:layout_width="343dp"
+                android:layout_height="wrap_content"
+                android:dropDownWidth="wrap_content"
+                />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Community -->
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="Community"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/Community"
+                android:layout_width="343dp"
+                android:layout_height="wrap_content" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <!--      Type of attention seeked      -->
+        <TextView
+            android:id="@+id/attention_type_q"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="36dp"
+            android:text="@string/type_attention"
+            android:editable="false"
+            android:paddingBottom="5dp"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="fill_parent"
+            android:layout_height="122dp"
+            />
+        <!--      Type of attention offered      -->
+        <TextView
+            android:id="@+id/attention_type_prov"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="36dp"
+            android:text="@string/type_attention1"
+            android:editable="false"/>
+        <!--                android:paddingBottom="5dp"-->
+        <!--                android:layout_alignParentBottom="true"-->
+
+        <!--                />-->
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view1"
+            android:layout_width="fill_parent"
+            android:layout_height="122dp"
+            android:nestedScrollingEnabled="false"/>
+
+        <!--      Type of attention referred to      -->
+        <TextView
+            android:id="@+id/attention_type_off"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="36dp"
+            android:text="@string/type_attention2"
+            android:editable="false"
+            android:paddingBottom="5dp"
+            android:layout_alignParentBottom="true"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"/>
+
+        <!--     Classification    -->
+        <TextView
+            android:id="@+id/classif"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="36dp"
+            android:text="@string/classif"
+            android:editable="false"
+            android:paddingBottom="5dp"
+            android:layout_alignParentBottom="true"
+            />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view7"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view8"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view9"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view10"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view11"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view12"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view13"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"/>
+        <!--            Denial of Resources, Opportunities or Services-->
+        <TextView
+            android:id="@+id/denial"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="36dp"
+            android:text="@string/denial"
+            android:editable="false"
+            android:paddingBottom="5dp"
+            android:layout_alignParentBottom="true"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view6"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"/>
+        <!--      Gender of  perpetrator     -->
+        <TextView
+            android:id="@+id/perpetrator_gender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="36dp"
+            android:text="@string/prep_gender"
+            android:editable="false"
+            android:paddingBottom="5dp"
+            android:layout_alignParentBottom="true"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view3"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"/>
+
+        <!--      Is perpetrator known/unknown    -->
+        <TextView
+            android:id="@+id/perpetrator_known"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="36dp"
+            android:text="@string/prep_known"
+            android:editable="false"
+            android:paddingBottom="5dp"
+            android:layout_alignParentBottom="true"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view4"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"/>
+
+        <!--     If known    -->
+        <TextView
+            android:id="@+id/perpetrator_ifknown"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="36dp"
+            android:text="@string/prep_ifknown"
+            android:editable="false"
+            android:paddingBottom="5dp"
+            android:layout_alignParentBottom="true"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view5"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"/>
+
+
+        <!-- Submit Button -->
+        <Button
+            android:id="@+id/submit_form"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            android:layout_marginEnd="36dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginBottom="36dp"
+            android:text="Submit" />
+
+<!--        <Button-->
+<!--            android:id="@+id/button0"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:onClick="toCalculator"-->
+<!--            android:text="Calculator"-->
+<!--            android:layout_marginStart="36dp"-->
+<!--            android:layout_marginEnd="36dp"-->
+<!--            android:layout_marginBottom="36dp"-->
+<!--            android:layout_gravity="right"-->
+<!--            />-->
+            </LinearLayout>
+        </ScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+

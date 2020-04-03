@@ -3,6 +3,7 @@ package com.example.hrdtool;
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
 import android.content.ComponentName;
+import android.content.Intent;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -20,11 +21,14 @@ import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.accessibility.AccessibilityEvent;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.provider.Settings.Secure;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 import com.opencsv.CSVReader;
 
@@ -72,6 +76,15 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
 import okhttp3.Response;
+
+import static com.example.hrdtool.CSVForm.AREA;
+import static com.example.hrdtool.CSVForm.CITY;
+import static com.example.hrdtool.CSVForm.COUNTRY;
+import static com.example.hrdtool.CSVForm.TYPES;
+import static com.example.hrdtool.CSVHelp.find_user_zone_type;
+import static com.example.hrdtool.CSVHelp.index;
+import static com.example.hrdtool.CSVHelp.length;
+import static com.example.hrdtool.CSVHelp.users;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -728,23 +741,16 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void getHelp(View view) {
+    public void getHelp(CSVReader reader, String type, String area) {
         try {
-            CSVReader reader = new CSVReader(new InputStreamReader(getResources().openRawResource(R.raw.help)));
-
-            Spinner dropdown_type = findViewById(R.id.spinner_type);
-            Spinner dropdown_area = findViewById(R.id.spinner_area);
-
-            String type = dropdown_type.getSelectedItem().toString();
-            String area = dropdown_area.getSelectedItem().toString();
-
-            if(type.equalsIgnoreCase(TYPES[0]))
+            if(type.equalsIgnoreCase(
+                    TYPES[0]))
                 type = TYPES[1];
             if(area.equalsIgnoreCase(AREA[0]))
                 area = AREA[1];
 
-            this.users = find_user_zone_type(reader, area, type);
-            this.length = users.size();
+            users = find_user_zone_type(reader, area, type);
+            length = users.size();
 
             Button next = findViewById(R.id.button_next);
             Button prev = findViewById(R.id.button_prev);
@@ -753,6 +759,8 @@ public class MainActivity extends AppCompatActivity {
             prev.setEnabled(false);
             if(users.size() <= 1)
                 next.setEnabled(false);
+            else
+                next.setEnabled(true);
 
             if(users.isEmpty()) {
                 TextView support_name = (TextView) findViewById(R.id.support_name);
@@ -767,15 +775,40 @@ public class MainActivity extends AppCompatActivity {
                 support_email.setText(null);
             }
             else {
-                CSVHelpRow user = users.get(this.index-1);
-                display_CSVRow(user);
-                String ratio = this.index+"/"+this.length;
+                CSVHelp.CSVHelpRow user = users.get(index-1);
+                this.display_CSVRow(user);
+                String ratio = index+"/"+length;
                 page_ratio.setText(ratio);
             }
         } catch  (Exception e) {
             e.printStackTrace();
-            Toast.makeText(this, "The specified file was not found", Toast.LENGTH_SHORT).show();
+
         }
+    }
+    private void display_CSVRow(CSVHelp.CSVHelpRow user) {
+
+        Log.d("DEBUG", "Inside the display function");
+        TextView support_name = (TextView) findViewById(R.id.support_name);
+        support_name.setText(user.getName());
+        TextView support_type = (TextView) findViewById(R.id.support_type);
+        support_type.setText(user.getType());
+        TextView support_address = (TextView) findViewById(R.id.support_address);
+        support_address.setText(user.getCompleteAddress());
+
+        // Make the address a link
+        Pattern pattern = Pattern.compile(".*", Pattern.DOTALL);
+        Linkify.addLinks(support_address, pattern, "geo:0,0?q=");
+        support_address.setMovementMethod(LinkMovementMethod.getInstance());
+
+        TextView support_telephone = (TextView) findViewById(R.id.support_telephone);
+        support_telephone.setText(user.getCleanTelephone());
+
+        // Make the telephone number a phone link
+        Linkify.addLinks(support_telephone, Patterns.PHONE,"tel:",Linkify.sPhoneNumberMatchFilter,Linkify.sPhoneNumberTransformFilter);
+        support_telephone.setMovementMethod(LinkMovementMethod.getInstance());
+
+        TextView support_email = (TextView) findViewById(R.id.support_email);
+        support_email.setText(user.getEmail());
     }
 
     public void nextUser(View view) {
@@ -815,7 +848,47 @@ public class MainActivity extends AppCompatActivity {
             page_ratio.setText(ratio);
         }
     }
+    public void nextUser(View view) {
+        if(index >= length) {
+            index = length;
+            return;
+        }
+        else {
+            Button next = findViewById(R.id.button_next);
+            Button prev = findViewById(R.id.button_prev);
+            index++;
+            this.display_CSVRow(users.get(index-1));
+            if(index == length)
+                next.setEnabled(false);
+            prev.setEnabled(true);
+            TextView page_ratio = (TextView) findViewById(R.id.page_ratio);
+            String ratio = index + "/" + length;
+            page_ratio.setText(ratio);
+
+        }
+        return;
+    }
+    public void previousUser(View view) {
+        if(index <= 1) {
+            index = 1;
+            return;
+        } else {
+            Button next = findViewById(R.id.button_next);
+            Button prev = findViewById(R.id.button_prev);
+            index--;
+            this.display_CSVRow(users.get(index-1));
+            if(index == 1)
+                prev.setEnabled(false);
+            next.setEnabled(true);
+            TextView page_ratio = (TextView) findViewById(R.id.page_ratio);
+            String ratio = index + "/" + length;
+            page_ratio.setText(ratio);
+        }
+    }
+    public void toCalculator(View view){
+        Intent intent = new Intent(this, Calculator.class);
+        startActivity(intent);
+
+    }
 }
-
-
 

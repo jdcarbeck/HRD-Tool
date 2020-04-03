@@ -3,9 +3,4 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="btn_clr">#FFAA00</color>
-    <color name="green">#00FF00</color>
-    <color name="operator_btn_clr">#FFFFFF</color>
-    <color name="selected">#3498DB</color>
-    <color name="white">#fff</color>
 </resources>

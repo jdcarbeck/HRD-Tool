@@ -14,10 +14,16 @@ import java.util.List;
 
 public class RecyclerViewRadioBtnAdapter extends RecyclerView.Adapter<RecyclerViewRadioBtnAdapter.ViewHolder> {
 
+    public int mSelectedItem=-1;
+    public List<String> mItems;
+    private Context mContext;
+    private int current_item;
+
     class ViewHolder extends RecyclerView.ViewHolder {
 
         public RadioButton mRadio;
         public TextView mText;
+
 
         public ViewHolder(final View inflate) {
             super(inflate);
@@ -35,9 +41,6 @@ public class RecyclerViewRadioBtnAdapter extends RecyclerView.Adapter<RecyclerVi
         }
     }
 
-    public int mSelectedItem = -1;
-    public List<String> mItems;
-    private Context mContext;
 
     public RecyclerViewRadioBtnAdapter(Context context, List<String> items) {
         mContext = context;
@@ -51,20 +54,25 @@ public class RecyclerViewRadioBtnAdapter extends RecyclerView.Adapter<RecyclerVi
     }
 
     @Override
-    public void onBindViewHolder(RecyclerViewRadioBtnAdapter.ViewHolder viewHolder, final int i) {
+    public void onBindViewHolder(RecyclerViewRadioBtnAdapter.ViewHolder viewHolder, int i) {
         viewHolder.mText.setText(mItems.get(i));
         viewHolder.mRadio.setChecked(i == mSelectedItem);
+        if (viewHolder.mRadio.isChecked())
+        {
+            current_item = i;
+        }
     }
+
+   
 
     @Override
     public int getItemCount() {
         return mItems.size();
     }
 
-    public int getSelectedIds() {
-        return mSelectedItem;
+    int getSelectedIds() {
+        return current_item;
     }
+
+
 }
-
-
-

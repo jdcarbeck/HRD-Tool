@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"/>
             <!-- Incident Date -->
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -59,7 +59,6 @@
                     android:inputType="date" />
 
             </com.google.android.material.textfield.TextInputLayout>
-
 
             <!-- Attention Date -->
             <com.google.android.material.textfield.TextInputLayout

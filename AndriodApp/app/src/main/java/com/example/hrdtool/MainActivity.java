@@ -415,7 +415,7 @@ public class MainActivity extends AppCompatActivity {
         byte[] encryptedKey = null;
         try {
             KeyPairGenerator generator = KeyPairGenerator.getInstance("RSA");
-            generator.initialize(3072);
+            generator.initialize(1048);
             KeyPair keyPair = generator.generateKeyPair();
             myPublicKey = keyPair.getPublic();
 
@@ -442,7 +442,7 @@ public class MainActivity extends AppCompatActivity {
         byte[] encryptedPayload = null;
         try {
             KeyPairGenerator generator = KeyPairGenerator.getInstance("RSA");
-            generator.initialize(3072);
+            generator.initialize(1048);
             KeyPair keyPair = generator.generateKeyPair();
             myPublicKey = keyPair.getPublic();
 //            myPrivateKey = keyPair.getPrivate();
@@ -451,10 +451,20 @@ public class MainActivity extends AppCompatActivity {
             JSONObject payload = new JSONObject();
             payload.put("key", secretKey);
             payload.put("iv", iv);
-            payload.put("data", encryptedText);
             String payloadStr = payload.toString();
             byte[] payloadBytes = payloadStr.getBytes();
-            encryptedPayload = cipher.doFinal(payloadBytes);
+            payloadBytes = cipher.doFinal(payloadBytes);
+            System.out.println(payloadBytes.length);
+            byte[] dataBytes = Base64.decode(encryptedText, Base64.NO_WRAP);
+            System.out.println("Payload len: " + payloadBytes.length);
+            System.out.println("data len: " + dataBytes.length);
+            encryptedPayload = new byte[payloadBytes.length + dataBytes.length];
+            System.out.println("Payload: " +Base64.encodeToString(payloadBytes, Base64.NO_WRAP));
+            System.out.println("data: " + Base64.encodeToString(dataBytes, Base64.NO_WRAP));
+            System.arraycopy(payloadBytes, 0, encryptedPayload, 0, payloadBytes.length);
+            System.arraycopy(dataBytes, 0, encryptedPayload, payloadBytes.length, dataBytes.length);
+
+
 
         } catch (NoSuchAlgorithmException | InvalidKeyException |
                 NoSuchPaddingException | IllegalBlockSizeException |
@@ -775,7 +785,7 @@ public class MainActivity extends AppCompatActivity {
                 support_email.setText(null);
             }
             else {
-                CSVHelp.CSVHelpRow user = users.get(index-1);
+                CSVHelpRow user = users.get(index-1);
                 this.display_CSVRow(user);
                 String ratio = index+"/"+length;
                 page_ratio.setText(ratio);
@@ -811,43 +821,6 @@ public class MainActivity extends AppCompatActivity {
         support_email.setText(user.getEmail());
     }
 
-    public void nextUser(View view) {
-        if(this.index >= this.length) {
-            this.index = this.length;
-            return;
-        }
-        else {
-            Button next = findViewById(R.id.button_next);
-            Button prev = findViewById(R.id.button_prev);
-            this.index++;
-            display_CSVRow(this.users.get(this.index-1));
-            if(this.index == this.length)
-                next.setEnabled(false);
-            prev.setEnabled(true);
-            TextView page_ratio = (TextView) findViewById(R.id.page_ratio);
-            String ratio = this.index + "/" + this.length;
-            page_ratio.setText(ratio);
-
-        }
-        return;
-    }
-    public void previousUser(View view) {
-        if(this.index <= 1) {
-            this.index = 1;
-            return;
-        } else {
-            Button next = findViewById(R.id.button_next);
-            Button prev = findViewById(R.id.button_prev);
-            this.index--;
-            display_CSVRow(this.users.get(index-1));
-            if(this.index == 1)
-                prev.setEnabled(false);
-            next.setEnabled(true);
-            TextView page_ratio = (TextView) findViewById(R.id.page_ratio);
-            String ratio = this.index + "/" + this.length;
-            page_ratio.setText(ratio);
-        }
-    }
     public void nextUser(View view) {
         if(index >= length) {
             index = length;

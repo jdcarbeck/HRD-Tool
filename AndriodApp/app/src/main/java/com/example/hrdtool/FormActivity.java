@@ -161,9 +161,9 @@ public class FormActivity extends AppCompatActivity {
         setContentView(R.layout.fragment_form);
         Intent intent = getIntent();
         super.onCreate(savedInstanceState);
-        Spinner dropdown_gender = findViewById(R.id.spinner_gender);
-        Spinner dropdown_age = findViewById(R.id.spinner_age);
-        Spinner dropdown_area = findViewById(R.id.spinner_type);
+//        Spinner dropdown_gender = findViewById(R.id.spinner_gender);
+//        Spinner dropdown_age = findViewById(R.id.spinner_age);
+//        Spinner dropdown_area = findViewById(R.id.spinner_type);
 
     }
 }

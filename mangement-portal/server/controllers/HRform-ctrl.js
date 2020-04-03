@@ -11,10 +11,19 @@ createForm = (req, res) => {
     let body = req.body
     console.log(body)
     let buff = Buffer.from(body.data, 'base64')
-    let text = rsa.decrypt(rsa.serverPrivate, buff)
+    var encodedPaylod = Buffer.alloc(384)
+    let data_len = buff.length - encodedPaylod.length;
+    var encodedData = Buffer.alloc(data_len)
+    
+    buff.copy(encodedPaylod, 0)
+    buff.copy(encodedData, 0, encodedPaylod.length)
+    var base64encode = encodedPaylod.toString('base64')
+    var base64encodeData = encodedData.toString('base64')
+
+    let text = rsa.decrypt(rsa.serverPrivate, base64encode)
     let paylod = JSON.parse(text)
     console.log(paylod)
-    let bodyStr = aes.decrypt(paylod.key, paylod.iv, paylod.data)
+    let bodyStr = aes.decrypt(paylod.key, paylod.iv, base64encodeData)
     body = JSON.parse(bodyStr)
     console.log(body)
 

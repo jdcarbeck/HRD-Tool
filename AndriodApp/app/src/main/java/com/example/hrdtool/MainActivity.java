@@ -36,11 +36,13 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 
+import org.bouncycastle.jcajce.provider.symmetric.ARC4;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.security.AlgorithmParameters;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.KeyFactory;
@@ -52,6 +54,7 @@ import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.interfaces.RSAPublicKey;
 import java.security.spec.InvalidKeySpecException;
+import java.security.spec.InvalidParameterSpecException;
 import java.security.spec.KeySpec;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
@@ -65,6 +68,7 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
+import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
 import okhttp3.Response;
@@ -370,6 +374,8 @@ public class MainActivity extends AppCompatActivity {
 
     protected static PublicKey receivedPublicKey;
     protected static SecretKey mySecretKey;
+    protected static byte[] iv;
+    protected static Cipher encCipher;
     protected static PublicKey myPublicKey;
 
     public static final String PREFS_NAME = "MyPrefsFile";
@@ -383,7 +389,11 @@ public class MainActivity extends AppCompatActivity {
             generator = KeyGenerator.getInstance("AES");
             generator.init(256);
             mySecretKey = generator.generateKey();
-        } catch (NoSuchAlgorithmException e) {
+            encCipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+            encCipher.init(Cipher.ENCRYPT_MODE, mySecretKey);
+            AlgorithmParameters params = encCipher.getParameters();
+            iv = params.getParameterSpec(IvParameterSpec.class).getIV();
+        } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | InvalidParameterSpecException e) {
             e.printStackTrace();
         }
     }
@@ -392,11 +402,11 @@ public class MainActivity extends AppCompatActivity {
         byte[] encryptedKey = null;
         try {
             KeyPairGenerator generator = KeyPairGenerator.getInstance("RSA");
-            generator.initialize(2048);
+            generator.initialize(3072);
             KeyPair keyPair = generator.generateKeyPair();
             myPublicKey = keyPair.getPublic();
 
-            Cipher cipher = Cipher.getInstance("RSA/ECB/OAEPWITHSHA-256ANDMGF1PADDING");
+            Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
             cipher.init(Cipher.PUBLIC_KEY, receivedPublicKey);
             System.out.println(Cipher.PUBLIC_KEY);
             encryptedKey = cipher.doFinal(mySecretKey.getEncoded());
@@ -413,22 +423,40 @@ public class MainActivity extends AppCompatActivity {
         }
         return encryptedKey;
     }
+
+    public static byte[] encryptPayload(String secretKey, String iv, String encryptedText)
+    {
+        byte[] encryptedPayload = null;
+        try {
+            KeyPairGenerator generator = KeyPairGenerator.getInstance("RSA");
+            generator.initialize(3072);
+            KeyPair keyPair = generator.generateKeyPair();
+            myPublicKey = keyPair.getPublic();
+//            myPrivateKey = keyPair.getPrivate();
+            Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding ");
+            cipher.init(Cipher.PUBLIC_KEY, receivedPublicKey);
+            JSONObject payload = new JSONObject();
+            payload.put("key", secretKey);
+            payload.put("iv", iv);
+            payload.put("data", encryptedText);
+            String payloadStr = payload.toString();
+            byte[] payloadBytes = payloadStr.getBytes();
+            encryptedPayload = cipher.doFinal(payloadBytes);
+
+        } catch (NoSuchAlgorithmException | InvalidKeyException |
+                NoSuchPaddingException | IllegalBlockSizeException |
+                BadPaddingException | JSONException e){
+            e.printStackTrace();
+        }
+        return encryptedPayload;
+    }
+
     public static byte[] encryptText(String textToEncrypt)
     {
         byte[] byteCipherText = null;
         try {
-            Cipher encCipher = Cipher.getInstance("AES");
-            encCipher.init(Cipher.ENCRYPT_MODE, mySecretKey);
             byteCipherText = encCipher.doFinal(textToEncrypt.getBytes());
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (NoSuchPaddingException e) {
-            e.printStackTrace();
-        } catch (InvalidKeyException e) {
-            e.printStackTrace();
-        } catch (IllegalBlockSizeException e) {
-            e.printStackTrace();
-        } catch (BadPaddingException e) {
+        } catch ( IllegalBlockSizeException | BadPaddingException e) {
             e.printStackTrace();
         }
         return byteCipherText;
@@ -480,6 +508,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        generateSymmetricKey();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         TabLayout mTabLayout = findViewById(R.id.tab_layout);
@@ -535,14 +564,9 @@ public class MainActivity extends AppCompatActivity {
                 for(Map.Entry<String,?> entry : keys.entrySet()){
                     Log.d("map values",entry.getKey() + ": " +
                             entry.getValue().toString());
-                    try {
-                        JSONObject jsonForm = new JSONObject(entry.getValue().toString());
-                        scheduleJob(jsonForm);
-                        //unsentFormCount = 0;
-                    }
-                    catch (JSONException e){
-                        e.printStackTrace();
-                    }
+                    System.out.println("entry value: " + entry.getValue().toString());
+                    postJob(entry.getValue().toString());
+                    unsentFormCount = 0;
                 }
                 updateFormCount();
                 return true;
@@ -562,29 +586,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public static void encryptAndSendForm(String jsonString) {
-        System.out.println(jsonString);
-        generateSymmetricKey();
-        String strEncodedSecretKey  = Base64.encodeToString(mySecretKey.getEncoded(), Base64.DEFAULT);
-        System.out.println(strEncodedSecretKey);
-        byte[] encryptedSecretKey = encryptSecretKey();
-        System.out.println(encryptedSecretKey);
-        byte[] encryptedText = encryptText(jsonString);
-        System.out.println(encryptedText);
+    public static void encryptAndSendForm(String strEncodedJson) {
+        String strEncodedSecretKey = Base64.encodeToString(mySecretKey.getEncoded(), Base64.NO_WRAP);
+        String strEncodedIv = Base64.encodeToString(iv, Base64.NO_WRAP);
 
-        try {
-            String encryptedSecretKeyString = new String(encryptedSecretKey, "UTF-8");
-            String encryptedFormDataString = new String(encryptedText, "UTF-8");
+        byte[] dataToSend = encryptPayload(strEncodedSecretKey, strEncodedIv, strEncodedJson);
+        String strEncodedData = Base64.encodeToString(dataToSend, Base64.NO_WRAP);
 
-            OkHttp.sendPostReq("sendForm", encryptedSecretKeyString, encryptedFormDataString);
-            System.out.println(encryptedSecretKeyString);
-            System.out.println(encryptedFormDataString);
-
-        }
-        catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-
+        OkHttp.sendPostReq("api/form", strEncodedData, "");
     }
 
     //This method is called by OkHttp when a public key is received as a response
@@ -612,8 +621,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void scheduleJob(JSONObject rcvJSON) {
 
-        ComponentName componentName = new ComponentName(this, DataSendingService.class);
-
         JSONObject formJson = rcvJSON;
         String android_id = Secure.getString(MainActivity.this.getContentResolver(),
                 Secure.ANDROID_ID);
@@ -623,9 +630,16 @@ public class MainActivity extends AppCompatActivity {
         catch (JSONException e){
             e.printStackTrace();
         }
-        String jsonString = formJson.toString();
+        //Here the form is encrypted via AES
+        byte[] encryptedJsonForm = encryptText(formJson.toString());
+        String strEncodedJson = Base64.encodeToString(encryptedJsonForm, Base64.NO_WRAP);
+        postJob(strEncodedJson);
+    }
 
-        bundle.putString("form", jsonString);
+
+    public void postJob(String strEncodedJson){
+        ComponentName componentName = new ComponentName(this, DataSendingService.class);
+        bundle.putString("form", strEncodedJson);
         JobInfo info = new JobInfo.Builder(jobId, componentName)
                 .setRequiresCharging(false)
                 .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
@@ -642,7 +656,7 @@ public class MainActivity extends AppCompatActivity {
             updateFormCount();
             SharedPreferences unsentString = getSharedPreferences(PREFS_NAME, 0);
             SharedPreferences.Editor editor = unsentString.edit();
-            editor.putString("unsentForm" + (jobId-1), jsonString);
+            editor.putString("unsentForm" + (jobId-1), strEncodedJson); // jsonString is what is saved to the advice
             editor.commit();
         } else {
             Log.d(TAG, "Job scheduling failed");

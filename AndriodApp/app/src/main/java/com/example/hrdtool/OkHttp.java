@@ -18,6 +18,7 @@ import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.FormBody;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -39,14 +40,12 @@ public class OkHttp {
         final String paramZero = parameters[0];
         final String paramOne = parameters[1];
         final String paramTwo = parameters[2];
-        RequestBody body = RequestBody.create(
-                MediaType.parse("charset=utf-8"),
-                parameters[1] + parameters[2]
-        );
+        RequestBody body = new FormBody.Builder()
+                .add("data", paramOne)
+                .build();
 
         Request request = new Request.Builder()
-
-                .url("http://192.168.0.11:3000/HRform-router/sendForm") // URL of management portal
+                .url("http://10.0.2.2:3000/" + paramZero) // URL of management portal
                 .addHeader("User-Agent", "OkHttp Bot")
                 .post(body)
                 .build();
@@ -64,21 +63,18 @@ public class OkHttp {
                 } else {
                     String responseBody = response.body().string();
                     System.out.println((responseBody));
-                    if (paramZero.equals("getPublicKey")){
+                    if (paramZero.equals("key")){
                         MainActivity.setPublicKey(responseBody);
                         MainActivity.encryptAndSendForm(paramTwo);
 
                         System.out.println("started MainActivity");
                     }
-                    else if (paramZero.equals("sendForm")){
+                    else if (paramZero.equals("api/form")){
                         unsentFormCount -= 1;
                         if (MainActivity.reference!=null)
                         {
                             MainActivity.reference.updateFormCount();
                         }
-
-
-
 
                         //MainActivity main = new MainActivity();
                         //main.updateFormCount();

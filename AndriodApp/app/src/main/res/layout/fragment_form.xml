@@ -86,5 +86,4 @@
         android:layout_marginTop="36dp"
         app:layout_constraintStart_toStartOf="@+id/details"
         app:layout_constraintTop_toBottomOf="@+id/details" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

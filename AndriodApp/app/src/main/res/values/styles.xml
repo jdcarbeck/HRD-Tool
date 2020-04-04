@@ -3,9 +3,13 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">#6200EE</item>
-        <item name="colorPrimaryDark">#C1C1C1</item>
-        <item name="colorAccent">#6200EE</item>
+        <item name="colorPrimary">#01619B</item>
+        <item name="colorPrimaryDark">#00314B</item>
+        <item name="colorAccent">#0081CC</item>
+
+<!--        Light Blue: 0081CC-->
+<!--        Blue: 01619B-->
+<!--        Dark Blue: 00314B-->
 
         <!-- New MaterialComponents attributes. -->
 

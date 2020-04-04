@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.view.accessibility.AccessibilityEvent;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import androidx.recyclerview.widget.RecyclerView;
@@ -45,6 +47,8 @@ public class FormFragment extends Fragment {
     private  Button submit_form;
     private EditText i_date;
     private EditText a_date;
+    private String i_date_iso;
+    private String a_date_iso;
     private EditText community;
     private AutoCompleteTextView dropdown_gender;
     private AutoCompleteTextView dropdown_type;
@@ -73,6 +77,7 @@ public class FormFragment extends Fragment {
     private SparseBooleanArray sexual_sub_classification;
     private SparseBooleanArray denial_resources;
     private SparseBooleanArray classification_forced_marriage;
+    DatePickerDialog picker;
     private int perpetrator_gender;
     private int perpetrator_known;
     private int perpetrator_association;
@@ -162,15 +167,45 @@ public class FormFragment extends Fragment {
         chb1 = v.findViewById(R.id.rowCheckBox1);
 
 
-        Calendar cal = Calendar.getInstance();
-        final int year = cal.get(Calendar.YEAR);
-        final int month = cal.get(Calendar.MONTH);
-        final int day = cal.get(Calendar.DAY_OF_MONTH);
+        i_date.setInputType(InputType.TYPE_NULL);
+        i_date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar cal = Calendar.getInstance();
+                final int year = cal.get(Calendar.YEAR);
+                final int month = cal.get(Calendar.MONTH);
+                final int day = cal.get(Calendar.DAY_OF_MONTH);
+                picker = new DatePickerDialog(getActivity(),
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                                i_date.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                                i_date_iso = year+"-"+monthOfYear+"-"+dayOfMonth;
+                            }
+                        }, year, month, day);
+                picker.show();
+            }
+        });
 
-//        setListener = DatePickerDialog.OnDateSetListener(){
-//            @Override
-//
-//        }
+        a_date.setInputType(InputType.TYPE_NULL);
+        a_date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar cal = Calendar.getInstance();
+                final int year = cal.get(Calendar.YEAR);
+                final int month = cal.get(Calendar.MONTH);
+                final int day = cal.get(Calendar.DAY_OF_MONTH);
+                picker = new DatePickerDialog(getActivity(),
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                                a_date.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                                a_date_iso = year+"-"+monthOfYear+"-"+dayOfMonth;
+                            }
+                        }, year, month, day);
+                picker.show();
+            }
+        });
 
         submit_form.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -178,8 +213,8 @@ public class FormFragment extends Fragment {
                 JSONObject jObj = new JSONObject();
                 try {
 
-                    jObj.put("incident_date", i_date.getText().toString());
-                    jObj.put("attention_date",  a_date.getText().toString());
+                    jObj.put("incident_date", i_date_iso);
+                    jObj.put("attention_date",  a_date_iso);
                     jObj.put("gender",  dropdown_gender.getText().toString());
                     jObj.put("age_range",  dropdown_age.getText().toString());
                     jObj.put("municipality",  dropdown_area.getText().toString());

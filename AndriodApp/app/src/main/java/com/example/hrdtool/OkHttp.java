@@ -38,9 +38,9 @@ public class OkHttp {
     public static void sendPostReq(final String... parameters)  {
 
         final String paramZero = parameters[0];
-        final String paramOne = parameters[1];
+        String paramOne = parameters[1];
+        paramOne = parameters[3] + "-" + paramOne;   // append data to "(int id)-"
         final String paramTwo = parameters[2];
-        final String paramThree = parameters[3];    //id
         RequestBody body = new FormBody.Builder()
                 .add("data", paramOne)
                 .build();
@@ -69,7 +69,7 @@ public class OkHttp {
                     System.out.println((responseBody));
                     if (paramZero.equals("key")){
                         MainActivity.setPublicKey(responseBody);
-                        MainActivity.encryptAndSendForm(paramTwo, paramThree);  // pass form and id
+                        MainActivity.encryptAndSendForm(publicKey, id);  // pass form and id
 
                         System.out.println("started MainActivity");
                     }
@@ -79,7 +79,7 @@ public class OkHttp {
                         {
                             MainActivity.reference.updateFormCount();
                             MainActivity.reference.deleteReceivedForm(id);
-                        }                      
+                        }
                     }
                 }
             }

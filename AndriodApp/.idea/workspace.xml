@@ -14,21 +14,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cd4aaaf7-4ed6-4b5a-92ef-1986409743e2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/FormFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/FormFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mangement-portal/client/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mangement-portal/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../mangement-portal/client/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mangement-portal/client/src/api/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../mangement-portal/client/src/api/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mangement-portal/client/src/app/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../mangement-portal/client/src/app/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mangement-portal/client/src/components/FormList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../mangement-portal/client/src/components/FormList.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mangement-portal/client/src/components/Links.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../mangement-portal/client/src/components/Links.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mangement-portal/client/src/components/NewForms.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../mangement-portal/client/src/components/NewForms.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mangement-portal/client/src/components/R" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mangement-portal/client/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../mangement-portal/client/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mangement-portal/client/src/pages/Dashboard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../mangement-portal/client/src/pages/Dashboard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mangement-portal/client/src/pages/Devices.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../mangement-portal/client/src/pages/Devices.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mangement-portal/client/src/pages/FormList.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mangement-portal/client/src/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../mangement-portal/client/src/pages/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mangement-portal/client/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../mangement-portal/client/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/MainActivity.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -52,8 +38,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="156">
-              <caret line="644" column="28" selection-start-line="644" selection-start-column="16" selection-end-line="644" selection-end-column="28" />
+            <state relative-caret-position="342">
+              <caret line="636" column="9" lean-forward="true" selection-start-line="636" selection-start-column="9" selection-end-line="636" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -61,8 +47,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/FormFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="297" column="53" selection-start-line="297" selection-start-column="53" selection-end-line="297" selection-end-column="53" />
+            <state relative-caret-position="1528">
+              <caret line="239" column="61" lean-forward="true" selection-start-line="239" selection-start-column="61" selection-end-line="239" selection-end-column="61" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#7966#16534#0" expanded="true" />
@@ -99,9 +85,11 @@
       <find>hldf</find>
       <find>jtcz</find>
       <find>lttwe</find>
-      <find>scheduleJob(</find>
       <find>LIst</find>
       <find>List&lt;STRING&gt;</find>
+      <find>SUPPORT</find>
+      <find>scheduleJob(</find>
+      <find>CLASSIFICATION_PHY_2</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -143,10 +131,10 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/RecyclerViewRadioBtnAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_form.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/FormActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/FormFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/MainActivity.java" />
       </list>
     </option>
   </component>
@@ -670,15 +658,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="644" column="28" selection-start-line="644" selection-start-column="16" selection-end-line="644" selection-end-column="28" />
+        <state relative-caret-position="342">
+          <caret line="636" column="9" lean-forward="true" selection-start-line="636" selection-start-column="9" selection-end-line="636" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/FormFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="297" column="53" selection-start-line="297" selection-start-column="53" selection-end-line="297" selection-end-column="53" />
+        <state relative-caret-position="1528">
+          <caret line="239" column="61" lean-forward="true" selection-start-line="239" selection-start-column="61" selection-end-line="239" selection-end-column="61" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#7966#16534#0" expanded="true" />

@@ -4,9 +4,6 @@ const aes = require('../crypto/aes')
 
 rsa.initLoadServerKeys(__dirname + "/../" )
 
-
-
-
 createForm = (req, res) => {
     let body = req.body
     console.log(body)
@@ -27,13 +24,15 @@ createForm = (req, res) => {
     body = JSON.parse(bodyStr)
     console.log(body)
 
+    body.incident_date = Date.now()
+    body.attention_date = Date.now()
+
     if(!body) {
         return res.status(400).json({
             sucesss: false,
             error: 'You must provide a valid form'
         })
     }
-
     const form = new Form(body)
 
     if(!form){

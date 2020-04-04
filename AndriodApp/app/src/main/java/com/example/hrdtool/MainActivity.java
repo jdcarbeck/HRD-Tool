@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         CSVHelpRow(String name, String type, String address,
-               String telephone, String email, String area) {
+                   String telephone, String email, String area) {
             this.name = name;
             this.type= type;
             this.address= address;
@@ -395,6 +395,7 @@ public class MainActivity extends AppCompatActivity {
     TextView textUnsentFormCount;
     public static int unsentFormCount;
     public static int unsentFormID;
+    public boolean cancelPrevJobs = false;
 
     public static void generateSymmetricKey()
     {
@@ -544,7 +545,7 @@ public class MainActivity extends AppCompatActivity {
                 int i = 1;
                 SharedPreferences unsentString = getSharedPreferences(PREFS_NAME, 0);
                 Map<String,?> keys = unsentString.getAll();
-
+                cancelPrevJobs = true;
                 for(Map.Entry<String,?> entry : keys.entrySet()){
                     Log.d("map values",entry.getKey() + ": " +
                             entry.getValue().toString());
@@ -637,7 +638,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void postJob(String strEncodedJson){
         ComponentName componentName = new ComponentName(this, DataSendingService.class);
-        String strEncodedJsonWithID = unsentFormID + "-" + jsonString;
+        String strEncodedJsonWithID = unsentFormID + "-" + strEncodedJson;
         bundle.putString("form", strEncodedJsonWithID);
         JobInfo info = new JobInfo.Builder(jobId, componentName)
                 .setRequiresCharging(false)
@@ -659,7 +660,7 @@ public class MainActivity extends AppCompatActivity {
             updateFormCount();
             SharedPreferences unsentString = getSharedPreferences(PREFS_NAME, 0);
             SharedPreferences.Editor editor = unsentString.edit();
-            editor.putString("unsentForm" + unsentFormID, jsonString);        
+            editor.putString("unsentForm" + unsentFormID, strEncodedJson);
             editor.putInt("unsentFormID", unsentFormID);
             editor.apply();
             System.out.println("unsentForm" + unsentFormID + " saved");
@@ -668,7 +669,7 @@ public class MainActivity extends AppCompatActivity {
             Log.d(TAG, "Job scheduling failed");
         }
     }
-    
+
     public void deleteReceivedForm(String receivedFormId){
         SharedPreferences removeEntry = getSharedPreferences(PREFS_NAME, 0);
         SharedPreferences.Editor editor = removeEntry.edit();
@@ -676,7 +677,7 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("removed: unsentForm" + receivedFormId );
         editor.apply();
     }
-    
+
     public void updateFormCount()
     {
         SharedPreferences formCount = getSharedPreferences(PREFS_NAME, 0);
@@ -692,7 +693,7 @@ public class MainActivity extends AppCompatActivity {
                     ((GradientDrawable)findViewById(R.id.message_badge).getBackground()).setColor(Color.parseColor("#8bc34a"));
                     SharedPreferences delete = getSharedPreferences(PREFS_NAME, 0);
                     SharedPreferences.Editor editor = delete.edit();
-                    editor.clear()
+                    editor.clear();
                     editor.apply();
                 }
                 else {

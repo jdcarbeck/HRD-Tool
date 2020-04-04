@@ -14,8 +14,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cd4aaaf7-4ed6-4b5a-92ef-1986409743e2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/FormFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/FormFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mangement-portal/client/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mangement-portal/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../mangement-portal/client/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mangement-portal/client/src/api/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../mangement-portal/client/src/api/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mangement-portal/client/src/app/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../mangement-portal/client/src/app/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mangement-portal/client/src/components/FormList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../mangement-portal/client/src/components/FormList.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mangement-portal/client/src/components/Links.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../mangement-portal/client/src/components/Links.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mangement-portal/client/src/components/NewForms.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../mangement-portal/client/src/components/NewForms.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mangement-portal/client/src/components/R" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mangement-portal/client/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../mangement-portal/client/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mangement-portal/client/src/pages/Dashboard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../mangement-portal/client/src/pages/Dashboard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mangement-portal/client/src/pages/Devices.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../mangement-portal/client/src/pages/Devices.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mangement-portal/client/src/pages/FormList.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mangement-portal/client/src/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../mangement-portal/client/src/pages/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mangement-portal/client/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../mangement-portal/client/yarn.lock" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -37,101 +50,26 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_form.xml">
-          <provider editor-type-id="android-designer2" />
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1258">
-              <caret line="41" column="46" selection-start-line="41" selection-start-column="46" selection-end-line="41" selection-end-column="46" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="38" selection-start-line="2" selection-start-column="38" selection-end-line="2" selection-end-column="38" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/FormFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4215">
-              <caret line="293" selection-start-line="293" selection-end-line="293" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="254">
-              <caret line="458" column="43" selection-start-line="458" selection-start-column="43" selection-end-line="458" selection-end-column="43" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="32" lean-forward="true" selection-start-line="11" selection-start-column="32" selection-end-line="11" selection-end-column="32" />
+            <state relative-caret-position="156">
+              <caret line="644" column="28" selection-start-line="644" selection-start-column="16" selection-end-line="644" selection-end-column="28" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/FormFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="86" selection-start-line="17" selection-start-column="86" selection-end-line="17" selection-end-column="86" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/OkHttp.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="196">
-              <caret line="67" selection-start-line="67" selection-end-line="67" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/FormActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+            <state relative-caret-position="360">
+              <caret line="297" column="53" selection-start-line="297" selection-start-column="53" selection-end-line="297" selection-end-column="53" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#7966#16534#0" expanded="true" />
+                <element signature="e#16533#16534#0" expanded="true" />
               </folding>
             </state>
           </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.4.1/70fca5cd856d0cc740e43affeb6f661204fdb2cc/okhttp-3.4.1-sources.jar!/okhttp3/internal/connection/StreamAllocation.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="196">
-              <caret line="128" selection-start-line="128" selection-end-line="128" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" column="42" selection-start-line="12" selection-start-column="42" selection-end-line="12" selection-end-column="42" />
-            </state>
-          </provider>
-          <provider editor-type-id="android-manifest" />
         </entry>
       </file>
     </leaf>
@@ -161,6 +99,9 @@
       <find>hldf</find>
       <find>jtcz</find>
       <find>lttwe</find>
+      <find>scheduleJob(</find>
+      <find>LIst</find>
+      <find>List&lt;STRING&gt;</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -199,13 +140,13 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/Calculator.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/HomeWatcher.java" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/FormFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/RecyclerViewRadioBtnAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_form.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/FormActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/FormFragment.java" />
       </list>
     </option>
   </component>
@@ -224,6 +165,7 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="ProjectPane" />
       <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane>
@@ -243,22 +185,10 @@
               <item name="java" type="edd41e36:AndroidSourceTypeNode" />
               <item name="hrdtool" type="cbb59c9e:AndroidPsiDirectoryNode" />
             </path>
-            <path>
-              <item name="HRDTool" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-            </path>
-            <path>
-              <item name="HRDTool" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-              <item name="values" type="ddeffd01:AndroidResFolderTypeNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -539,7 +469,7 @@
       <window_info anchor="bottom" id="TODO" order="2" />
       <window_info anchor="bottom" id="Android Profiler" order="3" />
       <window_info anchor="bottom" id="Debug" order="4" weight="0.62171054" />
-      <window_info anchor="bottom" id="Run" order="5" weight="0.32785088" />
+      <window_info active="true" anchor="bottom" id="Run" order="5" visible="true" weight="0.32785088" />
       <window_info anchor="bottom" id="Event Log" order="6" sideWeight="0.50053304" side_tool="true" weight="0.32936078" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32866243" />
       <window_info anchor="bottom" id="Build" order="8" weight="0.40460527" />
@@ -612,8 +542,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/raw/help.csv" />
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_help.xml">
-      <provider selected="true" editor-type-id="android-designer2" />
       <provider editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/HelpFragment.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -643,8 +573,8 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/menu_layout.xml" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/ExpressionEvaluation.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
-      <provider selected="true" editor-type-id="android-designer2" />
       <provider editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/row1.xml" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/RecyclerViewAdapter.java" />
@@ -677,6 +607,14 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/Calculator.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/RecyclerViewAdapter1.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/RecyclerViewRadioBtnAdapter.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_form.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="615">
+          <caret line="41" column="46" selection-start-line="41" selection-start-column="46" selection-end-line="41" selection-end-column="46" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -684,13 +622,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/FormFragment.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4215">
-          <caret line="293" selection-start-line="293" selection-end-line="293" />
+        <state relative-caret-position="165">
+          <caret line="11" column="32" selection-start-line="11" selection-start-column="32" selection-end-line="11" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/OkHttp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="600">
+          <caret line="67" selection-start-line="67" selection-end-line="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/FormActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.4.1/70fca5cd856d0cc740e43affeb6f661204fdb2cc/okhttp-3.4.1-sources.jar!/okhttp3/internal/connection/StreamAllocation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1485">
+          <caret line="128" selection-start-line="128" selection-end-line="128" />
         </state>
       </provider>
     </entry>
@@ -702,56 +661,29 @@
       </provider>
       <provider editor-type-id="android-manifest" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_form.xml">
-      <provider editor-type-id="android-designer2" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1258">
-          <caret line="41" column="46" selection-start-line="41" selection-start-column="46" selection-end-line="41" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.4.1/70fca5cd856d0cc740e43affeb6f661204fdb2cc/okhttp-3.4.1-sources.jar!/okhttp3/internal/connection/StreamAllocation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="128" selection-start-line="128" selection-end-line="128" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/OkHttp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="67" selection-start-line="67" selection-end-line="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/FormActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="255">
+          <caret line="17" column="86" selection-start-line="17" selection-start-column="86" selection-end-line="17" selection-end-column="86" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
-          <caret line="458" column="43" selection-start-line="458" selection-start-column="43" selection-end-line="458" selection-end-column="43" />
+        <state relative-caret-position="156">
+          <caret line="644" column="28" selection-start-line="644" selection-start-column="16" selection-end-line="644" selection-end-column="28" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/FormFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="32" lean-forward="true" selection-start-line="11" selection-start-column="32" selection-end-line="11" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="86" selection-start-line="17" selection-start-column="86" selection-end-line="17" selection-end-column="86" />
+        <state relative-caret-position="360">
+          <caret line="297" column="53" selection-start-line="297" selection-start-column="53" selection-end-line="297" selection-end-column="53" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#7966#16534#0" expanded="true" />
+            <element signature="e#16533#16534#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

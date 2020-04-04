@@ -1,3 +1,4 @@
 import Dashboard from './Dashboard'
+import Devices from './Devices'
 
-export { Dashboard }
+export { Dashboard, Devices }

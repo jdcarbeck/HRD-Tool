@@ -19,9 +19,6 @@ const CardTitle = styled.div.attrs({
 const CardWrapper = styled.div`
     margin: auto;
 `
-
-
-
 class Dashboard extends Component {
     constructor(props){
         super(props)
@@ -54,42 +51,20 @@ class Dashboard extends Component {
             <div>
                 {showDashboard && (
                     <div>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <Card>
-                                    <CardTitle>New Forms</CardTitle>
-                                    <CardWrapper>
-                                        <div class="card-body">
-                                            <NewForms forms={this.state.data}/>
-                                        </div>
-                                    </CardWrapper>
-                                </Card>
-                            </div>
-                            <div class="col-lg-6">
-                                <Card>
-                                    <CardTitle>Case Breakdown</CardTitle>
-                                    <CardWrapper>
-                                        <div class="card-body">
-                                            <CaseTypeVis/>
-                                        </div>
-                                    </CardWrapper>
-                                </Card>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
+                        <div className="row">         
+                            <div className="col-lg-12">
                                 <Card>
                                     <CardTitle>Form Rate</CardTitle>
                                     <CardWrapper>
-                                        <div class="card-body">
+                                        <div className="card-body">
                                             <LineFormRate/>
                                         </div>
                                     </CardWrapper>
                                 </Card>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12">
+                        <div className="row">
+                            <div className="col-md-12">
                                 <Card>
                                     <CardTitle>Database</CardTitle>
                                     <FormList forms={this.state.data}/>

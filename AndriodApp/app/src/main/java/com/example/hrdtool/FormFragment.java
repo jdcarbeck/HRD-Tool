@@ -32,6 +32,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import android.widget.Toast;
 
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.Arrays;
@@ -177,96 +178,125 @@ public class FormFragment extends Fragment {
                 JSONObject jObj = new JSONObject();
                 try {
 
-                    jObj.put("incident date", i_date.getText().toString());
-                    jObj.put("attention date",  a_date.getText().toString());
+                    jObj.put("incident_date", i_date.getText().toString());
+                    jObj.put("attention_date",  a_date.getText().toString());
                     jObj.put("gender",  dropdown_gender.getText().toString());
-                    jObj.put("age range",  dropdown_age.getText().toString());
+                    jObj.put("age_range",  dropdown_age.getText().toString());
                     jObj.put("municipality",  dropdown_area.getText().toString());
                     jObj.put("community",  community.getText().toString());
+
+                    JSONArray support_sought_list = new JSONArray();
                     for (int i = 0; i<=support_sought.size(); i++)
                     {
                         int j;
                         if(support_sought.valueAt(i))
                         {
                             j = support_sought.keyAt(i);
-                            jObj.put("support sought "+i,  SUPPORT[j]);
+                            support_sought_list.put(SUPPORT[j]);
                         }
                     }
+                    jObj.put("support_sought",  support_sought_list);
+
+                    JSONArray support_offered_list = new JSONArray();
                     for (int i = 0; i<=support_offered.size(); i++)
                     {
                         int j;
                         if(support_offered.valueAt(i))
                         {
                             j = support_offered.keyAt(i);
-                            jObj.put("support offered "+i,  SUPPORT[j]);
+                            support_offered_list.put(SUPPORT[j]);
                         }
                     }
+                    jObj.put("support_offered",  support_offered_list);
+
+
+                    JSONArray support_referred_list = new JSONArray();
                     for (int i = 0; i<=support_referred.size(); i++)
                     {
                         int j;
                         if(support_referred.valueAt(i))
                         {
                             j = support_referred.keyAt(i);
-                            jObj.put("support referred "+i,  SUPPORT1[j]);
+                            support_referred_list.put(SUPPORT1[j]);
                         }
                     }
+
+                    jObj.put("support_referred", support_referred_list);
+
+                    boolean physical = false;
                     if(classification_physical.valueAt(0))
                     {
-                        jObj.put("classification physical",  "yes");
+                        physical = true;
                     }
+                    jObj.put("physical_abuse",  physical);
 
+                    JSONArray phystical_abuse_suffered = new JSONArray();
                     for (int i = 0; i<=physical_sub_classification.size(); i++)
                     {
                         int j;
                         if(physical_sub_classification.valueAt(i))
                         {
                             j = support_referred.keyAt(i);
-                            jObj.put("physical sub classification "+i,  CLASSIFICATION_PHY_2[j]);
+                            phystical_abuse_suffered.put(CLASSIFICATION_PHY_2[j]);
                         }
                     }
+                    jObj.put("physical_abuse_suffered",  phystical_abuse_suffered);
 
+
+                    boolean emotional = false;
                     if(classification_emotional.valueAt(0))
                     {
-                        jObj.put("classification emotional",  "yes");
+                        emotional = true;
                     }
+                    jObj.put("emotional_abuse",  emotional);
 
+                    JSONArray emotional_abuse_suffered = new JSONArray();
                     for (int i = 0; i<=emotional_sub_classification.size(); i++)
                     {
                         int j;
                         if(emotional_sub_classification.valueAt(i))
                         {
                             j = emotional_sub_classification.keyAt(i);
-                            jObj.put("emotional sub classification "+i,  CLASSIFICATION_EMO_2[j]);
+                            emotional_abuse_suffered.put(CLASSIFICATION_EMO_2[j]);
                         }
                     }
+                    jObj.put("emotional_abuse_suffered", emotional_abuse_suffered);
 
+                    boolean sexual_abuse = false;
                     if(classification_sexual.valueAt(0))
                     {
-                        jObj.put("classification sexual",  "yes");
+                        sexual_abuse = true;
                     }
+                    jObj.put("sexual_abuse",  sexual_abuse);
 
+                    JSONArray sexual_abuse_suffered = new JSONArray();
                     for (int i = 0; i<=sexual_sub_classification.size(); i++)
                     {
                         int j;
                         if(sexual_sub_classification.valueAt(i))
                         {
                             j = sexual_sub_classification.keyAt(i);
-                            jObj.put("sexual sub classification "+i,  CLASSIFICATION_SEX_2[j]);
+                            sexual_abuse_suffered.put(CLASSIFICATION_SEX_2[j]);
                         }
                     }
+                    jObj.put("sexual_abuse_suffered", sexual_abuse_suffered);
 
+                    boolean forced_marriage = false;
                     if(classification_forced_marriage.valueAt(0))
                     {
-                        jObj.put("classification sexual",  "yes");
+                        forced_marriage = true;
                     }
+                    jObj.put("forced_marriage",  forced_marriage);
+
                     perpetrator_gender = adapter1radio1.getSelectedIds();
-                    jObj.put("perpetrator gender",  GENDER[perpetrator_gender]);
+                    jObj.put("perpetrator_gender",  GENDER[perpetrator_gender]);
 
                     perpetrator_known = adapter1radio2.getSelectedIds();
-                    jObj.put("perpetrator known",  KNOWN[perpetrator_known]);
+                    jObj.put("perpetrator_known",  KNOWN[perpetrator_known]);
 
                     perpetrator_association = adapter1radio3.getSelectedIds();
-                    jObj.put("perpetrator association if known",  IFKNOWN[perpetrator_association]);
+                    jObj.put("perpetrator_association",  IFKNOWN[perpetrator_association]);
+
                 } catch (Exception e) {
                     System.out.println("Error:" + e);
                 }

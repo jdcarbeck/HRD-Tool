@@ -7,10 +7,12 @@ const api = axios.create({
 // here is where the methods that are linked to the server router are defined
 export const getAllForms = () => api.get(`/form`)
 export const getFormById = id => api.get(`/form/${id}`)
+export const updateFormRead = id => api.put(`/form/${id}`)
 
 const apis = {
     getAllForms,
     getFormById,
+    updateFormRead,
 }
 
 export default apis

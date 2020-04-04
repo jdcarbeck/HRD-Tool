@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import api from '../api'
 import {
     useTable,
     useSortBy,
@@ -33,6 +34,11 @@ const Styles = styled.div`
             }
         }
     }
+`
+
+const Read = styled.div`
+    color: #ff0000;
+    cursor: pointer;
 `
 
 function Table({ columns, data }) {
@@ -86,6 +92,18 @@ function Table({ columns, data }) {
     )
 }
 
+class MarkRead extends Component {
+    markAsRead = event => {
+        event.preventDefault()
+        api.updateFormRead(this.props.id)
+        window.location.reload()
+    }
+
+    render() {
+        return <Read onClick={this.markAsRead}>X</Read>
+    }
+}
+
 class NewForms extends Component {
     render() {
         const { forms } = this.props
@@ -105,7 +123,18 @@ class NewForms extends Component {
                         <span>{cellProps.cell.value.join('/')}</span>
                     )
                 },
-            }      
+            },
+            {
+                Header: '',
+                accessor: ' ',
+                Cell: function(props) {
+                    return (
+                        <span>
+                            <MarkRead id={props} />
+                        </span>
+                    )
+                },
+            },      
         ]
 
         return (

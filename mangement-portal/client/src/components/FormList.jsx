@@ -14,35 +14,6 @@ const Wrapper = styled.div`
   padding: 0;
 `
 
-const Styles = styled.div`
-    padding: 1rem;
-
-    table {
-        border-spacing: 0;
-        border: 1px solid black;
-
-        tr{
-            :last-child {
-                td {
-                    border-bottom: 0;
-                }
-            }
-        }
-
-        th,
-        td {
-            margin: 0;
-            padding: 0.5rem;
-            border-bottom: 1px solid black;
-            border-right: 1px solid black;
-
-            :last-child {
-                border-right: 0;
-            }
-        }
-    }
-`
-
 // UI global filter
 function GlobalFilter({
     preGlobalFilteredRows,
@@ -58,7 +29,7 @@ function GlobalFilter({
                 onChange={ e => {
                     setGlobalFilter(e.target.value || undefined) //set or remove a filter
                 }}
-                placeholder={`${count} records...`}
+                placeholder={`${count} forms...`}
                 style={{
                     fontSize: '1.1rem',
                     border: '0',
@@ -80,7 +51,7 @@ function DefaultColumnFilter({
             onChange={e => {
                 setFilter(e.target.value || undefined)
             }}
-            placeholder={`Search ${count} records...`}
+            placeholder={`Search ${count} forms...`}
         />
     )
 }
@@ -219,19 +190,18 @@ function Table({ columns, data }) {
             filterTypes,
         },
         useFilters,
-        useGlobalFilter
     )
 
     const firstPageRows = rows.slice(0,10)
 
     return (
         <>
-          <table {...getTableProps()}>
+          <table className="table" {...getTableProps()}>
             <thead>
               {headerGroups.map(headerGroup => (
                 <tr {...headerGroup.getHeaderGroupProps()}>
                   {headerGroup.headers.map(column => (
-                    <th {...column.getHeaderProps()}>
+                    <th scope="col" {...column.getHeaderProps()}>
                       {column.render('Header')}
                       {/* Render the columns filter UI */}
                       <div>{column.canFilter ? column.render('Filter') : null}</div>
@@ -239,20 +209,6 @@ function Table({ columns, data }) {
                   ))}
                 </tr>
               ))}
-              <tr>
-                <th
-                  colSpan={visibleColumns.length}
-                  style={{
-                    textAlign: 'left',
-                  }}
-                >
-                  <GlobalFilter
-                    preGlobalFilteredRows={preGlobalFilteredRows}
-                    globalFilter={state.globalFilter}
-                    setGlobalFilter={setGlobalFilter}
-                  />
-                </th>
-              </tr>
             </thead>
             <tbody {...getTableBodyProps()}>
               {firstPageRows.map((row, i) => {
@@ -269,11 +225,6 @@ function Table({ columns, data }) {
           </table>
           <br />
           <div>Showing the first 20 results of {rows.length} rows</div>
-          <div>
-            <pre>
-              <code>{JSON.stringify(state.filters, null, 2)}</code>
-            </pre>
-          </div>
         </>
     )
 }
@@ -286,6 +237,13 @@ function filterGreaterThan(rows, id, filterValue) {
 }
 
 filterGreaterThan.autoRemove = val => typeof val !== 'number'
+
+class ViewForm extends Component {
+  render(){
+    return <button className="btn btn-outline-info">View</button>
+  }
+}
+
 
 class FormList extends Component {
 
@@ -314,7 +272,19 @@ class FormList extends Component {
                     <span>{cellProps.cell.value.join('/')}</span>
                   )
                 },
-            }
+            },
+            {
+              Header: '',
+              accessor: ' ',
+              disableFilters: true,
+              Cell: function(props) {
+                  return (
+                      <span>
+                          <ViewForm id={props} />
+                      </span>
+                  )
+              },
+          },
         ]
 
         let showTable = true
@@ -326,13 +296,11 @@ class FormList extends Component {
         return (
             <Wrapper>
                 {showTable && (
-                    <Styles>
-                        <Table
-                            data={forms}
-                            columns={columns}
-                            loading={isLoading}
-                        />
-                    </Styles>
+                      <Table
+                          data={forms}
+                          columns={columns}
+                          loading={isLoading}
+                      />
                 )}
             </Wrapper>
         )

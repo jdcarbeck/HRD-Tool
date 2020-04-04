@@ -394,6 +394,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String PREFS_NAME = "MyPrefsFile";
     TextView textUnsentFormCount;
     public static int unsentFormCount;
+    public static int unsentFormID;
 
     public static void generateSymmetricKey()
     {
@@ -484,48 +485,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return byteCipherText;
     }
-//    public byte[] decryptSecretKey(byte[] encryptedSecretKey)         //for testing decryption
-//    {
-//        byte[] decryptedKey = null;
-//        try {
-//            Cipher cipher = Cipher.getInstance("RSA/ECB/OAEPWITHSHA-256ANDMGF1PADDING");
-//            cipher.init(Cipher.PRIVATE_KEY, myPrivateKey);
-//            decryptedKey = cipher.doFinal(encryptedSecretKey);
-//        } catch (NoSuchAlgorithmException e) {
-//            e.printStackTrace();
-//        } catch (NoSuchPaddingException e) {
-//            e.printStackTrace();
-//        } catch (InvalidKeyException e) {
-//            e.printStackTrace();
-//        } catch (IllegalBlockSizeException e) {
-//            e.printStackTrace();
-//        } catch (BadPaddingException e) {
-//            e.printStackTrace();
-//        }
-//        return decryptedKey;
-//    }
-//    public String decryptText(byte[] decryptedKey, byte[] encryptedText)      //for testing decryption
-//    {
-//        String decryptedPlainText = null;
-//        try {
-//            SecretKey originalKey = new SecretKeySpec(decryptedKey , 0, decryptedKey.length, "AES");
-//            Cipher aesCipher2 = Cipher.getInstance("AES");
-//            aesCipher2.init(Cipher.DECRYPT_MODE, originalKey);
-//            byte[] bytePlainText = aesCipher2.doFinal(encryptedText);
-//            decryptedPlainText = new String(bytePlainText);
-//        } catch (NoSuchAlgorithmException e) {
-//            e.printStackTrace();
-//        } catch (NoSuchPaddingException e) {
-//            e.printStackTrace();
-//        } catch (InvalidKeyException e) {
-//            e.printStackTrace();
-//        } catch (IllegalBlockSizeException e) {
-//            e.printStackTrace();
-//        } catch (BadPaddingException e) {
-//            e.printStackTrace();
-//        }
-//        return decryptedPlainText;
-//    }
+
 
 
 
@@ -542,10 +502,11 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences formCount = getSharedPreferences(PREFS_NAME, 0);
         unsentFormCount = formCount.getInt("unsentFormCount",0);
+        unsentFormID = formCount.getInt("unsentFormID",0);
 //        SharedPreferences dd = getSharedPreferences(PREFS_NAME, 0);
 //        SharedPreferences.Editor editor = dd.edit();
-//        editor.clear().commit();
-//        editor.commit();
+//        editor.clear().apply();
+//        editor.apply();
 
 
 
@@ -587,9 +548,23 @@ public class MainActivity extends AppCompatActivity {
                 for(Map.Entry<String,?> entry : keys.entrySet()){
                     Log.d("map values",entry.getKey() + ": " +
                             entry.getValue().toString());
-                    System.out.println("entry value: " + entry.getValue().toString());
-                    postJob(entry.getValue().toString());
-                    unsentFormCount = 0;
+                    if( !entry.getKey().toString().equals("unsentFormCount") && !entry.getKey().toString().equals("unsentFormID")) {
+
+                        try {
+                            JSONObject jsonForm = new JSONObject(entry.getValue().toString());
+                            System.out.println("entry key: " + entry.getKey());
+
+                            SharedPreferences removeEntry = getSharedPreferences(PREFS_NAME, 0);
+                            SharedPreferences.Editor editor = removeEntry.edit();
+                            editor.remove(entry.getKey());
+                            editor.apply();
+
+                            unsentFormCount -= 1;
+                            scheduleJob(jsonForm);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
                 }
                 updateFormCount();
                 return true;
@@ -609,14 +584,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public static void encryptAndSendForm(String strEncodedJson) {
+    public static void encryptAndSendForm(String strEncodedJson, String id) {
         String strEncodedSecretKey = Base64.encodeToString(mySecretKey.getEncoded(), Base64.NO_WRAP);
         String strEncodedIv = Base64.encodeToString(iv, Base64.NO_WRAP);
 
         byte[] dataToSend = encryptPayload(strEncodedSecretKey, strEncodedIv, strEncodedJson);
         String strEncodedData = Base64.encodeToString(dataToSend, Base64.NO_WRAP);
 
-        OkHttp.sendPostReq("api/form", strEncodedData, "");
+        OkHttp.sendPostReq("api/form", strEncodedData, "", id);
     }
 
     //This method is called by OkHttp when a public key is received as a response
@@ -662,7 +637,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void postJob(String strEncodedJson){
         ComponentName componentName = new ComponentName(this, DataSendingService.class);
-        bundle.putString("form", strEncodedJson);
+        String strEncodedJsonWithID = unsentFormID + "-" + jsonString;
+        bundle.putString("form", strEncodedJsonWithID);
         JobInfo info = new JobInfo.Builder(jobId, componentName)
                 .setRequiresCharging(false)
                 .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
@@ -671,6 +647,10 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         jobId += 1;
         JobScheduler scheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
+        if (cancelPrevJobs == true) {
+            scheduler.cancelAll();
+            cancelPrevJobs = false;
+        }
         int resultCode = scheduler.schedule(info);
         if (resultCode == JobScheduler.RESULT_SUCCESS) {
             Log.d(TAG, "Job scheduled");
@@ -679,20 +659,30 @@ public class MainActivity extends AppCompatActivity {
             updateFormCount();
             SharedPreferences unsentString = getSharedPreferences(PREFS_NAME, 0);
             SharedPreferences.Editor editor = unsentString.edit();
-            editor.putString("unsentForm" + (jobId-1), strEncodedJson); // jsonString is what is saved to the advice
-            editor.commit();
+            editor.putString("unsentForm" + unsentFormID, jsonString);        
+            editor.putInt("unsentFormID", unsentFormID);
+            editor.apply();
+            System.out.println("unsentForm" + unsentFormID + " saved");
+            unsentFormID += 1;
         } else {
             Log.d(TAG, "Job scheduling failed");
         }
     }
-    //public static MainActivity reference;
-
+    
+    public void deleteReceivedForm(String receivedFormId){
+        SharedPreferences removeEntry = getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences.Editor editor = removeEntry.edit();
+        editor.remove("unsentForm" + receivedFormId);
+        System.out.println("removed: unsentForm" + receivedFormId );
+        editor.apply();
+    }
+    
     public void updateFormCount()
     {
         SharedPreferences formCount = getSharedPreferences(PREFS_NAME, 0);
         SharedPreferences.Editor editor = formCount.edit();
         editor.putInt("unsentFormCount", unsentFormCount);
-        editor.commit();
+        editor.apply();
         runOnUiThread(new Runnable() {
             public void run() {
 
@@ -702,8 +692,8 @@ public class MainActivity extends AppCompatActivity {
                     ((GradientDrawable)findViewById(R.id.message_badge).getBackground()).setColor(Color.parseColor("#8bc34a"));
                     SharedPreferences delete = getSharedPreferences(PREFS_NAME, 0);
                     SharedPreferences.Editor editor = delete.edit();
-                    editor.clear().commit();
-                    editor.commit();
+                    editor.clear()
+                    editor.apply();
                 }
                 else {
                     ((GradientDrawable)findViewById(R.id.message_badge).getBackground()).setColor(Color.RED);

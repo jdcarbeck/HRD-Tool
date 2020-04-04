@@ -38,7 +38,8 @@ public class OkHttp {
     public static void sendPostReq(final String... parameters)  {
 
         final String paramZero = parameters[0];
-        final String paramOne = parameters[1];
+        String paramOne = parameters[1];
+        paramOne = parameters[3] + "-" + paramOne;   // append data to "(int id)-"
         final String paramTwo = parameters[2];
         RequestBody body = new FormBody.Builder()
                 .add("data", paramOne)
@@ -62,10 +63,13 @@ public class OkHttp {
                     throw new IOException("Unexpected code " + response);
                 } else {
                     String responseBody = response.body().string();
+                    String[] splitResponse = responseBody.split("-");
+                    String id = splitResponse[0];
+                    String publicKey = splitResponse[1];
                     System.out.println((responseBody));
                     if (paramZero.equals("key")){
                         MainActivity.setPublicKey(responseBody);
-                        MainActivity.encryptAndSendForm(paramTwo);
+                        MainActivity.encryptAndSendForm(publicKey, id);  // pass form and id
 
                         System.out.println("started MainActivity");
                     }
@@ -74,10 +78,8 @@ public class OkHttp {
                         if (MainActivity.reference!=null)
                         {
                             MainActivity.reference.updateFormCount();
+                            MainActivity.reference.deleteReceivedForm(id);
                         }
-
-                        //MainActivity main = new MainActivity();
-                        //main.updateFormCount();
                     }
                 }
             }

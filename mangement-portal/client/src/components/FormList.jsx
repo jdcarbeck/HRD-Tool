@@ -7,11 +7,14 @@ import {
   } from 'react-table'
 
 import styled from 'styled-components'
-
+import  FormOverlay  from './FormOverlay'
 import matchSorter from 'match-sorter'
 
 const Wrapper = styled.div`
   padding: 0;
+`
+const Abuse = styled.span`
+  margin-right: 5px;
 `
 
 // UI global filter
@@ -252,35 +255,71 @@ class FormList extends Component {
         console.log('TCL: FormsList -> render -> forms', forms)
 
         const columns = [
-            {
-                Header: 'ID',
-                accessor: '_id',
-                filter: 'fuzzyText',
-            },
-            {
-                Header: 'Type',
-                accessor: 'type',
-                Filter: SelectColumnFilter,
-                filter: 'includes'
-            },
             {   
-                Header: 'Date',
-                accessor: 'time',
+                Header: 'Incident Date',
+                accessor: 'incident_date',
+            
                 Cell: function(cellProps){
-                  console.log(cellProps)
+                  let date = new Date(cellProps.cell.value)
+                  var mm = date.getMonth() + 1; // getMonth() is zero-based
+                  var dd = date.getDate();
+                  var fulldate = [(dd>9 ? '' : '0') + dd, (mm>9 ? '' : '0') + mm, date.getFullYear()].join('/');
                   return(
-                    <span>{cellProps.cell.value.join('/')}</span>
+                    <span>{fulldate}</span>
                   )
                 },
             },
             {
-              Header: '',
+                Header: 'Community',
+                accessor: 'community',
+                filter: 'fuzzyText',
+            },
+            {
+              Header: 'Age',
+              accessor: 'age_range',
+              Filter: SelectColumnFilter,
+              filter: 'includes'
+            },
+            {
+                Header: 'Victim Gender',
+                accessor: 'gender',
+                Filter: SelectColumnFilter,
+                filter: 'includes'
+            },
+            {
+              Header: 'Relation',
+              accessor: 'perpetrator_association',
+              Filter: SelectColumnFilter,
+              filter: 'includes'
+            },
+            {
+              Header: 'Abuse',
               accessor: ' ',
               disableFilters: true,
+              Cell: function(cellProps){
+                console.log(cellProps)
+                let data = cellProps.cell.row.original
+                let sexual = data.sexual_abuse
+                let emotional = data.emotional_abuse
+                let physical = data.physical_abuse
+                return (
+                  <span>
+                    <Abuse className="badge badge-warning">{(sexual ? 'sexual' : '')}</Abuse>
+                    <Abuse className="badge badge-warning">{(emotional ? 'emotional' : '')}</Abuse>
+                    <Abuse className="badge badge-warning">{(physical ? 'physical' : '')}</Abuse>
+                  </span>
+                )
+              }
+            },
+            {
+              Header: '',
+              accessor: '_id',
+              disableFilters: true,
               Cell: function(props) {
+                  let data = props.cell.row.original
                   return (
                       <span>
-                          <ViewForm id={props} />
+                          <FormOverlay data={data}/>
                       </span>
                   )
               },

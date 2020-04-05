@@ -17,7 +17,7 @@ function App() {
             <NavBar />
             <Container>
               <Switch>
-                <Route path="/dashboard" exact component={Dashboard} />
+                <Route path="/" exact component={Dashboard} />
                 <Route path="/devices" exact component={Devices}/>
               </Switch>
             </Container>

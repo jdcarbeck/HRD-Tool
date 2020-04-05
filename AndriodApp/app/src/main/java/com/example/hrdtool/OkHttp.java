@@ -41,7 +41,8 @@ public class OkHttp {
     public static void sendPostReq(final String... parameters)  {
 
         final String paramZero = parameters[0];
-        final String paramOne = parameters[1];
+        String paramOne = parameters[1];
+        paramOne = parameters[3] + "-" + paramOne;   // append data to "(int id)-"
         final String paramTwo = parameters[2];
         final String paramThree = parameters[3];
         JSONObject formJson = new JSONObject();

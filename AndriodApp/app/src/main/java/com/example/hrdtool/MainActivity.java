@@ -624,7 +624,7 @@ public class MainActivity extends AppCompatActivity {
         String android_id = Secure.getString(MainActivity.this.getContentResolver(),
                 Secure.ANDROID_ID);
         try {
-            formJson.put("id", android_id);
+            formJson.put("device_id", android_id);
         }
         catch (JSONException e){
             e.printStackTrace();

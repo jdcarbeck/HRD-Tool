@@ -37,6 +37,15 @@ class Dashboard extends Component {
         })
     }
 
+    refresh = async () => {
+        await api.getAllForms().then(forms =>{
+            this.setState({
+                data: forms.data.data,
+                isLoading: false,
+            })
+        })
+    }
+
     
     render() {
 
@@ -51,13 +60,20 @@ class Dashboard extends Component {
             <div>
                 {showDashboard && (
                     <div>
+                        <div className="row">
+                            <div className="col-1 float-center">
+                                <button className="btn btn-success" onClick={ this.refresh.bind(this) }>
+                                <span>Reload</span>
+                                </button>
+                            </div>
+                        </div>
                         <div className="row">         
                             <div className="col-lg-12">
                                 <Card>
-                                    <CardTitle>Form Rate</CardTitle>
+                                    <CardTitle>Reported Incidents</CardTitle>
                                     <CardWrapper>
                                         <div className="card-body">
-                                            <LineFormRate/>
+                                            <LineFormRate data={this.state.data}/>
                                         </div>
                                     </CardWrapper>
                                 </Card>

@@ -10,6 +10,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.PublicKey;
@@ -38,12 +41,22 @@ public class OkHttp {
     public static void sendPostReq(final String... parameters)  {
 
         final String paramZero = parameters[0];
-        String paramOne = parameters[1];
-        paramOne = parameters[3] + "-" + paramOne;   // append data to "(int id)-"
+        final String paramOne = parameters[1];
         final String paramTwo = parameters[2];
-        RequestBody body = new FormBody.Builder()
-                .add("data", paramOne)
-                .build();
+        final String paramThree = parameters[3];
+        JSONObject formJson = new JSONObject();
+        try{
+            formJson.put("data", paramOne);
+            formJson.put("formId", paramThree);
+        } catch (JSONException e){
+            e.printStackTrace();
+        }
+        String jsonString = formJson.toString();
+        RequestBody body = RequestBody.create(
+                MediaType.parse("application/json; charset=utf-8"),
+                jsonString
+                );
+
 
         Request request = new Request.Builder()
                 .url("http://10.0.2.2:3000/" + paramZero) // URL of management portal

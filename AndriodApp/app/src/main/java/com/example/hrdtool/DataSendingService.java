@@ -39,7 +39,7 @@ public class DataSendingService extends JobService {
 //                String encryptedSecretKey = parameters.getExtras().getString("encryptedSecretKey");
 
 
-                OkHttp.sendPostReq("getPublicKey", "", json, id);
+                OkHttp.sendPostReq("key", "", json, id);
 
                 if (jobCancelled) {
                     return;

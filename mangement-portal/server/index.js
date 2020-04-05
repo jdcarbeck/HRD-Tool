@@ -22,9 +22,10 @@ app.use(bodyParser.json())
 
 db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 
-app.post('/key', (_,res) =>{
+app.post('/key', (req,res) =>{
+  var id = req.body.formId
   var derB64PublicKey  = Buffer.from(rsa.serverPub , 'binary').toString('base64');
-  res.send(derB64PublicKey)
+  res.send(id + "-" + derB64PublicKey)
 })
 
 app.use('/api', formRouter)

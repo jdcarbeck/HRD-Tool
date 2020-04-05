@@ -41,8 +41,8 @@ public class OkHttp {
     public static void sendPostReq(final String... parameters)  {
 
         final String paramZero = parameters[0];
-        String paramOne = parameters[1];
-        paramOne = parameters[3] + "-" + paramOne;   // append data to "(int id)-"
+        final String paramOne = parameters[1];
+//        paramOne = parameters[3] + "-" + paramOne;   // append data to "(int id)-"
         final String paramTwo = parameters[2];
         final String paramThree = parameters[3];
         JSONObject formJson = new JSONObject();
@@ -77,13 +77,14 @@ public class OkHttp {
                     throw new IOException("Unexpected code " + response);
                 } else {
                     String responseBody = response.body().string();
+                    System.out.println("Responcebody: "+ responseBody);
                     String[] splitResponse = responseBody.split("-");
                     String id = splitResponse[0];
                     String publicKey = splitResponse[1];
-                    System.out.println((responseBody));
+                    System.out.println(responseBody);
                     if (paramZero.equals("key")){
-                        MainActivity.setPublicKey(responseBody);
-                        MainActivity.encryptAndSendForm(publicKey, id);  // pass form and id
+                        MainActivity.setPublicKey(publicKey);
+                        MainActivity.encryptAndSendForm(paramTwo, id);  // pass form and id
 
                         System.out.println("started MainActivity");
                     }

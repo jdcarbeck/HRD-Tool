@@ -6,7 +6,9 @@ rsa.initLoadServerKeys(__dirname + "/../" )
 
 createForm = (req, res) => {
     let body = req.body
+    var formId = req.body.formId
     console.log(body)
+
     let buff = Buffer.from(body.data, 'base64')
     var encodedPaylod = Buffer.alloc(384)
     let data_len = buff.length - encodedPaylod.length;
@@ -14,6 +16,7 @@ createForm = (req, res) => {
     
     buff.copy(encodedPaylod, 0)
     buff.copy(encodedData, 0, encodedPaylod.length)
+
     var base64encode = encodedPaylod.toString('base64')
     var base64encodeData = encodedData.toString('base64')
 
@@ -45,11 +48,7 @@ createForm = (req, res) => {
     form
         .save()
         .then(()=> {
-            return res.status(201).json({
-                sucesss: true,
-                id: form._id,
-                message: 'Form created!'
-            })
+            return res.status(201).send(formId + "-success")
         })
         .catch(error => {
             return res.status(400).json({

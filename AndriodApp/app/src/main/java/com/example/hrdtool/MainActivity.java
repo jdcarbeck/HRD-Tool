@@ -507,11 +507,7 @@ public class MainActivity extends AppCompatActivity {
 //        SharedPreferences dd = getSharedPreferences(PREFS_NAME, 0);
 //        SharedPreferences.Editor editor = dd.edit();
 //        editor.clear().apply();
-//        editor.apply();
-
-
-
-        //OkHttp.sendPostReq("getKey", "", "");
+//        editor.commit();
 
     }
     @Override

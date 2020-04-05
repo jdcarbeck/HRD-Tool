@@ -34,11 +34,12 @@ public class DataSendingService extends JobService {
             @Override
             public void run() {
 
-//                String route = parameters.getExtras().getString("route");
+                String id = parameters.getExtras().getString("id");
                 String json = parameters.getExtras().getString("form");
 //                String encryptedSecretKey = parameters.getExtras().getString("encryptedSecretKey");
 
-                OkHttp.sendPostReq("key", "", json, "");
+
+                OkHttp.sendPostReq("getPublicKey", "", json, id);
 
                 if (jobCancelled) {
                     return;

@@ -554,7 +554,7 @@ public class MainActivity extends AppCompatActivity {
                             SharedPreferences removeEntry = getSharedPreferences(PREFS_NAME, 0);
                             SharedPreferences.Editor editor = removeEntry.edit();
                             editor.remove(entry.getKey());
-                            editor.apply();
+                            editor.commit();
 
                             unsentFormCount -= 1;
                             scheduleJob(jsonForm);
@@ -660,7 +660,7 @@ public class MainActivity extends AppCompatActivity {
             SharedPreferences.Editor editor = unsentString.edit();
             editor.putString("unsentForm" + unsentFormID, strEncodedJson);
             editor.putInt("unsentFormID", unsentFormID);
-            editor.apply();
+            editor.commit();
             System.out.println("unsentForm" + unsentFormID + " saved");
             unsentFormID += 1;
         } else {
@@ -673,7 +673,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = removeEntry.edit();
         editor.remove("unsentForm" + receivedFormId);
         System.out.println("removed: unsentForm" + receivedFormId );
-        editor.apply();
+        editor.commit();
     }
 
     public void updateFormCount()
@@ -681,7 +681,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences formCount = getSharedPreferences(PREFS_NAME, 0);
         SharedPreferences.Editor editor = formCount.edit();
         editor.putInt("unsentFormCount", unsentFormCount);
-        editor.apply();
+        editor.commit();
         runOnUiThread(new Runnable() {
             public void run() {
 
@@ -692,7 +692,7 @@ public class MainActivity extends AppCompatActivity {
                     SharedPreferences delete = getSharedPreferences(PREFS_NAME, 0);
                     SharedPreferences.Editor editor = delete.edit();
                     editor.clear();
-                    editor.apply();
+                    editor.commit();
                 }
                 else {
                     ((GradientDrawable)findViewById(R.id.message_badge).getBackground()).setColor(Color.RED);

@@ -638,8 +638,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void postJob(String strEncodedJson){
         ComponentName componentName = new ComponentName(this, DataSendingService.class);
-        String strEncodedJsonWithID = unsentFormID + "-" + strEncodedJson;
-        bundle.putString("form", strEncodedJsonWithID);
+        String strEncodedForm = strEncodedJson;
+        String id = String.valueOf(unsentFormID);
+        bundle.putString("id", id);
+        bundle.putString("form", strEncodedJson);
         JobInfo info = new JobInfo.Builder(jobId, componentName)
                 .setRequiresCharging(false)
                 .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)

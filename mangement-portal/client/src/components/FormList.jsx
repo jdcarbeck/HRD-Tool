@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {
     useTable,
     useFilters,
+    useSortBy,
     useGlobalFilter,
     usePagination,
   } from 'react-table'
@@ -191,8 +192,12 @@ function Table({ columns, data }) {
             data,
             defaultColumn,
             filterTypes,
+            initialState: {
+              sortBy: [{ id: 'incident_date', desc: true }]
+            }
         },
         useFilters,
+        useSortBy,
     )
 
     const firstPageRows = rows.slice(0,10)
@@ -204,10 +209,11 @@ function Table({ columns, data }) {
               {headerGroups.map(headerGroup => (
                 <tr {...headerGroup.getHeaderGroupProps()}>
                   {headerGroup.headers.map(column => (
-                    <th scope="col" {...column.getHeaderProps()}>
+                    <th scope="col" {...column.getHeaderProps(column.getSortByToggleProps())}>
                       {column.render('Header')}
                       {/* Render the columns filter UI */}
                       <div>{column.canFilter ? column.render('Filter') : null}</div>
+                      <span>{column.isSorted ? (column.isSortedDesc ? '' : '') : ''}</span>
                     </th>
                   ))}
                 </tr>
@@ -258,7 +264,7 @@ class FormList extends Component {
             {   
                 Header: 'Incident Date',
                 accessor: 'incident_date',
-            
+                sortType: 'basic',
                 Cell: function(cellProps){
                   let date = new Date(cellProps.cell.value)
                   var mm = date.getMonth() + 1; // getMonth() is zero-based

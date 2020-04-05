@@ -1,7 +1,7 @@
 package com.example.hrdtool;
 
 import android.app.DatePickerDialog;
-import android.content.Intent;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputType;
@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityEvent;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -83,6 +85,7 @@ public class FormFragment extends Fragment {
     private int perpetrator_association;
     DatePickerDialog.OnDateSetListener setListener;
 
+
     public static FormFragment newInstance(int page, String title){
         FormFragment formFragment = new FormFragment();
         Bundle args = new Bundle();
@@ -105,17 +108,19 @@ public class FormFragment extends Fragment {
         title = getArguments().getString("someTitle");
     }
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        final String[] SUPPORT = {"Information", "Legal Attention", "Psychosocial Attention", "Medical Attention","Refuge","Other Attention"};
-        final String[] SUPPORT1 = {"Information", "Legal Attention", "Psychosocial Attention", "Medical Attention","Refuge","Other Attention"};
-        final String[] SUPPORT2 = { "Legal Attention", "Psychosocial Attention", "Medical Attention","Other Attention"};
+        final String[] SUPPORT = {"Information", "Legal Attention", "Psychosocial Attention", "Medical Attention", "Refuge", "Other Attention"};
+        final String[] SUPPORT1 = {"Information", "Legal Attention", "Psychosocial Attention", "Medical Attention", "Refuge", "Other Attention"};
+        final String[] SUPPORT2 = {"Legal Attention", "Psychosocial Attention", "Medical Attention", "Other Attention"};
         final String[] GENDER = {"Male", "Female"};
         final String[] GENDER1 = {"Male", "Female"};
         final String[] KNOWN = {"Known", "Unknown"};
-        final String[] IFKNOWN = {"Current partner","Former partner" ,"Relative" ,"Neighbor" ,"Friend" ,"Association" ,"Other"};
+        final String[] IFKNOWN = {"Current partner", "Former partner", "Relative", "Neighbor", "Friend", "Association", "Other"};
 
         final String[] AGE = {"0-9", "10-19", "20-29", "30-39", "40-49", "50+"};
         final String[] AREA = {"D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "D9", "D10",
@@ -129,13 +134,13 @@ public class FormFragment extends Fragment {
         final String[] CLASSIFICATION_PHY_2 = new String[]{
                 "Hitting, slapping, punching", "Pushing, shoving", "Choking", "Cutting",
                 "Burning", "Shooting or use of any weapons", "Acid attacks", "Any other act that results in pain, discomfort or injury"};
-        final String[] CLASSIFICATION_EMO = { "Emotional/psychological (infliction of mental or emotional pain or injury eg. threats of physical or sexual violence, intimidation, humiliation)"};
+        final String[] CLASSIFICATION_EMO = {"Emotional/psychological (infliction of mental or emotional pain or injury eg. threats of physical or sexual violence, intimidation, humiliation)"};
 
         final String[] CLASSIFICATION_EMO_2 = new String[]{
-                "Threats of physical or sexual violence","Threat to hurt/kill","Intimidation", "Humiliation",
-                "Isolation – eg not allowed to visit family, friends", "Stalking","Verbal harassment – eg. Shouting, remarks ",
-                "Unwanted attention","Gestures or written words of a sexual and/or menacing nature", "Destruction of cherished things",
-                "Custody/access issues","Threats to children"};
+                "Threats of physical or sexual violence", "Threat to hurt/kill", "Intimidation", "Humiliation",
+                "Isolation – eg not allowed to visit family, friends", "Stalking", "Verbal harassment – eg. Shouting, remarks ",
+                "Unwanted attention", "Gestures or written words of a sexual and/or menacing nature", "Destruction of cherished things",
+                "Custody/access issues", "Threats to children"};
 
         final String[] CLASSIFICATION_SEX = {"Sexual (any form of non-consensual sexual contact)"};
 
@@ -148,19 +153,50 @@ public class FormFragment extends Fragment {
         final String[] DENIAL = {"Denial of rightful access to economic resources",
                 "Denial of rightful access to assets or livelihood opportunities",
                 "Denial of Access to education",
-                "Denial of Access to health care" ,
-                "Conflict between neighbours or broader community members over resources" ,
+                "Denial of Access to health care",
+                "Conflict between neighbours or broader community members over resources",
                 "Denial of Access to other social services"};
 
         View v = inflater.inflate(R.layout.fragment_form, container, false);
 
-        dropdown_gender =  v.findViewById(R.id.spinner_gender);
+        dropdown_gender = v.findViewById(R.id.spinner_gender);
+        dropdown_gender.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+                InputMethodManager in = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                in.hideSoftInputFromWindow(arg1.getApplicationWindowToken(), 0);
+            }
+
+        });
+
 //         dropdown_type = v.findViewById(R.id.spinner_type);
-        dropdown_age =  v.findViewById(R.id.spinner_age);
-        dropdown_area =  v.findViewById(R.id.municipality);
+        dropdown_age = v.findViewById(R.id.spinner_age);
+        dropdown_age.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+                InputMethodManager in = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                in.hideSoftInputFromWindow(arg1.getApplicationWindowToken(), 0);
+
+            }
+
+        });
+
+        dropdown_area = v.findViewById(R.id.municipality);
+        dropdown_area.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+                InputMethodManager in = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                in.hideSoftInputFromWindow(arg1.getApplicationWindowToken(), 0);
+
+            }
+
+        });
 
         submit_form = v.findViewById(R.id.submit_form);
-        i_date =  v.findViewById(R.id.i_date);
+        i_date = v.findViewById(R.id.i_date);
         a_date = v.findViewById(R.id.a_date);
         community = v.findViewById(R.id.community);
         chb = v.findViewById(R.id.rowCheckBox);
@@ -180,7 +216,7 @@ public class FormFragment extends Fragment {
                             @Override
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                                 i_date.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
-                                i_date_iso = year+"-"+monthOfYear+"-"+dayOfMonth;
+                                i_date_iso = year + "/" + (monthOfYear + 1) + "/" + dayOfMonth;
                             }
                         }, year, month, day);
                 picker.show();
@@ -200,7 +236,7 @@ public class FormFragment extends Fragment {
                             @Override
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                                 a_date.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
-                                a_date_iso = year+"-"+monthOfYear+"-"+dayOfMonth;
+                                a_date_iso = year + "-" + monthOfYear + "-" + dayOfMonth;
                             }
                         }, year, month, day);
                 picker.show();
@@ -214,43 +250,37 @@ public class FormFragment extends Fragment {
                 try {
 
                     jObj.put("incident_date", i_date_iso);
-                    jObj.put("attention_date",  a_date_iso);
-                    jObj.put("gender",  dropdown_gender.getText().toString());
-                    jObj.put("age_range",  dropdown_age.getText().toString());
-                    jObj.put("municipality",  dropdown_area.getText().toString());
-                    jObj.put("community",  community.getText().toString());
+                    jObj.put("attention_date", a_date_iso);
+                    jObj.put("gender", dropdown_gender.getText().toString());
+                    jObj.put("age_range", dropdown_age.getText().toString());
+                    jObj.put("municipality", dropdown_area.getText().toString());
+                    jObj.put("community", community.getText().toString());
 
                     JSONArray support_sought_list = new JSONArray();
-                    for (int i = 0; i<=support_sought.size(); i++)
-                    {
+                    for (int i = 0; i <= support_sought.size(); i++) {
                         int j;
-                        if(support_sought.valueAt(i))
-                        {
+                        if (support_sought.valueAt(i)) {
                             j = support_sought.keyAt(i);
                             support_sought_list.put(SUPPORT[j]);
                         }
                     }
-                    jObj.put("support_sought",  support_sought_list);
+                    jObj.put("support_sought", support_sought_list);
 
                     JSONArray support_offered_list = new JSONArray();
-                    for (int i = 0; i<=support_offered.size(); i++)
-                    {
+                    for (int i = 0; i <= support_offered.size(); i++) {
                         int j;
-                        if(support_offered.valueAt(i))
-                        {
+                        if (support_offered.valueAt(i)) {
                             j = support_offered.keyAt(i);
                             support_offered_list.put(SUPPORT[j]);
                         }
                     }
-                    jObj.put("support_offered",  support_offered_list);
+                    jObj.put("support_offered", support_offered_list);
 
 
                     JSONArray support_referred_list = new JSONArray();
-                    for (int i = 0; i<=support_referred.size(); i++)
-                    {
+                    for (int i = 0; i <= support_referred.size(); i++) {
                         int j;
-                        if(support_referred.valueAt(i))
-                        {
+                        if (support_referred.valueAt(i)) {
                             j = support_referred.keyAt(i);
                             support_referred_list.put(SUPPORT1[j]);
                         }
@@ -259,38 +289,32 @@ public class FormFragment extends Fragment {
                     jObj.put("support_referred", support_referred_list);
 
                     boolean physical = false;
-                    if(classification_physical.valueAt(0))
-                    {
+                    if (classification_physical.valueAt(0)) {
                         physical = true;
                     }
-                    jObj.put("physical_abuse",  physical);
+                    jObj.put("physical_abuse", physical);
 
                     JSONArray phystical_abuse_suffered = new JSONArray();
-                    for (int i = 0; i<=physical_sub_classification.size(); i++)
-                    {
+                    for (int i = 0; i <= physical_sub_classification.size(); i++) {
                         int j;
-                        if(physical_sub_classification.valueAt(i))
-                        {
+                        if (physical_sub_classification.valueAt(i)) {
                             j = support_referred.keyAt(i);
                             phystical_abuse_suffered.put(CLASSIFICATION_PHY_2[j]);
                         }
                     }
-                    jObj.put("physical_abuse_suffered",  phystical_abuse_suffered);
+                    jObj.put("physical_abuse_suffered", phystical_abuse_suffered);
 
 
                     boolean emotional = false;
-                    if(classification_emotional.valueAt(0))
-                    {
+                    if (classification_emotional.valueAt(0)) {
                         emotional = true;
                     }
-                    jObj.put("emotional_abuse",  emotional);
+                    jObj.put("emotional_abuse", emotional);
 
                     JSONArray emotional_abuse_suffered = new JSONArray();
-                    for (int i = 0; i<=emotional_sub_classification.size(); i++)
-                    {
+                    for (int i = 0; i <= emotional_sub_classification.size(); i++) {
                         int j;
-                        if(emotional_sub_classification.valueAt(i))
-                        {
+                        if (emotional_sub_classification.valueAt(i)) {
                             j = emotional_sub_classification.keyAt(i);
                             emotional_abuse_suffered.put(CLASSIFICATION_EMO_2[j]);
                         }
@@ -298,18 +322,15 @@ public class FormFragment extends Fragment {
                     jObj.put("emotional_abuse_suffered", emotional_abuse_suffered);
 
                     boolean sexual_abuse = false;
-                    if(classification_sexual.valueAt(0))
-                    {
+                    if (classification_sexual.valueAt(0)) {
                         sexual_abuse = true;
                     }
-                    jObj.put("sexual_abuse",  sexual_abuse);
+                    jObj.put("sexual_abuse", sexual_abuse);
 
                     JSONArray sexual_abuse_suffered = new JSONArray();
-                    for (int i = 0; i<=sexual_sub_classification.size(); i++)
-                    {
+                    for (int i = 0; i <= sexual_sub_classification.size(); i++) {
                         int j;
-                        if(sexual_sub_classification.valueAt(i))
-                        {
+                        if (sexual_sub_classification.valueAt(i)) {
                             j = sexual_sub_classification.keyAt(i);
                             sexual_abuse_suffered.put(CLASSIFICATION_SEX_2[j]);
                         }
@@ -317,33 +338,30 @@ public class FormFragment extends Fragment {
                     jObj.put("sexual_abuse_suffered", sexual_abuse_suffered);
 
                     boolean forced_marriage = false;
-                    if(classification_forced_marriage.valueAt(0))
-                    {
+                    if (classification_forced_marriage.valueAt(0)) {
                         forced_marriage = true;
                     }
-                    jObj.put("forced_marriage",  forced_marriage);
+                    jObj.put("forced_marriage", forced_marriage);
 
                     perpetrator_gender = adapter1radio1.getSelectedIds();
-                    jObj.put("perpetrator_gender",  GENDER[perpetrator_gender]);
+                    jObj.put("perpetrator_gender", GENDER[perpetrator_gender]);
 
                     perpetrator_known = adapter1radio2.getSelectedIds();
-                    jObj.put("perpetrator_known",  KNOWN[perpetrator_known]);
+                    jObj.put("perpetrator_known", KNOWN[perpetrator_known]);
 
                     perpetrator_association = adapter1radio3.getSelectedIds();
-                    jObj.put("perpetrator_association",  IFKNOWN[perpetrator_association]);
+                    jObj.put("perpetrator_association", IFKNOWN[perpetrator_association]);
 
                 } catch (Exception e) {
                     System.out.println("Error:" + e);
                 }
-                ((MainActivity)getActivity()).scheduleJob(jObj);
+                ((MainActivity) getActivity()).scheduleJob(jObj);
             }
         });
 
 
-
         //------------------------------gender of survivor------------------------------//
         ArrayAdapter<String> gender_adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.select_dialog_singlechoice, GENDER) {
-
 
 
             @Override
@@ -362,7 +380,7 @@ public class FormFragment extends Fragment {
             }
         };
         //------------------------------age range of survivor------------------------------//
-        ArrayAdapter<String>  age_adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.select_dialog_singlechoice, AGE) {
+        ArrayAdapter<String> age_adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.select_dialog_singlechoice, AGE) {
 
 
             @Override
@@ -381,7 +399,6 @@ public class FormFragment extends Fragment {
         };
         //------------------------------municipailty------------------------------//
         ArrayAdapter<String> area_adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.select_dialog_singlechoice, AREA) {
-
 
 
             @Override
@@ -582,7 +599,7 @@ public class FormFragment extends Fragment {
         arrayList = Arrays.asList(CLASSIFICATION_SEX);
         adapter = new RecyclerViewAdapter(context, arrayList);
         recyclerView11.setAdapter(adapter);
-        classification_sexual  = adapter.getSelectedIds();
+        classification_sexual = adapter.getSelectedIds();
 
 
         arrayList1 = new ArrayList<>();
@@ -607,7 +624,7 @@ public class FormFragment extends Fragment {
 
         adapter = new RecyclerViewAdapter(context, arrayList);
         recyclerView13.setAdapter(adapter);
-        classification_forced_marriage  = adapter.getSelectedIds();
+        classification_forced_marriage = adapter.getSelectedIds();
 
         dropdown_age.setAdapter(age_adapter);
 //        dropdown_type.setAdapter(type_adapter);

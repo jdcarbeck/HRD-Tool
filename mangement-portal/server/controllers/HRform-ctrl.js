@@ -27,8 +27,8 @@ createForm = (req, res) => {
     body = JSON.parse(bodyStr)
     console.log(body)
 
-    body.incident_date = Date.now()
-    body.attention_date = Date.now()
+    body.incident_date = new Date(body.incident_date)
+    body.attention_date = new Date(body.attention_date)
 
     if(!body) {
         return res.status(400).json({

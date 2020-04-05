@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import '../../node_modules/react-vis/dist/style.css'
 import { XYPlot, XAxis, YAxis, VerticalGridLines,
-HorizontalGridLines, LineSeries } from 'react-vis'
+HorizontalGridLines, LineSeries, LineMarkSeries } from 'react-vis'
 var moment = require('moment');
 var twix = require('twix');
 
@@ -66,7 +66,11 @@ class LineFormRate extends Component {
                 <YAxis title="Incidents"/>
                 <LineSeries
                     data={data}
-                    style={{stroke: 'blue', strokeWidth: 3}} />
+                    curve={'curveMonotoneX'}
+                    style={{
+                        stroke: '#0081CC', 
+                        strokeWidth: 3,
+                        }} />
             </XYPlot>
             
         )

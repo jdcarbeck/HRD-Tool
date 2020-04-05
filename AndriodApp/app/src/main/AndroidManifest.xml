@@ -28,7 +28,7 @@
 
         <activity android:name=".MainActivity"
             android:windowSoftInputMode="stateAlwaysHidden"
-            />
+            android:label="@string/hidden_name" />
 
         <activity android:name=".FormFragment"
             android:windowSoftInputMode="stateAlwaysHidden"/>

@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name"><font color='#FFFFFF'>Trōcaire Collect</font></string>
+    <string name="app_name"><font color='#FFFFFF'>Calculator</font></string>
+    <string name="hidden_name"><font color='#FFFFFF'>Trōcaire Collect</font></string>
     <string name="help">This is help information</string>
     <string name="back">back</string>
     <string name="tab_form_label">Form</string>

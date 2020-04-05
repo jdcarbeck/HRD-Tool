@@ -17,9 +17,9 @@
         android:layout_marginTop="36dp"
         android:layout_marginEnd="36dp"
         android:layout_marginBottom="36dp"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="@color/colorAccent"
         android:onClick="toCalculator"
-        android:tint="#9C27B0"
+        android:tint="@color/white"
         app:backgroundTint="#6200EE"/>
         <!--app:srcCompat="@drawable/ic_calculator4" />
         -->

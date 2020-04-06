@@ -4,12 +4,19 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AutoCompleteTextView;
 import android.widget.CheckBox;
 import android.widget.TextView;
+
+import com.opencsv.CSVReader;
+
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,6 +62,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             @Override
             public void onClick(View v) {
                 checkCheckBox(i, !mSelectedItemsIds.get(i));
+
+
             }
         });
 
@@ -89,7 +98,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             mSelectedItemsIds.put(position, true);
         }
         else{
-            mSelectedItemsIds.delete(position);
+            mSelectedItemsIds.put(position, false);
 
         };
         notifyDataSetChanged();

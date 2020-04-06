@@ -27,12 +27,16 @@ import android.widget.TextView;
 import android.content.Context;
 
 import androidx.fragment.app.Fragment;
+
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
+import com.opencsv.CSVReader;
+
 import android.widget.Toast;
 
 
@@ -41,6 +45,8 @@ import org.json.JSONObject;
 
 import java.util.Arrays;
 import java.util.Calendar;
+
+import static com.example.hrdtool.CSVForm.SUPPORT;
 
 public class FormFragment extends Fragment {
 
@@ -94,6 +100,8 @@ public class FormFragment extends Fragment {
         formFragment.setArguments(args);
         return formFragment;
     }
+
+
 
     @Override
     public void onAttach(Context context) {
@@ -156,6 +164,7 @@ public class FormFragment extends Fragment {
                 "Denial of Access to health care",
                 "Conflict between neighbours or broader community members over resources",
                 "Denial of Access to other social services"};
+
 
         View v = inflater.inflate(R.layout.fragment_form, container, false);
 
@@ -415,6 +424,8 @@ public class FormFragment extends Fragment {
                 return view;
             }
         };
+
+
         //------------------------------Attention survivor seeking------------------------------//
         RecyclerView recyclerView = (RecyclerView) v.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
@@ -425,9 +436,10 @@ public class FormFragment extends Fragment {
         arrayList = Arrays.asList(SUPPORT);
 
 
-        adapter = new RecyclerViewAdapter(context, arrayList);
-        recyclerView.setAdapter(adapter);
-        support_sought = adapter.getSelectedIds();
+        RecyclerViewAdapterSupport adapterSupport = new RecyclerViewAdapterSupport(context, arrayList);
+        recyclerView.setAdapter(adapterSupport);
+        support_sought = adapterSupport.getSelectedIds();
+
         //------------------------------Attention HRD provided survivor------------------------------//
         RecyclerView recyclerView1 = (RecyclerView) v.findViewById(R.id.recycler_view1);
         recyclerView1.setHasFixedSize(true);

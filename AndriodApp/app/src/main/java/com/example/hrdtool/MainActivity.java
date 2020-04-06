@@ -46,6 +46,7 @@ import org.json.JSONObject;
 
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Array;
 import java.security.AlgorithmParameters;
 import java.security.InvalidKeyException;
 import java.security.Key;
@@ -63,6 +64,7 @@ import java.security.spec.KeySpec;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -209,7 +211,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String CITY = "DUBLIN";
     private static final String COUNTRY = "IRELAND";
 
-    private static final String[] TYPES = {"Choose type of support needed", "Any", "Legal", "Medical", "Psychological"};
+    private static final String[] GENERAL_SUPPORT_TYPES = {"Legal", "Med", "Psy"};
     private static final String[] AREA = {"What area are you located in?", "Any", "D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "D9", "D10",
             "D11", "D12", "D13", "D14", "D15", "D16", "D17", "D18", "D19", "D20"};
 
@@ -220,7 +222,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int HELP_TYPE_COLUMN = 2;
     private static final int HELP_AREA_COLUMN = 6;
 
-    private static ArrayList<CSVHelpRow> find_user_zone_type(CSVReader reader, String area, String type) {
+    private static ArrayList<CSVHelpRow> find_user_zone_type(CSVReader reader, String area, ArrayList<String> types) {
         boolean headers = check_headers(reader);
         ArrayList<CSVHelpRow> list = new ArrayList<CSVHelpRow>();
         try {
@@ -228,13 +230,15 @@ public class MainActivity extends AppCompatActivity {
                 reader.skip(1);
             String[] read = reader.readNext();
             while(read != null) {
-                boolean add_to_list = true;
-                if(!area.equalsIgnoreCase("any"))
-                    if(!read[HELP_AREA_COLUMN].toLowerCase().contains(area.toLowerCase()))
-                        add_to_list = false;
-                if(!type.equalsIgnoreCase("any"))
-                    if(!read[HELP_TYPE_COLUMN].toLowerCase().contains(type.toLowerCase()))
-                        add_to_list = false;
+                boolean add_to_list = false;
+                for (int i=0; i<types.size() && !add_to_list; i++) {
+                    String type = types.get(i);
+                        if (read[HELP_TYPE_COLUMN].toLowerCase().contains(type.toLowerCase()))
+                            if(area.equalsIgnoreCase("any"))
+                                add_to_list = true;
+                            else if(read[HELP_AREA_COLUMN].toLowerCase().contains(area.toLowerCase()))
+                                add_to_list = true;
+                }
                 if(add_to_list) {
                     CSVHelpRow row = new CSVHelpRow(read[1],read[2],read[3],read[4],read[5],read[6]);
                     list.add(row);
@@ -740,15 +744,32 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void getHelp(CSVReader reader, String type, String area) {
+    public void getHelp( ArrayList<String> types) {
         try {
-            if(type.equalsIgnoreCase(
-                    TYPES[0]))
-                type = TYPES[1];
-            if(area.equalsIgnoreCase(AREA[0]))
+            CSVReader reader = new CSVReader(new InputStreamReader(getResources().openRawResource(R.raw.help)));
+
+            String area = ((TextView) findViewById(R.id.municipality)).getText().toString();
+            if(!Arrays.asList(AREA).contains(area)) {
+                area = "any";
+            }
+
+            ArrayList<String> cleanedTypes = new ArrayList<String>(0);
+            for(String type : types) {
+                for ( String support : GENERAL_SUPPORT_TYPES) {
+                    if(type.toLowerCase().contains(support.toLowerCase()))
+                        cleanedTypes.add(support);
+                }
+            }
+            if (area.equalsIgnoreCase(AREA[0]))
                 area = AREA[1];
 
-            users = find_user_zone_type(reader, area, type);
+            StringBuilder sb = new StringBuilder("");
+            for(String s: cleanedTypes) {
+                sb.append(s + " ");
+            }
+
+            users = find_user_zone_type(reader, area, cleanedTypes);
+            Log.d("DEBUG", "AREA is: " + area + "\nTypes are: " +sb.toString());
             length = users.size();
 
             Button next = findViewById(R.id.button_next);
@@ -772,6 +793,7 @@ public class MainActivity extends AppCompatActivity {
                 support_type.setText(null);
                 TextView support_email = (TextView) findViewById(R.id.support_email);
                 support_email.setText(null);
+                page_ratio.setText(null);
             }
             else {
                 CSVHelpRow user = users.get(index-1);

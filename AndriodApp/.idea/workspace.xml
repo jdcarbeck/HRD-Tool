@@ -14,16 +14,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cd4aaaf7-4ed6-4b5a-92ef-1986409743e2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../mangement-portal/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../mangement-portal/client/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mangement-portal/client/src/api/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../mangement-portal/client/src/api/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mangement-portal/client/src/components/FormList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../mangement-portal/client/src/components/FormList.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mangement-portal/client/src/components/LineFormRate.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../mangement-portal/client/src/components/LineFormRate.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mangement-portal/client/src/pages/Dashboard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../mangement-portal/client/src/pages/Dashboard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mangement-portal/client/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../mangement-portal/client/yarn.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mangement-portal/server/controllers/HRform-ctrl.js" beforeDir="false" afterPath="$PROJECT_DIR$/../mangement-portal/server/controllers/HRform-ctrl.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mangement-portal/server/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../mangement-portal/server/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mangement-portal/server/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../mangement-portal/server/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mangement-portal/server/routes/HRform-router.js" beforeDir="false" afterPath="$PROJECT_DIR$/../mangement-portal/server/routes/HRform-router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -34,7 +28,7 @@
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_3_API_28" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="Copy_of_Nexus_6P_API_28" />
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
@@ -44,16 +38,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_form.xml">
-          <provider editor-type-id="android-designer2" />
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1350">
-              <caret line="90" column="37" selection-start-line="90" selection-start-column="37" selection-end-line="90" selection-end-column="37" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/ic_calculator4.png">
           <provider selected="true" editor-type-id="images" />
@@ -77,17 +61,26 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="40" selection-start-line="7" selection-start-column="34" selection-end-line="7" selection-end-column="40" />
+            <state relative-caret-position="75">
+              <caret line="5" column="37" lean-forward="true" selection-start-line="5" selection-start-column="35" selection-end-line="5" selection-end-column="41" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="435">
+              <caret line="29" column="128" selection-start-line="29" selection-start-column="128" selection-end-line="29" selection-end-column="128" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/FormFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="167" column="80" selection-start-line="167" selection-start-column="80" selection-end-line="167" selection-end-column="80" />
+            <state relative-caret-position="106">
+              <caret line="148" column="100" selection-start-line="148" selection-start-column="100" selection-end-line="148" selection-end-column="100" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -199,13 +192,13 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/DataSendingService.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/OkHttp.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/MainActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_calculator.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
         <option value="$PROJECT_DIR$/app/bin/src/main/res/layout/fragment_form.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_form.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/FormFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
       </list>
     </option>
   </component>
@@ -225,6 +218,7 @@
     <panes>
       <pane id="ProjectPane" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="AndroidView">
         <subPane>
           <expand>
@@ -248,7 +242,7 @@
     <property name="SHOW_ALL_PROCESSES" value="false" />
     <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../Noobculator/app" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="Images" />
   </component>
   <component name="RecentsManager">
@@ -501,11 +495,12 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="4" y="23" width="1680" height="1027" extended-state="6" />
+    <frame x="0" y="23" width="1920" height="1057" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" sideWeight="0.50110865" side_tool="true" weight="0.32972974" />
       <window_info id="Capture Tool" order="1" />
-      <window_info content_ui="combo" id="Project" order="2" sideWeight="0.49889135" visible="true" weight="0.17521368" />
+      <window_info active="true" content_ui="combo" id="Project" order="2" sideWeight="0.49889135" visible="true" weight="0.17678382" />
       <window_info id="Structure" order="3" side_tool="true" />
       <window_info id="Build Variants" order="4" side_tool="true" />
       <window_info id="Image Layers" order="5" />
@@ -520,7 +515,7 @@
       <window_info anchor="bottom" id="Run" order="5" weight="0.32785088" />
       <window_info anchor="bottom" id="Event Log" order="6" sideWeight="0.50053304" side_tool="true" weight="0.32936078" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32866243" />
-      <window_info anchor="bottom" id="Build" order="8" weight="0.40460527" />
+      <window_info anchor="bottom" id="Build" order="8" visible="true" weight="0.2880829" />
       <window_info anchor="bottom" id="Terminal" order="9" weight="0.32866243" />
       <window_info anchor="bottom" id="Messages" order="10" weight="0.3299363" />
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
@@ -659,13 +654,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/build/generated/source/buildConfig/debug/com/example/hrdtool/BuildConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="7" column="29" selection-start-line="7" selection-start-column="29" selection-end-line="7" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build/generated/source/buildConfig/debug/com/example/hrdtool/BuildConfig.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="537">
@@ -732,13 +721,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="5" column="39" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="29" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="29" />
         </state>
       </provider>
     </entry>
@@ -812,13 +794,6 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ic_calculator4.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="40" selection-start-line="7" selection-start-column="34" selection-end-line="7" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/bin/src/main/res/layout/fragment_form.xml">
       <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
@@ -836,11 +811,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hrdtool/FormFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="167" column="80" selection-start-line="167" selection-start-column="80" selection-end-line="167" selection-end-column="80" />
+        <state relative-caret-position="106">
+          <caret line="148" column="100" selection-start-line="148" selection-start-column="100" selection-end-line="148" selection-end-column="100" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="37" lean-forward="true" selection-start-line="5" selection-start-column="35" selection-end-line="5" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="29" column="128" selection-start-line="29" selection-start-column="128" selection-end-line="29" selection-end-column="128" />
         </state>
       </provider>
     </entry>

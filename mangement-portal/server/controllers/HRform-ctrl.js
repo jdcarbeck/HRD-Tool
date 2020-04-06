@@ -1,6 +1,12 @@
 const Form = require('../models/HRform')
 const rsa = require('../crypto/rsa')
 const aes = require('../crypto/aes')
+const fs = require('fs')
+const fastCsv = require('fast-csv')
+const { Parser } = require('json2csv')
+var csv = require('csv-express')
+const path = require('path')
+
 
 rsa.initLoadServerKeys(__dirname + "/../" )
 
@@ -141,10 +147,24 @@ getForm = async (req, res) => {
     }).catch(err => console.log(err))
 }
 
+download = (req, res) => {
+    var filename = "forms.csv"
+    var dataArray;
+    console.log('download!')
+    Form.find().lean().exec({}, (err, forms) => {
+        if (err) res.send(err)
+        res.statusCode = 200
+        res.setHeader('Content-Type', 'text/csv')
+        res.setHeader("Content-Disposition", 'attachment; filename='+filename)
+        res.csv(forms, true)
+    })
+}
+
 module.exports = {
     createForm,
     updateForm,
     deleteForm,
     getForm,
     getFormById,
+    download,
 }

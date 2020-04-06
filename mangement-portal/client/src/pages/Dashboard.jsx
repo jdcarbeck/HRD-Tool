@@ -61,10 +61,11 @@ class Dashboard extends Component {
                 {showDashboard && (
                     <div>
                         <div className="row">
-                            <div className="col-1 float-center">
-                                <button className="btn btn-success" onClick={ this.refresh.bind(this) }>
-                                <span>Reload</span>
+                            <div className=" col-12">
+                                <button className="btn btn-outline-success float-right mr-3" onClick={ this.refresh.bind(this) }>
+                                    <span>Reload</span>
                                 </button>
+                                <button className="btn btn-outline-dark float-right mr-2" onClick={api.download}>Download</button>
                             </div>
                         </div>
                         <div className="row">         

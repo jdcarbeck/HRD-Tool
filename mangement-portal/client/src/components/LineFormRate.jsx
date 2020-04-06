@@ -66,7 +66,7 @@ class LineFormRate extends Component {
                 <YAxis title="Incidents"/>
                 <LineSeries
                     data={data}
-                    curve={'curveMonotoneX'}
+                    curve={'curveBasis'}
                     style={{
                         stroke: '#0081CC', 
                         strokeWidth: 3,

@@ -4,8 +4,8 @@ const Schema = mongoose.Schema
 const Device = new Schema(
     {
         device_id: { type: String, required: true },
-        name: { type: [String], required: true },
-        location: { type: [String], required: true }
+        name: { type: String, required: true },
+        location: { type: String, required: true }
     },
     {timestamps: true},
 )

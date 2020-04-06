@@ -1,54 +1,89 @@
 import React, { Component } from 'react'
-import { FormList } from '../components'
+import { DeviceList, DeviceOverlay } from '../components'
 import styled from 'styled-components'
-import Popup from "reactjs-popup";
+import api from '../api'
 
-const Modal = styled.div`
-    margin-bottom: 20px;
-    background-color: #FFFFFF;
+
+const Card = styled.div.attrs({
+    className: 'card',
+})`
+    margin: 1rem;
+    border-style: None;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
 `
+const CardTitle = styled.div.attrs({
+    className: 'card-header'
+})``
 
-// const Close = styled.button.attrs({
-//     className: 'btn btn-danger'
-// })`
-//     cursor: pointer;
-//     position: absolute;
-//     display: block;
-//     padding: 2px 10px;
-//     line-height: 30px;
-//     right: -10px;
-//     top: -10px;
-//     font-size: 24px;
-// `
-
-const Header = styled.div`
-    width: 100%;
-    border-bottom: 1px solid gray;
-    font-size: 18px;
-    text-align: center;
-    padding: 5px;
-`
-
-const Content = styled.div`
-    width: 100%;
-    padding: 10px 5px;
-`
-
-const Actions = styled.div`
-    width: 100%;
-    padding: 10px 5px;
+const CardWrapper = styled.div`
     margin: auto;
-    text-align: center;
-` 
-
+`
 
 
 class Devices extends Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            data: {},
+            isLoading: true,
+        }
+    }
+    
+    componentDidMount = async () => {
+        await api.getAllDevices().then(devices =>{
+            this.setState({
+                data: devices.data.data,
+                isLoading: false,
+            })
+        })
+    }
+
+    updateDevice = async () => {
+        console.log(this.state._id)
+        let obj = {
+            name: this.state.name,
+            device_id: this.state.device_id,
+            location: this.state.location
+        }
+        await api.updateDevice(this.state._id, obj).then( () =>{
+            this.props.callback()
+            window.location.reload(false);
+        })
+    }
+
+
     render() {
+        const { data } = this.state
+
+        let showDevices = true
+        if(!data.length){
+            showDevices = false
+        }
+
         return (
-            <span>This is the device mangement screen</span>
+            <div>
+                {showDevices && (
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-3 ml-3">
+                                <DeviceOverlay label="New Device" update={false} data={{}}/>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-md-12">
+                                <Card>
+                                    <CardTitle>Devices</CardTitle>
+                                    <DeviceList devices={this.state.data}/>
+                                </Card>
+                            </div>
+                        </div>
+                    </div>
+                )}
+            </div>
         )
     }
+
 }
 
 export default Devices

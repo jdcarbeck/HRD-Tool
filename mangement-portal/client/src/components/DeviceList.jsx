@@ -6,15 +6,11 @@ import {
   } from 'react-table'
 
 import styled from 'styled-components'
-import  FormOverlay  from './FormOverlay'
+import  DeviceOverlay  from './DeviceOverlay'
 import matchSorter from 'match-sorter'
-import api from '../api';
 
 const Wrapper = styled.div`
   padding: 0;
-`
-const Abuse = styled.span`
-  margin-right: 5px;
 `
 
 //filter UI
@@ -29,7 +25,7 @@ function DefaultColumnFilter({
             onChange={e => {
                 setFilter(e.target.value || undefined)
             }}
-            placeholder={`Search ${count} forms...`}
+            placeholder={`Search ${count} devices...`}
         />
     )
 }
@@ -107,10 +103,6 @@ function Table({ columns, data }) {
         headerGroups,
         rows,
         prepareRow,
-        state,
-        visibleColumns,
-        preGlobalFilteredRows,
-        setGlobalFilter,
     } = useTable (
         {
             columns,
@@ -118,7 +110,7 @@ function Table({ columns, data }) {
             defaultColumn,
             filterTypes,
             initialState: {
-              sortBy: [{ id: 'incident_date', desc: true }]
+              sortBy: [{ id: 'name', desc: true }]
             }
         },
         useFilters,
@@ -157,8 +149,6 @@ function Table({ columns, data }) {
               })}
             </tbody>
           </table>
-          <br />
-          <div>Showing the first 20 results of {rows.length} rows</div>
         </>
     )
 }
@@ -172,75 +162,31 @@ function filterGreaterThan(rows, id, filterValue) {
 
 filterGreaterThan.autoRemove = val => typeof val !== 'number'
 
-class ViewForm extends Component {
-  render(){
-    return <button className="btn btn-outline-info">View</button>
-  }
-}
 
+class DeviceList extends Component {
 
-class FormList extends Component {
+    newDevice = async () => {
+      
+    }
 
     render() {
-        const { forms, isLoading } = this.props
-        console.log('TCL: FormsList -> render -> forms', forms)
+        const { devices, isLoading } = this.props
 
         const columns = [
-            {   
-                Header: 'Incident Date',
-                accessor: 'incident_date',
-                sortType: 'basic',
-                Cell: function(cellProps){
-                  let date = new Date(cellProps.cell.value)
-                  var mm = date.getMonth() + 1; // getMonth() is zero-based
-                  var dd = date.getDate();
-                  var fulldate = [(dd>9 ? '' : '0') + dd, (mm>9 ? '' : '0') + mm, date.getFullYear()].join('/');
-                  return(
-                    <span>{fulldate}</span>
-                  )
-                },
-            },
             {
-                Header: 'Community',
-                accessor: 'community',
+                Header: 'Name',
+                accessor: 'name',
                 filter: 'fuzzyText',
             },
             {
-              Header: 'Age',
-              accessor: 'age_range',
-              Filter: SelectColumnFilter,
-              filter: 'includes'
+              Header: 'Assigned Device',
+              accessor: 'device_id',
+              filter: 'fuzzyText',
             },
             {
-                Header: 'Victim Gender',
-                accessor: 'gender',
-                Filter: SelectColumnFilter,
-                filter: 'includes'
-            },
-            {
-              Header: 'Relation',
-              accessor: 'perpetrator_association',
-              Filter: SelectColumnFilter,
-              filter: 'includes'
-            },
-            {
-              Header: 'Abuse',
-              accessor: ' ',
-              disableFilters: true,
-              Cell: function(cellProps){
-                console.log(cellProps)
-                let data = cellProps.cell.row.original
-                let sexual = data.sexual_abuse
-                let emotional = data.emotional_abuse
-                let physical = data.physical_abuse
-                return (
-                  <span>
-                    <Abuse className="badge badge-warning">{(sexual ? 'sexual' : '')}</Abuse>
-                    <Abuse className="badge badge-warning">{(emotional ? 'emotional' : '')}</Abuse>
-                    <Abuse className="badge badge-warning">{(physical ? 'physical' : '')}</Abuse>
-                  </span>
-                )
-              }
+                Header: 'Location',
+                accessor: 'location',
+                filter: 'fuzzyText',
             },
             {
               Header: '',
@@ -250,7 +196,7 @@ class FormList extends Component {
                   let data = props.cell.row.original
                   return (
                       <span>
-                          <FormOverlay data={data}/>
+                         <DeviceOverlay label="Edit Device" update={true} data={data}/>
                       </span>
                   )
               },
@@ -258,7 +204,7 @@ class FormList extends Component {
         ]
 
         let showTable = true
-        if(!forms.length){
+        if(!devices.length){
             showTable = false
         }
 
@@ -267,7 +213,7 @@ class FormList extends Component {
             <Wrapper>
                 {showTable && (
                       <Table
-                          data={forms}
+                          data={devices}
                           columns={columns}
                           loading={isLoading}
                       />
@@ -277,4 +223,4 @@ class FormList extends Component {
     }
 }
 
-export default FormList
+export default DeviceList

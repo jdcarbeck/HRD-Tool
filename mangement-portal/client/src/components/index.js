@@ -5,5 +5,7 @@ import FormList from './FormList'
 import NewForms from './NewForms'
 import CaseTypeVis from './CaseTypeVis'
 import LineFormRate from './LineFormRate'
+import DeviceList from './DeviceList'
+import DeviceOverlay from './DeviceOverlay'
 
-export { Links, Logo, NavBar, FormList, NewForms, CaseTypeVis, LineFormRate }
+export { Links, Logo, NavBar, FormList, NewForms, CaseTypeVis, LineFormRate, DeviceList, DeviceOverlay }

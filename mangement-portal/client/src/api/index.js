@@ -15,11 +15,18 @@ export const download = () => {
    });
 }
 
+export const getAllDevices = () => api.get(`/devices`)
+export const updateDevice = (id, obj) => api.put(`/devices/${id}`, obj)
+export const newDevice = obj => api.post(`/devices/`, obj)
+
 const apis = {
     getAllForms,
     getFormById,
     updateFormRead,
     download,
+    getAllDevices,
+    updateDevice,
+    newDevice,
 }
 
 export default apis

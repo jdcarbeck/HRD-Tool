@@ -1,6 +1,6 @@
 # Trocaire Collect
 
-[Demo Video](https://drive.google.com/drive/u/1/folders/1D6w19FYvGhq6_eNTQ6XZjkwR9aeTf5DZ)
+[Demo Video](https://drive.google.com/file/d/1GjROvvjNGP5D_c4PnXZ93e18og4ZPNnX/view?usp=sharing)
 
 Human rights should be universally recognised. Unfortunately many countries' governments fail to uphold the human rights of citizens. In some cases, governments actively limit citizens' human rights, and persecute those that advocate for them. NGOs like Trócaire, collect human rights abuse cases and offer support through trained Human Rights Defenders (HRD). These HRDs live within these communities, and collect data for Trócaire so issues can be brought to the right authorities. 
 
